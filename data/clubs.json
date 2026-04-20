@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Football Ticketing Intelligence — Fever",
-    "last_updated": "2026-04-20T17:21:40Z",
+    "last_updated": "2026-04-20T17:32:01Z",
     "total_clubs": 132,
     "leagues": [
       "La Liga",
@@ -546,15 +546,18 @@
       "stadium": "Old Trafford",
       "capacity": 74140,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "manutd.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub",
+        "Viagogo"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.manutd.com/en/tickets",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport partner oficial. Venta priorizada a miembros.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133616",
@@ -567,15 +570,18 @@
       "stadium": "Tottenham Hotspur Stadium",
       "capacity": 62850,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "tottenhamhotspur.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub",
+        "Viagogo"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.tottenhamhotspur.com/tickets/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport partner renovado en 2022. Ticketing 100% digital integrado en su app.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133618",
@@ -588,15 +594,17 @@
       "stadium": "St. James' Park",
       "capacity": 52305,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "nufc.com / SeatGeek",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.nufc.com/tickets/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "SeatGeek partner oficial. Uno de los primeros clubs Premier League en adoptar SeatGeek.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "SeatGeek"
     },
     {
       "id": "133620",
@@ -609,15 +617,17 @@
       "stadium": "Villa Park",
       "capacity": 42785,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "avfc.co.uk / SeatGeek",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.avfc.co.uk/tickets",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "SeatGeek partner renovado en 2024. Implantación de tickets móviles.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "SeatGeek"
     },
     {
       "id": "133622",
@@ -676,15 +686,17 @@
       "stadium": "Gtech Community Stadium",
       "capacity": 17250,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "brentfordfc.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.brentfordfc.com/en/tickets",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport partner desde temporada 2023/24.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133628",
@@ -697,15 +709,17 @@
       "stadium": "Craven Cottage",
       "capacity": 25700,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "fulhamfc.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.fulhamfc.com/tickets-and-hospitality/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport para venta oficial en Craven Cottage.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133630",
@@ -718,15 +732,17 @@
       "stadium": "Selhurst Park",
       "capacity": 25486,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "cpfc.co.uk / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.eticketing.co.uk/cpfc/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Plataforma eTicketing (Ticketmaster Sport) para venta oficial.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133632",
@@ -739,15 +755,17 @@
       "stadium": "Molineux Stadium",
       "capacity": 32050,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "wolves.co.uk / SeatGeek",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.wolves.co.uk/tickets/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "SeatGeek partner oficial Premier League.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "SeatGeek"
     },
     {
       "id": "133634",
@@ -760,15 +778,17 @@
       "stadium": "Goodison Park",
       "capacity": 39414,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "evertonfc.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.evertonfc.com/tickets",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport partner oficial. Temporada 2025/26 primera en nuevo estadio Bramley-Moore Dock.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133636",
@@ -781,15 +801,17 @@
       "stadium": "City Ground",
       "capacity": 30445,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "nottinghamforest.co.uk / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.nottinghamforest.co.uk/tickets/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport partner oficial. Venta priorizada a miembros.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133638",
@@ -802,15 +824,17 @@
       "stadium": "Vitality Stadium",
       "capacity": 11364,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "afcb.co.uk / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.afcb.co.uk/tickets/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport partner oficial. Alta demanda, raramente llega a venta general.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133640",
@@ -823,15 +847,17 @@
       "stadium": "King Power Stadium",
       "capacity": 32261,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "lcfc.com / SeatGeek",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.lcfc.com/tickets",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "SeatGeek partner oficial Premier League.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "SeatGeek"
     },
     {
       "id": "133642",
@@ -844,15 +870,17 @@
       "stadium": "Portman Road",
       "capacity": 29500,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "itfc.co.uk / Ticketmaster",
+      "has_own_app": false,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.itfc.co.uk/tickets/",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Recién ascendido a Premier League en 2024/25. Ticketmaster Sport como proveedor.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133644",
@@ -865,15 +893,17 @@
       "stadium": "St. Mary's Stadium",
       "capacity": 32384,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "southamptonfc.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.southamptonfc.com/en/tickets",
       "fever_status": "prospect",
-      "notes": "",
+      "notes": "Ticketmaster Sport partner oficial en St. Mary's Stadium.",
       "last_updated": "2026-04-20",
-      "ticketing_technology": ""
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133704",
