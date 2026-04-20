@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Football Ticketing Intelligence — Fever",
-    "last_updated": "2026-04-20T16:37:14Z",
+    "last_updated": "2026-04-20T17:21:40Z",
     "total_clubs": 132,
     "leagues": [
       "La Liga",
@@ -25,14 +25,17 @@
       "stadium": "Spotify Camp Nou",
       "capacity": 99354,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "fcbarcelona.com",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
-      "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "ticket_url": "https://www.fcbarcelona.com/en/tickets/football",
+      "fever_status": "client",
+      "notes": "OneBox de Fever como tecnología interna",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "OneBox (Fever)"
     },
     {
       "id": "133600",
@@ -45,14 +48,17 @@
       "stadium": "Santiago Bernabéu",
       "capacity": 81044,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "realmadrid.com",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
-      "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "ticket_url": "https://www.realmadrid.com/en-US/tickets",
+      "fever_status": "client",
+      "notes": "OneBox de Fever como tecnología interna. Plataforma digital propia desarrollada con Softtek/Microsoft",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "OneBox (Fever)"
     },
     {
       "id": "133907",
@@ -65,14 +71,18 @@
       "stadium": "Cívitas Metropolitano",
       "capacity": 68456,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "atleticodemadrid.com",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub",
+        "Viagogo"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
-      "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "ticket_url": "https://www.atleticodemadrid.com/entradas",
+      "fever_status": "client",
+      "notes": "OneBox de Fever como tecnología interna",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "OneBox (Fever)"
     },
     {
       "id": "133905",
@@ -92,7 +102,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133910",
@@ -112,7 +123,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133618",
@@ -132,7 +144,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133906",
@@ -152,7 +165,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133604",
@@ -172,7 +186,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133603",
@@ -192,7 +207,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133608",
@@ -212,7 +228,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133612",
@@ -232,7 +249,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133913",
@@ -252,7 +270,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133614",
@@ -272,7 +291,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133616",
@@ -292,7 +312,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133602",
@@ -312,7 +333,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133919",
@@ -332,7 +354,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133921",
@@ -352,7 +375,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133922",
@@ -372,7 +396,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133923",
@@ -392,7 +417,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133924",
@@ -412,7 +438,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133604",
@@ -425,14 +452,18 @@
       "stadium": "Etihad Stadium",
       "capacity": 53400,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "mancity.com / SeatGeek",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub",
+        "Viagogo"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.mancity.com/tickets/mens",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "SeatGeek partner oficial desde 2018. También cubre Man City Women.",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "SeatGeek Enterprise"
     },
     {
       "id": "133612",
@@ -445,14 +476,17 @@
       "stadium": "Emirates Stadium",
       "capacity": 60704,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "arsenal.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.arsenal.com/tickets",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "Ticketmaster Sport partner desde hace más de 30 años. Renovado recientemente.",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133602",
@@ -465,14 +499,17 @@
       "stadium": "Anfield",
       "capacity": 61276,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "liverpoolfc.com / SeatGeek",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.liverpoolfc.com/tickets",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "SeatGeek partner oficial desde 2020",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "SeatGeek"
     },
     {
       "id": "133610",
@@ -485,14 +522,18 @@
       "stadium": "Stamford Bridge",
       "capacity": 40341,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "chelseafc.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub",
+        "Viagogo"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.chelseafc.com/en/tickets",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "Acuerdo multi-año firmado en 2025. Primera temporada con tickets digitales en 2025/26.",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133614",
@@ -512,7 +553,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133616",
@@ -532,7 +574,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133618",
@@ -552,7 +595,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133620",
@@ -572,7 +616,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133622",
@@ -585,14 +630,17 @@
       "stadium": "London Stadium",
       "capacity": 62500,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "whufc.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.whufc.com/tickets",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "Ticketmaster partner desde hace más de 10 años",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133624",
@@ -605,14 +653,17 @@
       "stadium": "Amex Stadium",
       "capacity": 31800,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "brightonandhovealbion.com / Ticketmaster",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://www.brightonandhovealbion.com/tickets",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "Ticketmaster Sport partner oficial",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "Ticketmaster Sport"
     },
     {
       "id": "133626",
@@ -632,7 +683,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133628",
@@ -652,7 +704,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133630",
@@ -672,7 +725,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133632",
@@ -692,7 +746,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133634",
@@ -712,7 +767,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133636",
@@ -732,7 +788,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133638",
@@ -752,7 +809,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133640",
@@ -772,7 +830,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133642",
@@ -792,7 +851,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133644",
@@ -812,7 +872,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133704",
@@ -825,14 +886,17 @@
       "stadium": "Allianz Arena",
       "capacity": 75024,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "fcbayern.com",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://fcbayern.com/en/tickets",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "Plataforma de ticketing propia. Venta exclusiva a socios y miembros para partidos de liga.",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "Propio (fcbayern.com)"
     },
     {
       "id": "133706",
@@ -852,7 +916,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133708",
@@ -872,7 +937,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133710",
@@ -892,7 +958,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133712",
@@ -912,7 +979,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133714",
@@ -932,7 +1000,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133716",
@@ -952,7 +1021,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133718",
@@ -972,7 +1042,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133720",
@@ -992,7 +1063,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133722",
@@ -1012,7 +1084,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133724",
@@ -1032,7 +1105,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133726",
@@ -1052,7 +1126,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133728",
@@ -1072,7 +1147,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133730",
@@ -1092,7 +1168,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133732",
@@ -1112,7 +1189,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133734",
@@ -1132,7 +1210,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133736",
@@ -1152,7 +1231,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133738",
@@ -1172,7 +1252,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133800",
@@ -1192,7 +1273,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133802",
@@ -1212,7 +1294,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133804",
@@ -1232,7 +1315,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133806",
@@ -1252,7 +1336,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133808",
@@ -1272,7 +1357,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133810",
@@ -1292,7 +1378,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133812",
@@ -1312,7 +1399,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133814",
@@ -1332,7 +1420,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133816",
@@ -1352,7 +1441,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133818",
@@ -1372,7 +1462,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133820",
@@ -1392,7 +1483,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133822",
@@ -1412,7 +1504,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133824",
@@ -1432,7 +1525,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133826",
@@ -1452,7 +1546,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133828",
@@ -1472,7 +1567,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133830",
@@ -1492,7 +1588,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133832",
@@ -1512,7 +1609,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133834",
@@ -1532,7 +1630,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133836",
@@ -1552,7 +1651,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133838",
@@ -1572,7 +1672,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133900",
@@ -1585,14 +1686,17 @@
       "stadium": "Parc des Princes",
       "capacity": 47929,
       "stadium_location": "",
-      "ticketing_provider": "",
-      "has_own_app": null,
-      "resale_channels": [],
+      "ticketing_provider": "psg.fr",
+      "has_own_app": true,
+      "resale_channels": [
+        "StubHub"
+      ],
       "price_range_eur": [],
-      "ticket_url": "",
+      "ticket_url": "https://billetterie.psg.fr",
       "fever_status": "prospect",
-      "notes": "",
-      "last_updated": "2026-04-20"
+      "notes": "Plataforma de ticketing propia. Venta principalmente a abonados y socios.",
+      "last_updated": "2026-04-20",
+      "ticketing_technology": "Propio (billetterie.psg.fr)"
     },
     {
       "id": "133902",
@@ -1612,7 +1716,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133904",
@@ -1632,7 +1737,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133906",
@@ -1652,7 +1758,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133908",
@@ -1672,7 +1779,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133910",
@@ -1692,7 +1800,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133912",
@@ -1712,7 +1821,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133914",
@@ -1732,7 +1842,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133916",
@@ -1752,7 +1863,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133918",
@@ -1772,7 +1884,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133920",
@@ -1792,7 +1905,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133922",
@@ -1812,7 +1926,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133924",
@@ -1832,7 +1947,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133926",
@@ -1852,7 +1968,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133928",
@@ -1872,7 +1989,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133930",
@@ -1892,7 +2010,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133932",
@@ -1912,7 +2031,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "133934",
@@ -1932,7 +2052,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134000",
@@ -1952,7 +2073,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134002",
@@ -1972,7 +2094,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134004",
@@ -1992,7 +2115,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134006",
@@ -2012,7 +2136,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134008",
@@ -2032,7 +2157,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134010",
@@ -2052,7 +2178,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134012",
@@ -2072,7 +2199,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134014",
@@ -2092,7 +2220,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134016",
@@ -2112,7 +2241,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134018",
@@ -2132,7 +2262,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134020",
@@ -2152,7 +2283,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134022",
@@ -2172,7 +2304,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134024",
@@ -2192,7 +2325,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134026",
@@ -2212,7 +2346,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134028",
@@ -2232,7 +2367,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134030",
@@ -2252,7 +2388,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134032",
@@ -2272,7 +2409,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134034",
@@ -2292,7 +2430,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134100",
@@ -2312,7 +2451,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134102",
@@ -2332,7 +2472,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134104",
@@ -2352,7 +2493,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134106",
@@ -2372,7 +2514,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134108",
@@ -2392,7 +2535,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134110",
@@ -2412,7 +2556,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134112",
@@ -2432,7 +2577,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134114",
@@ -2452,7 +2598,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134116",
@@ -2472,7 +2619,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134118",
@@ -2492,7 +2640,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134120",
@@ -2512,7 +2661,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134122",
@@ -2532,7 +2682,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134124",
@@ -2552,7 +2703,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134126",
@@ -2572,7 +2724,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134128",
@@ -2592,7 +2745,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134130",
@@ -2612,7 +2766,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134132",
@@ -2632,7 +2787,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     },
     {
       "id": "134134",
@@ -2652,7 +2808,8 @@
       "ticket_url": "",
       "fever_status": "prospect",
       "notes": "",
-      "last_updated": "2026-04-20"
+      "last_updated": "2026-04-20",
+      "ticketing_technology": ""
     }
   ]
 }
