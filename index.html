@@ -4,354 +4,340 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fever — Football Ticketing Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f8f9fc;--bg2:#ffffff;--bg3:#f1f3f8;--bg4:#e8ebf2;
-  --border:#e2e6ef;--border2:#d0d5e0;
+  --bg:#f5f6fa;--bg2:#ffffff;--bg3:#f0f1f7;--bg4:#e4e6f0;
+  --border:#e2e4ee;--border2:#d0d3e0;
   --text:#1a1d2e;--text2:#5a6080;--text3:#9aa0b8;
-  --fever:#e8193c;--fever2:#ff4d6a;--fever3:#fff0f3;--fever4:#ffdde3;
-  --green:#0a8a4e;--green2:#e8f7f0;
-  --amber:#b86a00;--amber2:#fff7e6;
+  --fever:#e8193c;--fever2:#ff3355;--fever3:#fff0f3;--fever4:#ffd6de;
+  --green:#0a8a4e;--green2:#e6f7f0;--green3:#00c47a;
+  --amber:#c07000;--amber2:#fff7e0;
   --blue:#1a56db;--blue2:#eff6ff;
   --purple:#6b21a8;--purple2:#f5f3ff;
   --red:#dc2626;--red2:#fef2f2;
-  --shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
-  --shadow2:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.04);
-  --shadow3:0 20px 60px rgba(0,0,0,.12),0 8px 24px rgba(0,0,0,.06);
+  --shadow:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
+  --shadow2:0 4px 16px rgba(0,0,0,.08);
+  --shadow3:0 20px 60px rgba(0,0,0,.14);
 }
 html,body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:13px;height:100vh;overflow:hidden}
-
-/* LAYOUT */
-.app{display:grid;grid-template-rows:60px 1fr;height:100vh}
-.main{display:grid;grid-template-columns:260px 1fr;overflow:hidden;height:100%}
-
-/* TOPBAR */
-.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:var(--bg2);border-bottom:1px solid var(--border);box-shadow:var(--shadow)}
+.app{display:grid;grid-template-rows:56px 1fr;height:100vh}
+.main{display:grid;grid-template-columns:240px 1fr;overflow:hidden;height:100%}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#fff;border-bottom:1px solid var(--border);box-shadow:var(--shadow);z-index:10}
 .logo{display:flex;align-items:center;gap:12px}
-.logo-mark{width:34px;height:34px;background:var(--fever);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff}
-.logo-title{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text)}
-.logo-sep{width:1px;height:22px;background:var(--border2);margin:0 14px}
-.logo-sub{font-size:10px;color:var(--text3);font-weight:500;letter-spacing:1px;text-transform:uppercase}
-.topbar-right{display:flex;align-items:center;gap:10px}
-.chip{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--text2);display:flex;align-items:center;gap:6px;font-weight:500}
+.logo img{height:22px;object-fit:contain}
+.logo-sep{width:1px;height:20px;background:var(--border2);margin:0 10px}
+.logo-sub{font-size:10px;color:var(--text3);font-weight:500;letter-spacing:1.2px;text-transform:uppercase}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.chip{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--text2);display:flex;align-items:center;gap:5px;font-weight:500}
 .chip b{color:var(--text);font-weight:600}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:'Inter',sans-serif}
+.dot-live{width:6px;height:6px;border-radius:50%;background:var(--green3);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:'Inter',sans-serif;white-space:nowrap}
 .btn-primary{background:var(--fever);color:#fff}
 .btn-primary:hover{background:var(--fever2)}
 .btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
 .btn-ghost:hover{background:var(--bg3);color:var(--text)}
-
-/* SIDEBAR */
-.sidebar{background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:18px}
+.btn-sm{padding:4px 10px;font-size:11px}
+.sidebar{background:#fff;border-right:1px solid var(--border);overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:16px}
 .sidebar::-webkit-scrollbar{width:3px}
-.sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-.slabel{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:8px;display:block}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border2)}
+.slabel{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:6px;display:block}
 .search-wrap{position:relative}
-.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:13px;pointer-events:none}
-.search-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 10px 8px 30px;color:var(--text);font-size:12px;outline:none;font-family:'Inter',sans-serif;transition:border .15s}
+.si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:12px;pointer-events:none}
+.search-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:7px 9px 7px 28px;color:var(--text);font-size:12px;outline:none;font-family:'Inter',sans-serif;transition:border .15s}
 .search-input:focus{border-color:var(--fever);background:#fff}
 .search-input::placeholder{color:var(--text3)}
-.filter-select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:7px 10px;color:var(--text);font-size:12px;outline:none;cursor:pointer;font-family:'Inter',sans-serif;appearance:none;transition:border .15s}
-.filter-select:focus{border-color:var(--fever)}
-.pills{display:flex;flex-wrap:wrap;gap:5px}
-.pill{padding:4px 10px;border-radius:6px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--border);color:var(--text2);background:var(--bg3);transition:all .15s}
+.fselect{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:6px 9px;color:var(--text);font-size:12px;outline:none;cursor:pointer;font-family:'Inter',sans-serif;appearance:none;transition:border .15s;margin-bottom:4px}
+.fselect:focus{border-color:var(--fever)}
+.pills{display:flex;flex-wrap:wrap;gap:4px}
+.pill{padding:3px 9px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid var(--border);color:var(--text2);background:var(--bg3);transition:all .15s}
 .pill.on{background:var(--fever3);color:var(--fever);border-color:var(--fever4)}
 .pill:hover:not(.on){background:var(--bg4);color:var(--text)}
-
-/* SIDEBAR STATS */
-.sidebar-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sstat{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-.sstat-val{font-size:20px;font-weight:700;line-height:1}
-.sstat-key{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;font-weight:500}
-.tech-breakdown{display:flex;flex-direction:column;gap:5px}
-.tech-row{display:flex;align-items:center;gap:8px;padding:5px 8px;background:var(--bg3);border-radius:7px;border:1px solid var(--border)}
-.tech-name{font-size:10px;color:var(--text2);font-weight:500;flex:1}
-.tech-count{font-size:11px;font-weight:700;color:var(--text);min-width:20px;text-align:right}
-.tech-bar-wrap{width:50px;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
-.tech-bar{height:100%;border-radius:2px;transition:width .4s}
-
-/* CONTENT */
+.sidebar-stats{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sstat{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 10px}
+.sstat-val{font-size:18px;font-weight:700;line-height:1}
+.sstat-key{font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px;font-weight:500}
+.tech-breakdown{display:flex;flex-direction:column;gap:4px}
+.tech-row{display:flex;align-items:center;gap:7px;padding:4px 8px;background:var(--bg3);border-radius:6px;border:1px solid var(--border)}
+.tech-name{font-size:10px;color:var(--text2);font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tech-count{font-size:11px;font-weight:700;min-width:18px;text-align:right}
+.tech-bar-wrap{width:40px;height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;flex-shrink:0}
+.tech-bar{height:100%;border-radius:2px}
 .content{display:flex;flex-direction:column;overflow:hidden;height:100%}
-.content-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);background:var(--bg2);flex-shrink:0}
-.content-title{font-size:13px;font-weight:600;color:var(--text2)}
-.view-tabs{display:flex;gap:2px;background:var(--bg3);padding:3px;border-radius:8px;border:1px solid var(--border)}
-.tab{padding:5px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;color:var(--text3);background:transparent;transition:all .15s}
+.content-header{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;border-bottom:1px solid var(--border);background:#fff;flex-shrink:0;gap:10px}
+.content-title{font-size:12px;font-weight:600;color:var(--text2);white-space:nowrap}
+.view-tabs{display:flex;gap:2px;background:var(--bg3);padding:3px;border-radius:7px;border:1px solid var(--border)}
+.tab{padding:4px 12px;border-radius:5px;font-size:11px;font-weight:600;cursor:pointer;color:var(--text3);background:transparent;transition:all .15s;white-space:nowrap}
 .tab.on{background:#fff;color:var(--text);box-shadow:var(--shadow)}
 .tab:hover:not(.on){color:var(--text2)}
-
-/* TABLE */
-.table-wrap{flex:1;overflow-y:auto;overflow-x:hidden}
-.table-wrap::-webkit-scrollbar{width:4px}
+.content-inner{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.table-wrap{flex:1;overflow-y:auto;overflow-x:auto}
+.table-wrap::-webkit-scrollbar{width:4px;height:4px}
 .table-wrap::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-table{width:100%;border-collapse:collapse;table-layout:fixed}
-thead th{position:sticky;top:0;background:var(--bg3);padding:9px 12px;text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap}
+table{width:100%;border-collapse:collapse;table-layout:fixed;min-width:900px}
+thead th{position:sticky;top:0;background:var(--bg3);padding:8px 10px;text-align:left;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--text3);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap;z-index:1}
 thead th:hover{color:var(--text2)}
 thead th.sort-on{color:var(--fever)}
 tbody tr{cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s}
 tbody tr:hover td{background:#f8f9fd}
 tbody tr.sel td{background:var(--fever3)}
-td{padding:9px 12px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.club-cell{display:flex;align-items:center;gap:9px}
-.shield{width:30px;height:30px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;border:1px solid var(--border);overflow:hidden}
+td{padding:8px 10px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.club-cell{display:flex;align-items:center;gap:8px}
+.shield{width:28px;height:28px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;border:1px solid var(--border);overflow:hidden}
 .shield img{width:100%;height:100%;object-fit:contain}
 .cname{font-weight:600;font-size:12px;color:var(--text)}
-.csub{font-size:10px;color:var(--text3);margin-top:1px}
-.status-badge{display:inline-flex;align-items:center;padding:3px 8px;border-radius:5px;font-size:10px;font-weight:600;white-space:nowrap}
+.csub{font-size:9px;color:var(--text3);margin-top:1px}
+.sbadge{display:inline-flex;align-items:center;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;white-space:nowrap}
 .s-client{background:var(--green2);color:var(--green)}
 .s-prospect{background:var(--blue2);color:var(--blue)}
 .s-contacted{background:var(--amber2);color:var(--amber)}
 .s-negotiating{background:var(--purple2);color:var(--purple)}
 .s-lost{background:var(--red2);color:var(--red)}
-.tech-badge{display:inline-flex;padding:2px 7px;border-radius:5px;font-size:10px;font-weight:600;white-space:nowrap}
+.tbadge{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:9px;font-weight:600;white-space:nowrap}
 .t-fever{background:var(--fever3);color:var(--fever)}
 .t-seatgeek{background:var(--green2);color:var(--green)}
 .t-ticketmaster{background:var(--blue2);color:var(--blue)}
 .t-propio{background:var(--purple2);color:var(--purple)}
 .t-unknown{background:var(--bg3);color:var(--text3)}
-.score-cell{display:flex;align-items:center;gap:6px}
-.score-num{font-size:13px;font-weight:700;min-width:22px}
-.score-bar-wrap{flex:1;height:5px;background:var(--bg4);border-radius:3px;overflow:hidden}
-.score-bar{height:100%;border-radius:3px}
-.mono{font-size:12px;color:var(--text2)}
-
-/* MAP VIEW */
-#view-map{flex:1;padding:16px;overflow:auto}
-.map-container{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;height:calc(100% - 32px);display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow)}
-.map-title{font-size:14px;font-weight:600;color:var(--text)}
-.map-legend{display:flex;gap:16px;flex-wrap:wrap}
-.leg-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);font-weight:500}
-.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-#europe-map{flex:1;min-height:0}
-
-/* SCORECARD VIEW */
-#view-scorecard{flex:1;overflow-y:auto;padding:16px}
-.scorecard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-.scorecard{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:box-shadow .15s,transform .15s;box-shadow:var(--shadow)}
-.scorecard:hover{box-shadow:var(--shadow2);transform:translateY(-1px)}
-.scorecard-header{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
-.scorecard-total{display:flex;align-items:baseline;gap:3px}
-.scorecard-num{font-size:28px;font-weight:700;line-height:1}
-.scorecard-denom{font-size:13px;color:var(--text3)}
-.scorecard-body{padding:12px 16px;display:flex;flex-direction:column;gap:7px}
-.score-param{display:flex;flex-direction:column;gap:3px}
-.score-param-header{display:flex;justify-content:space-between;align-items:center}
-.score-param-name{font-size:10px;color:var(--text2);font-weight:500}
-.score-param-val{font-size:10px;font-weight:600}
-.score-param-bar-wrap{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
-.score-param-bar{height:100%;border-radius:2px;transition:width .5s}
-.score-verdict{padding:10px 16px;border-top:1px solid var(--border);font-size:11px;color:var(--text2);line-height:1.5;background:var(--bg3)}
-
-/* DETAIL PANEL */
-.detail-panel{position:absolute;right:0;top:0;bottom:0;width:480px;background:#fff;border-left:1px solid var(--border);z-index:50;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;box-shadow:var(--shadow3)}
+.score-cell{display:flex;align-items:center;gap:5px}
+.score-num{font-size:12px;font-weight:700;min-width:20px}
+.score-bar-wrap{flex:1;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.score-bar{height:100%;border-radius:2px}
+.mono{font-size:11px;color:var(--text2)}
+.kanban-wrap{flex:1;overflow-x:auto;overflow-y:hidden;padding:14px}
+.kanban{display:flex;gap:12px;height:100%;min-width:min-content}
+.kanban-col{width:230px;flex-shrink:0;display:flex;flex-direction:column;gap:8px}
+.kanban-header{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px}
+.kanban-cards{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:2px}
+.kanban-cards::-webkit-scrollbar{width:3px}
+.kanban-cards::-webkit-scrollbar-thumb{background:var(--border2)}
+.kcard{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 12px;cursor:pointer;transition:box-shadow .15s,transform .15s;box-shadow:var(--shadow)}
+.kcard:hover{box-shadow:var(--shadow2);transform:translateY(-1px)}
+.kcard-name{font-size:12px;font-weight:600;color:var(--text)}
+.kcard-meta{font-size:10px;color:var(--text3);margin-top:3px}
+.kcard-score{display:flex;align-items:center;gap:5px;margin-top:6px}
+.kcard-score-num{font-size:11px;font-weight:700}
+.kcard-score-bar{flex:1;height:3px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.kcard-score-fill{height:100%;border-radius:2px}
+.map-view{flex:1;padding:14px;overflow:hidden;display:flex;flex-direction:column;gap:10px}
+.map-container{flex:1;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow);min-height:0}
+.map-legend{display:flex;gap:14px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2);font-weight:500}
+.leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.ownership-view{flex:1;overflow-y:auto;padding:14px}
+.ownership-view::-webkit-scrollbar{width:4px}
+.ownership-view::-webkit-scrollbar-thumb{background:var(--border2)}
+.owner-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:12px}
+.owner-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.owner-card-header{padding:14px 16px;border-bottom:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:space-between}
+.owner-name{font-size:13px;font-weight:700;color:var(--text)}
+.owner-type-badge{font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+.owner-body{padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.owner-clubs{display:flex;flex-wrap:wrap;gap:5px}
+.owner-club-chip{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:2px 8px;font-size:10px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .15s}
+.owner-club-chip:hover{background:var(--fever3);color:var(--fever);border-color:var(--fever4)}
+.owner-club-chip.is-client{background:var(--green2);color:var(--green);border-color:#c8eede}
+.owner-stat-row{display:flex;justify-content:space-between;font-size:11px}
+.owner-stat-key{color:var(--text3)}
+.owner-stat-val{font-weight:600;color:var(--text)}
+.fever-contact-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600}
+.has-contact{background:var(--green2);color:var(--green)}
+.no-contact{background:var(--bg3);color:var(--text3)}
+.detail-panel{position:absolute;right:0;top:0;bottom:0;width:460px;background:#fff;border-left:1px solid var(--border);z-index:50;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;box-shadow:var(--shadow3)}
 .detail-panel.open{transform:translateX(0)}
 .detail-panel::-webkit-scrollbar{width:4px}
-.detail-panel::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-.detail-header{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;background:var(--bg3)}
-.detail-club{display:flex;align-items:center;gap:14px}
-.detail-shield{width:54px;height:54px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;border:1px solid var(--border);overflow:hidden;flex-shrink:0;box-shadow:var(--shadow)}
-.detail-shield img{width:100%;height:100%;object-fit:contain}
-.detail-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text)}
-.detail-meta{font-size:11px;color:var(--text2);margin-top:4px}
-.close-btn{width:30px;height:30px;border-radius:8px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:16px;flex-shrink:0;transition:all .15s;box-shadow:var(--shadow)}
+.detail-panel::-webkit-scrollbar-thumb{background:var(--border2)}
+.dp-header{padding:16px 18px 14px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;background:var(--bg3)}
+.dp-club{display:flex;align-items:center;gap:12px}
+.dp-shield{width:50px;height:50px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid var(--border);overflow:hidden;flex-shrink:0;box-shadow:var(--shadow)}
+.dp-shield img{width:100%;height:100%;object-fit:contain}
+.dp-name{font-size:17px;font-weight:700;color:var(--text);line-height:1.2}
+.dp-meta{font-size:11px;color:var(--text2);margin-top:3px}
+.dp-actions{display:flex;gap:5px;align-items:center}
+.close-btn{width:28px;height:28px;border-radius:7px;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:14px;flex-shrink:0;transition:all .15s;box-shadow:var(--shadow)}
 .close-btn:hover{background:var(--bg4);color:var(--text)}
-.detail-body{padding:16px 20px;display:flex;flex-direction:column;gap:20px}
-.detail-section{display:flex;flex-direction:column;gap:10px}
-.detail-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding-bottom:8px;border-bottom:1px solid var(--border)}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.detail-stat{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
-.detail-stat-val{font-size:18px;font-weight:700}
-.detail-stat-key{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-top:3px;font-weight:500}
-.detail-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
-.detail-row:last-child{border-bottom:none}
-.detail-row-key{font-size:11px;color:var(--text2);font-weight:500}
-.detail-row-val{font-size:11px;font-weight:600;color:var(--text);text-align:right;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* SCORECARD IN DETAIL */
-.dp-scorecard{background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden}
-.dp-scorecard-header{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--border)}
-.dp-score-big{font-size:36px;font-weight:700;line-height:1}
-.dp-scorecard-body{padding:12px 14px;display:flex;flex-direction:column;gap:8px}
-.dp-verdict{padding:10px 14px;font-size:11px;color:var(--text2);line-height:1.6}
-
-/* MODAL / FORM */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.dp-body{padding:14px 18px;display:flex;flex-direction:column;gap:16px}
+.dp-section{display:flex;flex-direction:column;gap:8px}
+.dp-section-title{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);padding-bottom:6px;border-bottom:1px solid var(--border)}
+.dp-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.dp-stat{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.dp-stat-val{font-size:16px;font-weight:700;line-height:1}
+.dp-stat-key{font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:3px;font-weight:500}
+.dp-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border)}
+.dp-row:last-child{border-bottom:none}
+.dp-row-key{font-size:11px;color:var(--text2);font-weight:500}
+.dp-row-val{font-size:11px;font-weight:600;color:var(--text);text-align:right;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dp-row-editable{cursor:pointer}
+.dp-row-editable:hover .dp-row-val{color:var(--fever)}
+.dp-inline-edit{background:var(--bg3);border:1px solid var(--fever);border-radius:5px;padding:4px 7px;font-size:11px;font-weight:600;color:var(--text);outline:none;font-family:'Inter',sans-serif;width:180px}
+.dp-inline-select{background:var(--bg3);border:1px solid var(--fever);border-radius:5px;padding:4px 7px;font-size:11px;font-weight:600;color:var(--text);outline:none;font-family:'Inter',sans-serif;cursor:pointer;appearance:none;width:180px}
+.dp-scorecard{background:var(--bg3);border:1px solid var(--border);border-radius:9px;overflow:hidden}
+.dp-sc-header{padding:10px 12px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--border)}
+.dp-sc-body{padding:10px 12px;display:flex;flex-direction:column;gap:7px}
+.dp-sc-verdict{padding:8px 12px;font-size:11px;color:var(--text2);line-height:1.5}
+.sp{display:flex;flex-direction:column;gap:3px}
+.sp-header{display:flex;justify-content:space-between}
+.sp-name{font-size:10px;color:var(--text2);font-weight:500}
+.sp-val{font-size:10px;font-weight:600}
+.sp-bar-wrap{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.sp-bar{height:100%;border-radius:2px;transition:width .4s}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
 .modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:16px;width:580px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow3)}
+.modal{background:#fff;border-radius:14px;width:580px;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow3)}
 .modal::-webkit-scrollbar{width:4px}
 .modal::-webkit-scrollbar-thumb{background:var(--border2)}
-.modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
-.modal-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
-.modal-body{padding:20px 24px;display:flex;flex-direction:column;gap:16px}
-.modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px;position:sticky;bottom:0;background:#fff}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form-group{display:flex;flex-direction:column;gap:5px}
+.modal-header{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.modal-title{font-size:16px;font-weight:700}
+.modal-body{padding:18px 22px;display:flex;flex-direction:column;gap:14px}
+.modal-footer{padding:14px 22px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px;position:sticky;bottom:0;background:#fff}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-group{display:flex;flex-direction:column;gap:4px}
 .form-group.full{grid-column:1/-1}
-.form-label{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.6px}
-.form-input{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:12px;outline:none;font-family:'Inter',sans-serif;transition:border .15s;width:100%}
+.form-label{font-size:10px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.6px}
+.form-input{background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:7px 10px;color:var(--text);font-size:12px;outline:none;font-family:'Inter',sans-serif;transition:border .15s;width:100%}
 .form-input:focus{border-color:var(--fever);background:#fff}
 .form-select{appearance:none;cursor:pointer}
-.form-textarea{min-height:80px;resize:vertical}
-.form-section{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding-top:4px;border-top:1px solid var(--border);margin-top:4px}
-
-/* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--text);color:#fff;padding:12px 18px;border-radius:10px;font-size:12px;font-weight:500;box-shadow:var(--shadow3);z-index:200;transform:translateY(80px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:8px}
+.form-textarea{min-height:70px;resize:vertical}
+.fsection{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);padding-top:6px;border-top:1px solid var(--border);margin-top:2px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--text);color:#fff;padding:10px 16px;border-radius:8px;font-size:12px;font-weight:500;box-shadow:var(--shadow3);z-index:200;transform:translateY(60px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:7px;max-width:320px}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.success{background:var(--green)}
 .toast.error{background:var(--red)}
-
-/* GITHUB CONFIG */
-.config-panel{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px 20px;box-shadow:var(--shadow3);z-index:150;display:flex;align-items:center;gap:12px;font-size:12px}
-.config-panel b{color:var(--text);font-weight:600}
-
-/* CONTENT INNER */
-.content-inner{flex:1;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.toast.info{background:var(--blue)}
 </style>
 </head>
 <body>
 <div class="app">
-
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="logo">
-      <div class="logo-mark">F</div>
-      <div class="logo-title">Fever</div>
-      <div class="logo-sep"></div>
-      <div class="logo-sub">Football Ticketing Intelligence</div>
-    </div>
-    <div class="topbar-right">
-      <div class="chip"><span class="dot"></span> <b id="chip-count">0</b> clubs tracked</div>
-      <div class="chip">Updated <b>Apr 2026</b></div>
-      <button class="btn btn-ghost" onclick="openConfig()">⚙ GitHub Sync</button>
-      <button class="btn btn-primary" onclick="openAddModal()">+ Add Club</button>
+<div class="topbar">
+  <div class="logo">
+    <img src="https://feverup.com/logo/fever-logo-black.svg" alt="Fever" onerror="this.style.display='none'">
+    <div class="logo-sep"></div>
+    <div class="logo-sub">Football Intelligence</div>
+  </div>
+  <div class="topbar-right">
+    <div class="chip"><span class="dot-live"></span><b id="chip-count">0</b> clubs</div>
+    <div class="chip">Apr 2026</div>
+    <button class="btn btn-ghost btn-sm" onclick="openConfig()">⚙ Sync</button>
+    <button class="btn btn-primary btn-sm" onclick="openAddModal()">+ Add Club</button>
+  </div>
+</div>
+<div class="main">
+<div class="sidebar">
+  <div>
+    <span class="slabel">Search</span>
+    <div class="search-wrap">
+      <span class="si">⌕</span>
+      <input class="search-input" id="search" type="text" placeholder="Club, owner, stadium…">
     </div>
   </div>
-
-  <div class="main">
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-      <div>
-        <span class="slabel">Search</span>
-        <div class="search-wrap">
-          <span class="search-icon">⌕</span>
-          <input class="search-input" id="search" type="text" placeholder="Club, stadium…">
-        </div>
-      </div>
-      <div>
-        <span class="slabel">League</span>
-        <select class="filter-select" id="filter-league">
-          <option value="">All Leagues</option>
-          <option>La Liga</option><option>Premier League</option>
-          <option>Bundesliga</option><option>Serie A</option>
-          <option>Ligue 1</option><option>Eredivisie</option>
-          <option>Primeira Liga</option>
-        </select>
-      </div>
-      <div>
-        <span class="slabel">Fever Status</span>
-        <div class="pills" id="status-pills">
-          <div class="pill on" data-val="">All</div>
-          <div class="pill" data-val="client">Client</div>
-          <div class="pill" data-val="prospect">Prospect</div>
-          <div class="pill" data-val="contacted">Contacted</div>
-          <div class="pill" data-val="negotiating">Negotiating</div>
-          <div class="pill" data-val="lost">Lost</div>
-        </div>
-      </div>
-      <div>
-        <span class="slabel">Technology</span>
-        <div class="pills" id="tech-pills">
-          <div class="pill on" data-val="">All</div>
-          <div class="pill" data-val="OneBox">OneBox</div>
-          <div class="pill" data-val="SeatGeek">SeatGeek</div>
-          <div class="pill" data-val="Ticketmaster">Ticketmaster</div>
-          <div class="pill" data-val="Propio">Own Platform</div>
-        </div>
-      </div>
-      <div>
-        <span class="slabel">Overview</span>
-        <div class="sidebar-stats" id="sidebar-stats"></div>
-      </div>
-      <div>
-        <span class="slabel">Tech Distribution</span>
-        <div class="tech-breakdown" id="tech-breakdown"></div>
-      </div>
-    </div>
-
-    <!-- CONTENT -->
-    <div class="content">
-      <div class="content-header">
-        <div class="content-title" id="result-count">Loading…</div>
-        <div class="view-tabs">
-          <div class="tab on" onclick="setView('table')">Table</div>
-          <div class="tab" onclick="setView('map')">Map</div>
-          <div class="tab" onclick="setView('scorecard')">Scorecard</div>
-        </div>
-      </div>
-
-      <div class="content-inner">
-        <!-- TABLE -->
-        <div class="table-wrap" id="view-table" style="display:flex;flex-direction:column">
-          <table>
-            <thead><tr>
-              <th style="width:190px" onclick="sortBy('name')">Club</th>
-              <th style="width:105px" onclick="sortBy('league')">League</th>
-              <th style="width:110px">Technology</th>
-              <th style="width:90px">Status</th>
-              <th style="width:85px" onclick="sortBy('ticketing_revenue_eur_m')">Ticket Rev.</th>
-              <th style="width:75px" onclick="sortBy('avg_ticket_price_eur')">Avg Price</th>
-              <th style="width:70px" onclick="sortBy('avg_attendance_pct')">Occ %</th>
-              <th style="width:105px" onclick="sortBy('fever_score')">Fever Score</th>
-            </tr></thead>
-            <tbody id="table-body"></tbody>
-          </table>
-        </div>
-
-        <!-- MAP -->
-        <div id="view-map" style="display:none;flex:1;padding:16px;overflow:hidden">
-          <div class="map-container">
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <div class="map-title">European Football Opportunity Map</div>
-              <div class="map-legend">
-                <div class="leg-item"><div class="leg-dot" style="background:#0a8a4e"></div>Client (OneBox)</div>
-                <div class="leg-item"><div class="leg-dot" style="background:#1a56db"></div>Prospect</div>
-                <div class="leg-item"><div class="leg-dot" style="background:#b86a00"></div>Contacted</div>
-                <div class="leg-item"><div class="leg-dot" style="background:#6b21a8"></div>Negotiating</div>
-                <div class="leg-item"><div class="leg-dot" style="background:#dc2626"></div>Lost</div>
-              </div>
-            </div>
-            <div id="europe-map" style="flex:1;min-height:0;position:relative"></div>
-          </div>
-        </div>
-
-        <!-- SCORECARD -->
-        <div id="view-scorecard" style="display:none;flex:1;overflow-y:auto;padding:16px">
-          <div class="scorecard-grid" id="scorecard-grid"></div>
-        </div>
-
-        <!-- DETAIL PANEL -->
-        <div class="detail-panel" id="detail-panel">
-          <div class="detail-header">
-            <div class="detail-club">
-              <div class="detail-shield" id="dp-shield"></div>
-              <div>
-                <div class="detail-name" id="dp-name"></div>
-                <div class="detail-meta" id="dp-meta"></div>
-              </div>
-            </div>
-            <div style="display:flex;gap:6px;align-items:center">
-              <button class="btn btn-ghost" style="font-size:11px;padding:5px 10px" id="dp-edit-btn">✏ Edit</button>
-              <div class="close-btn" onclick="closeDetail()">✕</div>
-            </div>
-          </div>
-          <div class="detail-body" id="detail-body"></div>
-        </div>
-      </div>
+  <div>
+    <span class="slabel">League</span>
+    <select class="fselect" id="filter-league">
+      <option value="">All Leagues</option>
+      <option>La Liga</option><option>Premier League</option><option>Bundesliga</option>
+      <option>Serie A</option><option>Ligue 1</option><option>Eredivisie</option><option>Primeira Liga</option>
+    </select>
+  </div>
+  <div>
+    <span class="slabel">Status</span>
+    <div class="pills" id="status-pills">
+      <div class="pill on" data-val="">All</div>
+      <div class="pill" data-val="client">Client</div>
+      <div class="pill" data-val="prospect">Prospect</div>
+      <div class="pill" data-val="contacted">Contacted</div>
+      <div class="pill" data-val="negotiating">Negotiating</div>
+      <div class="pill" data-val="lost">Lost</div>
     </div>
   </div>
+  <div>
+    <span class="slabel">Technology</span>
+    <div class="pills" id="tech-pills">
+      <div class="pill on" data-val="">All</div>
+      <div class="pill" data-val="OneBox">OneBox</div>
+      <div class="pill" data-val="SeatGeek">SeatGeek</div>
+      <div class="pill" data-val="Ticketmaster">Ticketmaster</div>
+      <div class="pill" data-val="Propio">Own Platform</div>
+    </div>
+  </div>
+  <div>
+    <span class="slabel">Overview</span>
+    <div class="sidebar-stats" id="sidebar-stats"></div>
+  </div>
+  <div>
+    <span class="slabel">Tech Distribution</span>
+    <div class="tech-breakdown" id="tech-breakdown"></div>
+  </div>
+</div>
+<div class="content">
+  <div class="content-header">
+    <div class="content-title" id="result-count">Loading…</div>
+    <div class="view-tabs">
+      <div class="tab on" onclick="setView('table')">Table</div>
+      <div class="tab" onclick="setView('kanban')">Pipeline</div>
+      <div class="tab" onclick="setView('map')">Map</div>
+      <div class="tab" onclick="setView('ownership')">Ownership</div>
+      <div class="tab" onclick="setView('scorecard')">Scorecard</div>
+    </div>
+  </div>
+  <div class="content-inner">
+    <div class="table-wrap" id="view-table">
+      <table>
+        <thead><tr>
+          <th style="width:185px" onclick="sortBy('name')">Club</th>
+          <th style="width:100px" onclick="sortBy('league')">League</th>
+          <th style="width:100px">Technology</th>
+          <th style="width:85px">Status</th>
+          <th style="width:80px" onclick="sortBy('ticketing_revenue_eur_m')">Ticket Rev.</th>
+          <th style="width:65px" onclick="sortBy('avg_ticket_price_eur')">Avg €</th>
+          <th style="width:60px" onclick="sortBy('avg_attendance_pct')">Occ%</th>
+          <th style="width:85px">Owner</th>
+          <th style="width:95px" onclick="sortBy('fever_score')">Score</th>
+        </tr></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+    <div class="kanban-wrap" id="view-kanban" style="display:none">
+      <div class="kanban" id="kanban-board"></div>
+    </div>
+    <div class="map-view" id="view-map" style="display:none">
+      <div class="map-container">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <div style="font-size:13px;font-weight:600">European Opportunity Map</div>
+          <div class="map-legend">
+            <div class="leg-item"><div class="leg-dot" style="background:#0a8a4e"></div>Client</div>
+            <div class="leg-item"><div class="leg-dot" style="background:#1a56db"></div>Prospect</div>
+            <div class="leg-item"><div class="leg-dot" style="background:#c07000"></div>Contacted</div>
+            <div class="leg-item"><div class="leg-dot" style="background:#6b21a8"></div>Negotiating</div>
+            <div class="leg-item"><div class="leg-dot" style="background:#dc2626"></div>Lost</div>
+          </div>
+        </div>
+        <div id="europe-map" style="flex:1;min-height:0"></div>
+      </div>
+    </div>
+    <div class="ownership-view" id="view-ownership" style="display:none">
+      <div class="owner-grid" id="owner-grid"></div>
+    </div>
+    <div id="view-scorecard" style="display:none;flex:1;overflow-y:auto;padding:14px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px" id="scorecard-grid"></div>
+    </div>
+    <div class="detail-panel" id="detail-panel">
+      <div class="dp-header">
+        <div class="dp-club">
+          <div class="dp-shield" id="dp-shield"></div>
+          <div><div class="dp-name" id="dp-name"></div><div class="dp-meta" id="dp-meta"></div></div>
+        </div>
+        <div class="dp-actions">
+          <button class="btn btn-ghost btn-sm" id="dp-edit-btn">✏ Edit</button>
+          <div class="close-btn" onclick="closeDetail()">✕</div>
+        </div>
+      </div>
+      <div class="dp-body" id="dp-body"></div>
+    </div>
+  </div>
+</div>
+</div>
 </div>
 
 <!-- ADD/EDIT MODAL -->
@@ -362,19 +348,18 @@ td{padding:9px 12px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
       <div class="close-btn" onclick="closeModal()">✕</div>
     </div>
     <div class="modal-body">
-      <div class="form-section">Club Information</div>
+      <div class="fsection">Club Info</div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Club Name *</label><input class="form-input" id="f-name" placeholder="FC Barcelona"></div>
+        <div class="form-group"><label class="form-label">Name *</label><input class="form-input" id="f-name" placeholder="FC Barcelona"></div>
         <div class="form-group"><label class="form-label">Country *</label><input class="form-input" id="f-country" placeholder="Spain"></div>
       </div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">League *</label>
           <select class="form-input form-select" id="f-league">
-            <option value="">Select league…</option>
-            <option>La Liga</option><option>Premier League</option>
-            <option>Bundesliga</option><option>Serie A</option>
-            <option>Ligue 1</option><option>Eredivisie</option>
-            <option>Primeira Liga</option><option>Other</option>
+            <option value="">Select…</option>
+            <option>La Liga</option><option>Premier League</option><option>Bundesliga</option>
+            <option>Serie A</option><option>Ligue 1</option><option>Eredivisie</option>
+            <option>Primeira Liga</option><option>Championship</option><option>Liga MX</option><option>Other</option>
           </select>
         </div>
         <div class="form-group"><label class="form-label">Founded</label><input class="form-input" id="f-founded" type="number" placeholder="1899"></div>
@@ -383,595 +368,377 @@ td{padding:9px 12px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
         <div class="form-group"><label class="form-label">Stadium</label><input class="form-input" id="f-stadium" placeholder="Camp Nou"></div>
         <div class="form-group"><label class="form-label">Capacity</label><input class="form-input" id="f-capacity" type="number" placeholder="99354"></div>
       </div>
-
-      <div class="form-section">Ticketing Intelligence</div>
+      <div class="fsection">Ticketing</div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Ticketing Technology</label>
+        <div class="form-group"><label class="form-label">Technology</label>
           <select class="form-input form-select" id="f-technology">
             <option value="">Unknown</option>
-            <option>OneBox (Fever)</option><option>SeatGeek</option>
-            <option>SeatGeek Enterprise</option><option>Ticketmaster Sport</option>
-            <option>Propio (own platform)</option><option>Other</option>
+            <option>OneBox (Fever)</option><option>SeatGeek</option><option>SeatGeek Enterprise</option>
+            <option>Ticketmaster Sport</option><option>Propio (own platform)</option><option>Other</option>
           </select>
         </div>
-        <div class="form-group"><label class="form-label">Sales Channel / Provider</label><input class="form-input" id="f-provider" placeholder="club.com / Ticketmaster"></div>
+        <div class="form-group"><label class="form-label">Provider / Channel</label><input class="form-input" id="f-provider" placeholder="club.com / Ticketmaster"></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Annual Ticketing Rev (€M)</label><input class="form-input" id="f-ticket-rev" type="number" placeholder="45"></div>
+        <div class="form-group"><label class="form-label">Ticketing Rev (€M)</label><input class="form-input" id="f-ticket-rev" type="number" placeholder="45"></div>
         <div class="form-group"><label class="form-label">Avg Ticket Price (€)</label><input class="form-input" id="f-avg-price" type="number" placeholder="55"></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Avg Attendance %</label><input class="form-input" id="f-attendance" type="number" placeholder="92" min="0" max="100"></div>
-        <div class="form-group"><label class="form-label">Has Own App?</label>
-          <select class="form-input form-select" id="f-app">
-            <option value="">Unknown</option><option value="true">Yes</option><option value="false">No</option>
-          </select>
-        </div>
+        <div class="form-group"><label class="form-label">Avg Attendance %</label><input class="form-input" id="f-attendance" type="number" placeholder="92"></div>
+        <div class="form-group"><label class="form-label">Contract Expiry</label><input class="form-input" id="f-contract" placeholder="2026-06"></div>
       </div>
-      <div class="form-group"><label class="form-label">Resale Channels</label><input class="form-input" id="f-resale" placeholder="StubHub, Viagogo"></div>
-      <div class="form-group"><label class="form-label">Ticket URL</label><input class="form-input" id="f-url" placeholder="https://…"></div>
-
-      <div class="form-section">CRM</div>
+      <div class="fsection">Ownership</div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Fever Status *</label>
-          <select class="form-input form-select" id="f-status">
-            <option value="prospect">Prospect</option>
-            <option value="contacted">Contacted</option>
-            <option value="negotiating">Negotiating</option>
-            <option value="client">Client</option>
-            <option value="lost">Lost</option>
+        <div class="form-group"><label class="form-label">Owner Name</label><input class="form-input" id="f-owner" placeholder="RedBird Capital"></div>
+        <div class="form-group"><label class="form-label">Owner Type</label>
+          <select class="form-input form-select" id="f-owner-type">
+            <option value="">Unknown</option>
+            <option>Private Equity</option><option>Sovereign Wealth Fund</option>
+            <option>Sports Group</option><option>Family</option>
+            <option>Member-owned</option><option>Public Company</option><option>State</option>
           </select>
         </div>
-        <div class="form-group"><label class="form-label">Annual Revenue (€M)</label><input class="form-input" id="f-revenue" type="number" placeholder="400"></div>
       </div>
-      <div class="form-group full"><label class="form-label">Commercial Notes</label><textarea class="form-input form-textarea" id="f-notes" placeholder="Key insights, contacts, deal status…"></textarea></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Fever Contact at Owner</label>
+          <select class="form-input form-select" id="f-fever-contact">
+            <option value="">No</option><option value="yes">Yes</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Decision Maker</label><input class="form-input" id="f-decision-maker" placeholder="Head of Ticketing"></div>
+      </div>
+      <div class="fsection">CRM</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Fever Status</label>
+          <select class="form-input form-select" id="f-status">
+            <option value="prospect">Prospect</option><option value="contacted">Contacted</option>
+            <option value="negotiating">Negotiating</option><option value="client">Client</option><option value="lost">Lost</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Priority</label>
+          <select class="form-input form-select" id="f-priority">
+            <option value="High">High</option><option value="Medium" selected>Medium</option><option value="Low">Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group full"><label class="form-label">Annual Revenue (€M)</label><input class="form-input" id="f-revenue" type="number" placeholder="400"></div>
+      <div class="form-group full"><label class="form-label">Notes</label><textarea class="form-input form-textarea" id="f-notes" placeholder="Key insights, contacts, deal status…"></textarea></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" onclick="saveClub()">💾 Save & Sync to GitHub</button>
+      <button class="btn btn-primary" onclick="saveClub()">💾 Save & Sync</button>
     </div>
   </div>
 </div>
 
-<!-- GITHUB CONFIG MODAL -->
+<!-- CONFIG MODAL -->
 <div class="modal-overlay" id="config-overlay">
-  <div class="modal" style="width:460px">
+  <div class="modal" style="width:440px">
     <div class="modal-header">
-      <div class="modal-title">GitHub Sync Setup</div>
+      <div class="modal-title">GitHub Sync</div>
       <div class="close-btn" onclick="closeConfig()">✕</div>
     </div>
     <div class="modal-body">
-      <p style="font-size:12px;color:var(--text2);line-height:1.6">To save changes directly to GitHub, you need to provide your Personal Access Token. This token is stored only in your browser and never sent anywhere except GitHub's API.</p>
-      <div class="form-group"><label class="form-label">GitHub Token (FEVER_PAT)</label><input class="form-input" id="cfg-token" type="password" placeholder="ghp_xxxxxxxxxxxx"></div>
+      <div style="font-size:11px;color:var(--text2);line-height:1.6;background:var(--bg3);padding:10px 12px;border-radius:8px">Los cambios se guardan automáticamente en GitHub. Tu token se almacena solo en este navegador.</div>
+      <div class="form-group"><label class="form-label">Personal Access Token (FEVER_PAT)</label><input class="form-input" id="cfg-token" type="password" placeholder="ghp_xxxxxxxxxxxx"></div>
       <div class="form-group"><label class="form-label">GitHub Username</label><input class="form-input" id="cfg-user" placeholder="alvarobazaco-debug"></div>
       <div class="form-group"><label class="form-label">Repository Name</label><input class="form-input" id="cfg-repo" placeholder="football-ticketing-inteligence"></div>
-      <div style="font-size:11px;color:var(--text3);background:var(--bg3);padding:10px 12px;border-radius:8px;line-height:1.6">
-        ℹ️ Your token is stored in your browser's localStorage and only used to commit changes to <code>data/clubs.json</code> in your repo.
-      </div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeConfig()">Cancel</button>
-      <button class="btn btn-primary" onclick="saveConfig()">Save Configuration</button>
+      <button class="btn btn-primary" onclick="saveConfig()">Save</button>
     </div>
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ── Data ──────────────────────────────────────────────────────────────────────
-let CLUBS = [{"id":"133739","name":"FC Barcelona","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/uyhbfe1612467855.png","league":"La Liga","country":"Spain","founded":1899,"stadium":"Spotify Camp Nou","capacity":99354,"stadium_location":"","ticketing_provider":"fcbarcelona.com","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.fcbarcelona.com/en/tickets/football","fever_status":"client","notes":"OneBox de Fever como tecnología interna","last_updated":"2026-04-20","ticketing_technology":"OneBox (Fever)","annual_revenue_eur_m":800,"ticketing_revenue_eur_m":120,"avg_ticket_price_eur":95,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Enorme capacidad Camp Nou. Alto valor estratégico."},{"id":"133600","name":"Real Madrid","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/vwpvry1467462651.png","league":"La Liga","country":"Spain","founded":1902,"stadium":"Santiago Bernabéu","capacity":81044,"stadium_location":"","ticketing_provider":"realmadrid.com","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.realmadrid.com/en-US/tickets","fever_status":"client","notes":"OneBox de Fever como tecnología interna. Plataforma digital propia desarrollada con Softtek/Microsoft","last_updated":"2026-04-20","ticketing_technology":"OneBox (Fever)","annual_revenue_eur_m":831,"ticketing_revenue_eur_m":135,"avg_ticket_price_eur":110,"avg_attendance_pct":95,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Bernabéu renovado. Mayor revenue ticketing de Europa."},{"id":"133907","name":"Atletico de Madrid","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/uvqxox1420514169.png","league":"La Liga","country":"Spain","founded":1903,"stadium":"Cívitas Metropolitano","capacity":68456,"stadium_location":"","ticketing_provider":"atleticodemadrid.com","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"price_range_eur":[],"ticket_url":"https://www.atleticodemadrid.com/entradas","fever_status":"client","notes":"OneBox de Fever como tecnología interna","last_updated":"2026-04-20","ticketing_technology":"OneBox (Fever)","annual_revenue_eur_m":380,"ticketing_revenue_eur_m":55,"avg_ticket_price_eur":55,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Metropolitano con gran capacidad."},{"id":"133905","name":"Sevilla FC","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/xpwwwq1420230246.png","league":"La Liga","country":"Spain","founded":1890,"stadium":"Ramón Sánchez Pizjuán","capacity":43883,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":22,"avg_ticket_price_eur":35,"avg_attendance_pct":82,"annual_matchdays":19,"fever_score_notes":"Prospect. Estadio medio. Oportunidad real de expansión."},{"id":"133618","name":"Athletic Bilbao","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/sqwpvr1421075011.png","league":"La Liga","country":"Spain","founded":1898,"stadium":"San Mamés","capacity":53289,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":120,"ticketing_revenue_eur_m":16,"avg_ticket_price_eur":30,"avg_attendance_pct":96,"annual_matchdays":19,"fever_score_notes":"Prospect. Ocupación casi completa. Modelo de club único."},{"id":"133906","name":"Real Betis","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/rwpvxr1420229881.png","league":"La Liga","country":"Spain","founded":1907,"stadium":"Estadio Benito Villamarín","capacity":60720,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":130,"ticketing_revenue_eur_m":18,"avg_ticket_price_eur":32,"avg_attendance_pct":85,"annual_matchdays":19,"fever_score_notes":"Prospect. Benito Villamarín renovado. Base de aficionados fiel."},{"id":"133604","name":"Valencia CF","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/twpvvr1421241528.png","league":"La Liga","country":"Spain","founded":1919,"stadium":"Mestalla","capacity":55000,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":140,"ticketing_revenue_eur_m":15,"avg_ticket_price_eur":28,"avg_attendance_pct":72,"annual_matchdays":19,"fever_score_notes":"Prospect. Ocupación baja, margen mejora. Estadio nuevo en proyecto."},{"id":"133603","name":"Villarreal CF","short_name":"","logo_url":"https://www.thesportsdb.com/images/media/team/badge/xvqpvr1420229520.png","league":"La Liga","country":"Spain","founded":1923,"stadium":"Estadio de la Cerámica","capacity":23500,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":110,"ticketing_revenue_eur_m":10,"avg_ticket_price_eur":30,"avg_attendance_pct":78,"annual_matchdays":19,"fever_score_notes":"Prospect. Estadio pequeño limita revenue. Club bien gestionado."},{"id":"133604","name":"Manchester City","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1880,"stadium":"Etihad Stadium","capacity":53400,"stadium_location":"","ticketing_provider":"mancity.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"price_range_eur":[],"ticket_url":"https://www.mancity.com/tickets/mens","fever_status":"prospect","notes":"SeatGeek partner oficial desde 2018.","last_updated":"2026-04-20","ticketing_technology":"SeatGeek Enterprise","annual_revenue_eur_m":715,"ticketing_revenue_eur_m":85,"avg_ticket_price_eur":65,"avg_attendance_pct":98,"annual_matchdays":19,"fever_score_notes":"SeatGeek (competidor). Muy difícil de mover. Bajo en prioridad."},{"id":"133612","name":"Arsenal","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1886,"stadium":"Emirates Stadium","capacity":60704,"stadium_location":"","ticketing_provider":"arsenal.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.arsenal.com/tickets","fever_status":"prospect","notes":"Ticketmaster Sport partner desde hace más de 30 años. Renovado recientemente.","last_updated":"2026-04-20","ticketing_technology":"Ticketmaster Sport","annual_revenue_eur_m":590,"ticketing_revenue_eur_m":105,"avg_ticket_price_eur":82,"avg_attendance_pct":98,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. Contrato renovado recientemente. Oportunidad futura."},{"id":"133602","name":"Liverpool","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1892,"stadium":"Anfield","capacity":61276,"stadium_location":"","ticketing_provider":"liverpoolfc.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.liverpoolfc.com/tickets","fever_status":"prospect","notes":"SeatGeek partner oficial desde 2020","last_updated":"2026-04-20","ticketing_technology":"SeatGeek","annual_revenue_eur_m":700,"ticketing_revenue_eur_m":90,"avg_ticket_price_eur":72,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"SeatGeek (competidor). Anfield siempre sold out. Difícil entrada."},{"id":"133610","name":"Chelsea","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1905,"stadium":"Stamford Bridge","capacity":40341,"stadium_location":"","ticketing_provider":"chelseafc.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"price_range_eur":[],"ticket_url":"https://www.chelseafc.com/en/tickets","fever_status":"prospect","notes":"Acuerdo multi-año firmado en 2025.","last_updated":"2026-04-20","ticketing_technology":"Ticketmaster Sport","annual_revenue_eur_m":510,"ticketing_revenue_eur_m":72,"avg_ticket_price_eur":75,"avg_attendance_pct":97,"annual_matchdays":19,"fever_score_notes":"Ticketmaster desde 2025. Contrato nuevo, difícil a corto plazo."},{"id":"133614","name":"Manchester United","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1878,"stadium":"Old Trafford","capacity":74140,"stadium_location":"","ticketing_provider":"manutd.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"price_range_eur":[],"ticket_url":"https://www.manutd.com/en/tickets","fever_status":"prospect","notes":"Ticketmaster Sport partner oficial.","last_updated":"2026-04-20","ticketing_technology":"Ticketmaster Sport","annual_revenue_eur_m":640,"ticketing_revenue_eur_m":110,"avg_ticket_price_eur":75,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. Old Trafford mayor estadio PL. Alto valor potencial."},{"id":"133616","name":"Tottenham Hotspur","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1882,"stadium":"Tottenham Hotspur Stadium","capacity":62850,"stadium_location":"","ticketing_provider":"tottenhamhotspur.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"price_range_eur":[],"ticket_url":"https://www.tottenhamhotspur.com/tickets/","fever_status":"prospect","notes":"Ticketmaster Sport partner renovado en 2022.","last_updated":"2026-04-20","ticketing_technology":"Ticketmaster Sport","annual_revenue_eur_m":550,"ticketing_revenue_eur_m":95,"avg_ticket_price_eur":72,"avg_attendance_pct":97,"annual_matchdays":19,"fever_score_notes":"Ticketmaster renovado 2022. Estadio más moderno de Europa. Alta prioridad."},{"id":"133618","name":"Newcastle United","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1892,"stadium":"St. James' Park","capacity":52305,"stadium_location":"","ticketing_provider":"nufc.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.nufc.com/tickets/","fever_status":"prospect","notes":"SeatGeek partner oficial.","last_updated":"2026-04-20","ticketing_technology":"SeatGeek","annual_revenue_eur_m":250,"ticketing_revenue_eur_m":40,"avg_ticket_price_eur":40,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"SeatGeek. Con nueva propiedad saudí, inversión creciente."},{"id":"133620","name":"Aston Villa","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1874,"stadium":"Villa Park","capacity":42785,"stadium_location":"","ticketing_provider":"avfc.co.uk / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.avfc.co.uk/tickets","fever_status":"prospect","notes":"SeatGeek partner renovado en 2024.","last_updated":"2026-04-20","ticketing_technology":"SeatGeek","annual_revenue_eur_m":220,"ticketing_revenue_eur_m":30,"avg_ticket_price_eur":35,"avg_attendance_pct":95,"annual_matchdays":19,"fever_score_notes":"SeatGeek renovado 2024. Champions League añade valor."},{"id":"133622","name":"West Ham United","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1895,"stadium":"London Stadium","capacity":62500,"stadium_location":"","ticketing_provider":"whufc.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.whufc.com/tickets","fever_status":"prospect","notes":"Ticketmaster partner desde hace más de 10 años","last_updated":"2026-04-20","ticketing_technology":"Ticketmaster Sport","annual_revenue_eur_m":250,"ticketing_revenue_eur_m":45,"avg_ticket_price_eur":40,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. London Stadium gran capacidad. Oportunidad media."},{"id":"133624","name":"Brighton & Hove Albion","short_name":"","logo_url":"","league":"Premier League","country":"England","founded":1901,"stadium":"Amex Stadium","capacity":31800,"stadium_location":"","ticketing_provider":"brightonandhovealbion.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://www.brightonandhovealbion.com/tickets","fever_status":"prospect","notes":"Ticketmaster Sport partner oficial","last_updated":"2026-04-20","ticketing_technology":"Ticketmaster Sport","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":28,"avg_ticket_price_eur":38,"avg_attendance_pct":98,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. Club innovador tecnológicamente. Interesante."},{"id":"133704","name":"Bayern Munich","short_name":"","logo_url":"","league":"Bundesliga","country":"Germany","founded":1900,"stadium":"Allianz Arena","capacity":75024,"stadium_location":"","ticketing_provider":"fcbayern.com","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://fcbayern.com/en/tickets","fever_status":"prospect","notes":"Plataforma de ticketing propia.","last_updated":"2026-04-20","ticketing_technology":"Propio (fcbayern.com)","annual_revenue_eur_m":765,"ticketing_revenue_eur_m":90,"avg_ticket_price_eur":65,"avg_attendance_pct":98,"annual_matchdays":17,"fever_score_notes":"Plataforma propia. El más cerrado de Europa. Muy difícil penetrar."},{"id":"133706","name":"Borussia Dortmund","short_name":"","logo_url":"","league":"Bundesliga","country":"Germany","founded":1909,"stadium":"Signal Iduna Park","capacity":81365,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":420,"ticketing_revenue_eur_m":55,"avg_ticket_price_eur":35,"avg_attendance_pct":99,"annual_matchdays":17,"fever_score_notes":"Prospect. Signal Iduna Park mayor estadio Bundesliga. Alta ocupación."},{"id":"133708","name":"Bayer Leverkusen","short_name":"","logo_url":"","league":"Bundesliga","country":"Germany","founded":1904,"stadium":"BayArena","capacity":30210,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":220,"ticketing_revenue_eur_m":25,"avg_ticket_price_eur":40,"avg_attendance_pct":95,"annual_matchdays":17,"fever_score_notes":"Prospect. Campeón 2024. Crecimiento rápido en popularidad."},{"id":"133710","name":"RB Leipzig","short_name":"","logo_url":"","league":"Bundesliga","country":"Germany","founded":2009,"stadium":"Red Bull Arena","capacity":47069,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":290,"ticketing_revenue_eur_m":30,"avg_ticket_price_eur":38,"avg_attendance_pct":90,"annual_matchdays":17,"fever_score_notes":"Prospect. Club moderno, gestión profesional. Buena oportunidad."},{"id":"133714","name":"Eintracht Frankfurt","short_name":"","logo_url":"","league":"Bundesliga","country":"Germany","founded":1899,"stadium":"Deutsche Bank Park","capacity":58000,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":230,"ticketing_revenue_eur_m":28,"avg_ticket_price_eur":35,"avg_attendance_pct":97,"annual_matchdays":17,"fever_score_notes":"Prospect. Europa League ganador 2022. Base fan muy activa."},{"id":"133800","name":"Inter Milan","short_name":"","logo_url":"","league":"Serie A","country":"Italy","founded":1908,"stadium":"San Siro","capacity":80018,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":440,"ticketing_revenue_eur_m":50,"avg_ticket_price_eur":55,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Prospect. Nuevo estadio en proyecto. Oportunidad al renovar infraestructura."},{"id":"133802","name":"AC Milan","short_name":"","logo_url":"","league":"Serie A","country":"Italy","founded":1899,"stadium":"San Siro","capacity":80018,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":380,"ticketing_revenue_eur_m":42,"avg_ticket_price_eur":50,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"Prospect. Comparten San Siro con Inter. Nuevo estadio en proyecto."},{"id":"133804","name":"Juventus","short_name":"","logo_url":"","league":"Serie A","country":"Italy","founded":1897,"stadium":"Allianz Stadium","capacity":41507,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":395,"ticketing_revenue_eur_m":45,"avg_ticket_price_eur":55,"avg_attendance_pct":85,"annual_matchdays":19,"fever_score_notes":"Prospect. Allianz Stadium propio. Buen potencial de modernización."},{"id":"133806","name":"Napoli","short_name":"","logo_url":"","league":"Serie A","country":"Italy","founded":1926,"stadium":"Diego Armando Maradona","capacity":54726,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":260,"ticketing_revenue_eur_m":32,"avg_ticket_price_eur":40,"avg_attendance_pct":80,"annual_matchdays":19,"fever_score_notes":"Prospect. Gran base fan tras Scudetto 2023. Estadio municipal."},{"id":"133808","name":"AS Roma","short_name":"","logo_url":"","league":"Serie A","country":"Italy","founded":1927,"stadium":"Stadio Olimpico","capacity":70634,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":220,"ticketing_revenue_eur_m":28,"avg_ticket_price_eur":38,"avg_attendance_pct":82,"annual_matchdays":19,"fever_score_notes":"Prospect. Nuevo estadio en construcción. Oportunidad estratégica."},{"id":"133900","name":"Paris Saint-Germain","short_name":"","logo_url":"","league":"Ligue 1","country":"France","founded":1970,"stadium":"Parc des Princes","capacity":47929,"stadium_location":"","ticketing_provider":"psg.fr","has_own_app":true,"resale_channels":["StubHub"],"price_range_eur":[],"ticket_url":"https://billetterie.psg.fr","fever_status":"prospect","notes":"Plataforma de ticketing propia.","last_updated":"2026-04-20","ticketing_technology":"Propio (billetterie.psg.fr)","annual_revenue_eur_m":780,"ticketing_revenue_eur_m":65,"avg_ticket_price_eur":75,"avg_attendance_pct":98,"annual_matchdays":17,"fever_score_notes":"Plataforma propia. Parc des Princes pequeño limita revenue. Nuevo estadio en proyecto."},{"id":"133902","name":"Olympique de Marseille","short_name":"","logo_url":"","league":"Ligue 1","country":"France","founded":1899,"stadium":"Orange Vélodrome","capacity":67394,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":22,"avg_ticket_price_eur":30,"avg_attendance_pct":90,"annual_matchdays":17,"fever_score_notes":"Prospect. Vélodrome segunda mayor capacidad de Francia. Fan base muy activa."},{"id":"133904","name":"Olympique Lyonnais","short_name":"","logo_url":"","league":"Ligue 1","country":"France","founded":1950,"stadium":"Groupama Stadium","capacity":59186,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":200,"ticketing_revenue_eur_m":25,"avg_ticket_price_eur":32,"avg_attendance_pct":82,"annual_matchdays":17,"fever_score_notes":"Prospect. Groupama Stadium moderno. Gestión profesional."},{"id":"133906","name":"AS Monaco","short_name":"","logo_url":"","league":"Ligue 1","country":"France","founded":1924,"stadium":"Stade Louis II","capacity":18523,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":170,"ticketing_revenue_eur_m":18,"avg_ticket_price_eur":45,"avg_attendance_pct":75,"annual_matchdays":17,"fever_score_notes":"Prospect. Estadio pequeño pero precios altos. Mercado premium."},{"id":"134000","name":"Ajax","short_name":"","logo_url":"","league":"Eredivisie","country":"Netherlands","founded":1900,"stadium":"Johan Cruijff ArenA","capacity":55865,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":22,"avg_ticket_price_eur":40,"avg_attendance_pct":97,"annual_matchdays":17,"fever_score_notes":"Prospect. Johan Cruijff ArenA moderno. Club con historia digital fuerte."},{"id":"134002","name":"PSV Eindhoven","short_name":"","logo_url":"","league":"Eredivisie","country":"Netherlands","founded":1913,"stadium":"Philips Stadion","capacity":35000,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":110,"ticketing_revenue_eur_m":12,"avg_ticket_price_eur":30,"avg_attendance_pct":95,"annual_matchdays":17,"fever_score_notes":"Prospect. Philips Stadion siempre lleno. Mercado más pequeño."},{"id":"134004","name":"Feyenoord","short_name":"","logo_url":"","league":"Eredivisie","country":"Netherlands","founded":1908,"stadium":"De Kuip","capacity":51117,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":100,"ticketing_revenue_eur_m":14,"avg_ticket_price_eur":28,"avg_attendance_pct":98,"annual_matchdays":17,"fever_score_notes":"Prospect. De Kuip icónico. Nuevo estadio en proyecto. Oportunidad."},{"id":"134100","name":"SL Benfica","short_name":"","logo_url":"","league":"Primeira Liga","country":"Portugal","founded":1904,"stadium":"Estádio da Luz","capacity":64642,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":150,"ticketing_revenue_eur_m":18,"avg_ticket_price_eur":22,"avg_attendance_pct":85,"annual_matchdays":17,"fever_score_notes":"Prospect. Estádio da Luz gran capacidad. Mercado en crecimiento."},{"id":"134102","name":"FC Porto","short_name":"","logo_url":"","league":"Primeira Liga","country":"Portugal","founded":1893,"stadium":"Estádio do Dragão","capacity":50033,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":130,"ticketing_revenue_eur_m":15,"avg_ticket_price_eur":20,"avg_attendance_pct":80,"annual_matchdays":17,"fever_score_notes":"Prospect. Dragão moderno. Buen punto de entrada mercado portugués."},{"id":"134104","name":"Sporting CP","short_name":"","logo_url":"","league":"Primeira Liga","country":"Portugal","founded":1906,"stadium":"Estádio José Alvalade","capacity":50095,"stadium_location":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"price_range_eur":[],"ticket_url":"","fever_status":"prospect","notes":"","last_updated":"2026-04-20","ticketing_technology":"","annual_revenue_eur_m":120,"ticketing_revenue_eur_m":14,"avg_ticket_price_eur":20,"avg_attendance_pct":78,"annual_matchdays":17,"fever_score_notes":"Prospect. Alvalade modernizado. Rival directo de Benfica y Porto."}];
+let CLUBS=[{"id":"133739","name":"FC Barcelona","league":"La Liga","country":"Spain","founded":1899,"stadium":"Spotify Camp Nou","capacity":99354,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/uyhbfe1612467855.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"fcbarcelona.com","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.fcbarcelona.com/en/tickets/football","fever_status":"client","notes":"OneBox de Fever como tecnología interna","annual_revenue_eur_m":800,"ticketing_revenue_eur_m":120,"avg_ticket_price_eur":95,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Enorme capacidad Camp Nou.","owner_name":"Member-owned (Socios)","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133600","name":"Real Madrid","league":"La Liga","country":"Spain","founded":1902,"stadium":"Santiago Bernabéu","capacity":81044,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/vwpvry1467462651.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"realmadrid.com","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.realmadrid.com/en-US/tickets","fever_status":"client","notes":"OneBox de Fever como tecnología interna.","annual_revenue_eur_m":831,"ticketing_revenue_eur_m":135,"avg_ticket_price_eur":110,"avg_attendance_pct":95,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Mayor revenue ticketing de Europa.","owner_name":"Member-owned (Socios)","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133907","name":"Atletico de Madrid","league":"La Liga","country":"Spain","founded":1903,"stadium":"Cívitas Metropolitano","capacity":68456,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/uvqxox1420514169.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"atleticodemadrid.com","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.atleticodemadrid.com/entradas","fever_status":"client","notes":"OneBox de Fever como tecnología interna","annual_revenue_eur_m":380,"ticketing_revenue_eur_m":55,"avg_ticket_price_eur":55,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Metropolitano con gran capacidad.","owner_name":"Cerezo/Gil Marín","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133618","name":"Athletic Bilbao","league":"La Liga","country":"Spain","founded":1898,"stadium":"San Mamés","capacity":53289,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/sqwpvr1421075011.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":120,"ticketing_revenue_eur_m":16,"avg_ticket_price_eur":30,"avg_attendance_pct":96,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Ocupación casi completa.","owner_name":"Member-owned (Socios)","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133604","name":"Valencia CF","league":"La Liga","country":"Spain","founded":1919,"stadium":"Mestalla","capacity":55000,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/twpvvr1421241528.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":140,"ticketing_revenue_eur_m":15,"avg_ticket_price_eur":28,"avg_attendance_pct":72,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Ocupación baja, margen de mejora.","owner_name":"Peter Lim","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133603","name":"Villarreal CF","league":"La Liga","country":"Spain","founded":1923,"stadium":"Estadio de la Cerámica","capacity":23500,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/xvqpvr1420229520.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":110,"ticketing_revenue_eur_m":10,"avg_ticket_price_eur":30,"avg_attendance_pct":78,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Estadio pequeño.","owner_name":"Roig Family","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"133608","name":"Celta Vigo","league":"La Liga","country":"Spain","founded":1923,"stadium":"Abanca-Balaídos","capacity":29000,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/xvqpss1420229777.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":80,"ticketing_revenue_eur_m":8,"avg_ticket_price_eur":25,"avg_attendance_pct":75,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox.","owner_name":"Carlos Mouriño","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"133612","name":"Getafe CF","league":"La Liga","country":"Spain","founded":1983,"stadium":"Coliseum Alfonso Pérez","capacity":17700,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/tqpvvs1420229834.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":50,"ticketing_revenue_eur_m":5,"avg_ticket_price_eur":20,"avg_attendance_pct":70,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Estadio pequeño.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Low"},{"id":"133919","name":"Girona FC","league":"La Liga","country":"Spain","founded":1930,"stadium":"Estadi Montilivi","capacity":13500,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox. City Football Group.","annual_revenue_eur_m":60,"ticketing_revenue_eur_m":6,"avg_ticket_price_eur":22,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. City Football Group portfolio.","owner_name":"City Football Group","owner_type":"Sports Group","fever_contact_at_owner":"yes","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133905","name":"Sevilla FC","league":"La Liga","country":"Spain","founded":1890,"stadium":"Ramón Sánchez Pizjuán","capacity":43883,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/xpwwwq1420230246.png","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":22,"avg_ticket_price_eur":35,"avg_attendance_pct":82,"annual_matchdays":19,"fever_score_notes":"Prospect. Estadio medio. Oportunidad real.","owner_name":"777 Partners","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"133906","name":"Real Betis","league":"La Liga","country":"Spain","founded":1907,"stadium":"Estadio Benito Villamarín","capacity":60720,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/rwpvxr1420229881.png","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":130,"ticketing_revenue_eur_m":18,"avg_ticket_price_eur":32,"avg_attendance_pct":85,"annual_matchdays":19,"fever_score_notes":"Prospect. Benito Villamarín renovado.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"PL001","name":"Manchester City","league":"Premier League","country":"England","founded":1880,"stadium":"Etihad Stadium","capacity":53400,"logo_url":"","ticketing_technology":"SeatGeek Enterprise","ticketing_provider":"mancity.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.mancity.com/tickets/mens","fever_status":"prospect","notes":"SeatGeek partner desde 2018.","annual_revenue_eur_m":715,"ticketing_revenue_eur_m":85,"avg_ticket_price_eur":65,"avg_attendance_pct":98,"annual_matchdays":19,"fever_score_notes":"SeatGeek competidor. City Football Group.","owner_name":"City Football Group","owner_type":"Sports Group","fever_contact_at_owner":"yes","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL002","name":"Arsenal","league":"Premier League","country":"England","founded":1886,"stadium":"Emirates Stadium","capacity":60704,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"arsenal.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.arsenal.com/tickets","fever_status":"prospect","notes":"Ticketmaster 30+ años.","annual_revenue_eur_m":590,"ticketing_revenue_eur_m":105,"avg_ticket_price_eur":82,"avg_attendance_pct":98,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. Contrato renovado. Oportunidad futura.","owner_name":"Stan Kroenke (KSE)","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL003","name":"Liverpool","league":"Premier League","country":"England","founded":1892,"stadium":"Anfield","capacity":61276,"logo_url":"","ticketing_technology":"SeatGeek","ticketing_provider":"liverpoolfc.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.liverpoolfc.com/tickets","fever_status":"prospect","notes":"SeatGeek desde 2020.","annual_revenue_eur_m":700,"ticketing_revenue_eur_m":90,"avg_ticket_price_eur":72,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"SeatGeek competidor. Anfield siempre sold out.","owner_name":"Fenway Sports Group","owner_type":"Sports Group","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL004","name":"Chelsea","league":"Premier League","country":"England","founded":1905,"stadium":"Stamford Bridge","capacity":40341,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"chelseafc.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.chelseafc.com/en/tickets","fever_status":"prospect","notes":"Ticketmaster desde 2025.","annual_revenue_eur_m":510,"ticketing_revenue_eur_m":72,"avg_ticket_price_eur":75,"avg_attendance_pct":97,"annual_matchdays":19,"fever_score_notes":"Ticketmaster 2025. Contrato nuevo.","owner_name":"Todd Boehly / Clearlake","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"2028","decision_maker":"","priority":"Medium"},{"id":"PL005","name":"Manchester United","league":"Premier League","country":"England","founded":1878,"stadium":"Old Trafford","capacity":74140,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"manutd.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.manutd.com/en/tickets","fever_status":"prospect","notes":"Ticketmaster partner oficial.","annual_revenue_eur_m":640,"ticketing_revenue_eur_m":110,"avg_ticket_price_eur":75,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. Old Trafford mayor estadio PL.","owner_name":"Glazer Family / INEOS","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL006","name":"Tottenham Hotspur","league":"Premier League","country":"England","founded":1882,"stadium":"Tottenham Hotspur Stadium","capacity":62850,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"tottenhamhotspur.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.tottenhamhotspur.com/tickets/","fever_status":"prospect","notes":"Ticketmaster renovado 2022.","annual_revenue_eur_m":550,"ticketing_revenue_eur_m":95,"avg_ticket_price_eur":72,"avg_attendance_pct":97,"annual_matchdays":19,"fever_score_notes":"Ticketmaster 2022. Estadio más moderno Europa.","owner_name":"ENIC Group (Joe Lewis)","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL007","name":"Newcastle United","league":"Premier League","country":"England","founded":1892,"stadium":"St. James' Park","capacity":52305,"logo_url":"","ticketing_technology":"SeatGeek","ticketing_provider":"nufc.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.nufc.com/tickets/","fever_status":"prospect","notes":"SeatGeek partner oficial.","annual_revenue_eur_m":250,"ticketing_revenue_eur_m":40,"avg_ticket_price_eur":40,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"SeatGeek. Nueva propiedad saudí.","owner_name":"PIF (Saudi Arabia)","owner_type":"Sovereign Wealth Fund","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL008","name":"Aston Villa","league":"Premier League","country":"England","founded":1874,"stadium":"Villa Park","capacity":42785,"logo_url":"","ticketing_technology":"SeatGeek","ticketing_provider":"avfc.co.uk / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.avfc.co.uk/tickets","fever_status":"prospect","notes":"SeatGeek renovado 2024.","annual_revenue_eur_m":220,"ticketing_revenue_eur_m":30,"avg_ticket_price_eur":35,"avg_attendance_pct":95,"annual_matchdays":19,"fever_score_notes":"SeatGeek 2024. Champions añade valor.","owner_name":"Nassef Sawiris / Wes Edens","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"PL009","name":"West Ham United","league":"Premier League","country":"England","founded":1895,"stadium":"London Stadium","capacity":62500,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"whufc.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.whufc.com/tickets","fever_status":"prospect","notes":"Ticketmaster 10+ años.","annual_revenue_eur_m":250,"ticketing_revenue_eur_m":45,"avg_ticket_price_eur":40,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. London Stadium gran capacidad.","owner_name":"Daniel Kretinsky","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"BL001","name":"Bayern Munich","league":"Bundesliga","country":"Germany","founded":1900,"stadium":"Allianz Arena","capacity":75024,"logo_url":"","ticketing_technology":"Propio (fcbayern.com)","ticketing_provider":"fcbayern.com","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://fcbayern.com/en/tickets","fever_status":"prospect","notes":"Plataforma propia.","annual_revenue_eur_m":765,"ticketing_revenue_eur_m":90,"avg_ticket_price_eur":65,"avg_attendance_pct":98,"annual_matchdays":17,"fever_score_notes":"Plataforma propia. Muy cerrado.","owner_name":"Bayern Munich AG","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"BL002","name":"Borussia Dortmund","league":"Bundesliga","country":"Germany","founded":1909,"stadium":"Signal Iduna Park","capacity":81365,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":420,"ticketing_revenue_eur_m":55,"avg_ticket_price_eur":35,"avg_attendance_pct":99,"annual_matchdays":17,"fever_score_notes":"Prospect. Mayor estadio Bundesliga.","owner_name":"Borussia Dortmund GmbH","owner_type":"Public Company","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"SA001","name":"Inter Milan","league":"Serie A","country":"Italy","founded":1908,"stadium":"San Siro","capacity":80018,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":440,"ticketing_revenue_eur_m":50,"avg_ticket_price_eur":55,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Nuevo estadio en proyecto. Gran oportunidad.","owner_name":"Oaktree Capital","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"SA002","name":"AC Milan","league":"Serie A","country":"Italy","founded":1899,"stadium":"San Siro","capacity":80018,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":380,"ticketing_revenue_eur_m":42,"avg_ticket_price_eur":50,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"RedBird Capital. Nuevo estadio en proyecto.","owner_name":"RedBird Capital","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"SA003","name":"Juventus","league":"Serie A","country":"Italy","founded":1897,"stadium":"Allianz Stadium","capacity":41507,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":395,"ticketing_revenue_eur_m":45,"avg_ticket_price_eur":55,"avg_attendance_pct":85,"annual_matchdays":19,"fever_score_notes":"Allianz Stadium propio. Buen potencial.","owner_name":"Exor (Agnelli Family)","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"L1001","name":"Paris Saint-Germain","league":"Ligue 1","country":"France","founded":1970,"stadium":"Parc des Princes","capacity":47929,"logo_url":"","ticketing_technology":"Propio (billetterie.psg.fr)","ticketing_provider":"psg.fr","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://billetterie.psg.fr","fever_status":"prospect","notes":"Plataforma propia.","annual_revenue_eur_m":780,"ticketing_revenue_eur_m":65,"avg_ticket_price_eur":75,"avg_attendance_pct":98,"annual_matchdays":17,"fever_score_notes":"Plataforma propia. Nuevo estadio en proyecto.","owner_name":"Qatar Sports Investments","owner_type":"Sovereign Wealth Fund","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"ED001","name":"Ajax","league":"Eredivisie","country":"Netherlands","founded":1900,"stadium":"Johan Cruijff ArenA","capacity":55865,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":22,"avg_ticket_price_eur":40,"avg_attendance_pct":97,"annual_matchdays":17,"fever_score_notes":"ArenA moderno. Historia digital fuerte.","owner_name":"AFC Ajax NV","owner_type":"Public Company","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"PL001B","name":"Bristol City","league":"Championship","country":"England","founded":1894,"stadium":"Ashton Gate","capacity":27000,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"bristolcity.co.uk","has_own_app":false,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":null,"ticketing_revenue_eur_m":null,"avg_ticket_price_eur":null,"avg_attendance_pct":85,"annual_matchdays":23,"fever_score_notes":"Cliente OneBox.","owner_name":"Steve Lansdown","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"MX001","name":"Querétaro FC","league":"Liga MX","country":"Mexico","founded":1950,"stadium":"Estadio La Corregidora","capacity":33000,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"queretaro.com","has_own_app":false,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":null,"ticketing_revenue_eur_m":null,"avg_ticket_price_eur":null,"avg_attendance_pct":70,"annual_matchdays":17,"fever_score_notes":"Cliente OneBox. Mercado LATAM.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Low"},{"id":"CO001","name":"Municipal de Bogotá","league":"Liga BetPlay","country":"Colombia","founded":1948,"stadium":"Estadio Nemesio Camacho","capacity":36343,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":false,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":null,"ticketing_revenue_eur_m":null,"avg_ticket_price_eur":null,"avg_attendance_pct":65,"annual_matchdays":17,"fever_score_notes":"Cliente OneBox. Colombia.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Low"}];
 
-// Club coordinates [lng, lat] for map
-const COORDS = {
-  "FC Barcelona":[2.12,41.38],"Real Madrid":[-3.68,40.45],"Atletico de Madrid":[-3.60,40.44],
-  "Sevilla FC":[-5.97,37.38],"Athletic Bilbao":[-2.95,43.26],"Real Betis":[-5.98,37.35],
-  "Valencia CF":[-0.36,39.47],"Villarreal CF":[-0.10,39.94],
-  "Manchester City":[-2.20,53.48],"Arsenal":[-0.11,51.55],"Liverpool":[-2.96,53.43],
-  "Chelsea":[-0.19,51.48],"Manchester United":[-2.29,53.46],"Tottenham Hotspur":[-0.07,51.60],
-  "Newcastle United":[-1.62,54.97],"Aston Villa":[-1.88,52.51],"West Ham United":[-0.02,51.53],
-  "Brighton & Hove Albion":[-0.08,50.86],
-  "Bayern Munich":[11.62,48.22],"Borussia Dortmund":[7.45,51.49],"Bayer Leverkusen":[7.00,51.03],
-  "RB Leipzig":[12.35,51.35],"Eintracht Frankfurt":[8.65,50.07],
-  "Inter Milan":[9.12,45.48],"AC Milan":[9.12,45.48],"Juventus":[7.64,45.10],
-  "Napoli":[14.23,40.83],"AS Roma":[12.57,41.93],
-  "Paris Saint-Germain":[2.25,48.84],"Olympique de Marseille":[5.40,43.27],
-  "Olympique Lyonnais":[4.98,45.77],"AS Monaco":[7.42,43.73],
-  "Ajax":[4.94,52.31],"PSV Eindhoven":[5.47,51.44],"Feyenoord":[4.52,51.89],
-  "SL Benfica":[-9.18,38.75],"FC Porto":[-8.58,41.16],"Sporting CP":[-9.16,38.76]
-};
+const OWNERS=[
+  {name:'City Football Group',type:'Sports Group',hq:'UAE',clubs:['Manchester City','Girona FC'],portfolio:12,fever_relationship:'Client via Girona + Man City prospect',notes:'Mayor grupo de clubs del mundo. Abu Dhabi United Group.'},
+  {name:'RedBird Capital',type:'Private Equity',hq:'USA',clubs:['AC Milan'],portfolio:7,fever_relationship:'',notes:'Muy activo en fútbol europeo. También en FSG/Liverpool indirectamente.'},
+  {name:'PIF (Saudi Arabia)',type:'Sovereign Wealth Fund',hq:'Saudi Arabia',clubs:['Newcastle United'],portfolio:4,fever_relationship:'',notes:'Inversión masiva en deporte. También 4 clubs Saudi Pro League.'},
+  {name:'Fenway Sports Group',type:'Sports Group',hq:'USA',clubs:['Liverpool'],portfolio:3,fever_relationship:'',notes:'También Boston Red Sox y Pittsburgh Pirates.'},
+  {name:'Qatar Sports Investments',type:'Sovereign Wealth Fund',hq:'Qatar',clubs:['Paris Saint-Germain'],portfolio:1,fever_relationship:'',notes:'Fondo soberano de Qatar. Nuevo estadio PSG en proyecto.'},
+  {name:'Oaktree Capital',type:'Private Equity',hq:'USA',clubs:['Inter Milan'],portfolio:1,fever_relationship:'',notes:'Adquirieron Inter en 2024 tras deuda de Zhang Jindong.'},
+  {name:'Exor (Agnelli Family)',type:'Family',hq:'Italy',clubs:['Juventus'],portfolio:1,fever_relationship:'',notes:'Holding de la familia Agnelli (Ferrari, Stellantis).'},
+  {name:'777 Partners',type:'Private Equity',hq:'USA',clubs:['Sevilla FC'],portfolio:6,fever_relationship:'',notes:'Problemas financieros en 2024. Situación incierta.'},
+  {name:'Stan Kroenke (KSE)',type:'Family',hq:'USA',clubs:['Arsenal'],portfolio:2,fever_relationship:'',notes:'También Colorado Rapids (MLS) y LA Rams (NFL).'},
+  {name:'Glazer Family / INEOS',type:'Family',hq:'USA/UK',clubs:['Manchester United'],portfolio:3,fever_relationship:'',notes:'Glazers 75% + Ratcliffe (INEOS) 25%. Renovación Old Trafford en debate.'},
+  {name:'Todd Boehly / Clearlake',type:'Private Equity',hq:'USA',clubs:['Chelsea'],portfolio:1,fever_relationship:'',notes:'Adquirieron Chelsea en 2022 por £4.25B. Ticketmaster nuevo partner 2025.'},
+  {name:'Member-owned (Socios)',type:'Member-owned',hq:'Various',clubs:['FC Barcelona','Real Madrid','Athletic Bilbao','Bayern Munich'],portfolio:4,fever_relationship:'3 clients (Barça, Real, Athletic)',notes:'Clubs propiedad de sus socios. No hay fondo externo que presionar.'},
+  {name:'ENIC Group (Joe Lewis)',type:'Family',hq:'UK',clubs:['Tottenham Hotspur'],portfolio:1,fever_relationship:'',notes:'Joe Lewis falleció en 2023. Daniel Levy CEO continúa.'},
+];
 
-// ── GitHub Config ─────────────────────────────────────────────────────────────
-let ghToken = localStorage.getItem('gh_token') || '';
-let ghUser = localStorage.getItem('gh_user') || '';
-let ghRepo = localStorage.getItem('gh_repo') || '';
-let editingClubName = null;
+const COORDS={"FC Barcelona":[2.12,41.38],"Real Madrid":[-3.68,40.45],"Atletico de Madrid":[-3.60,40.44],"Sevilla FC":[-5.97,37.38],"Athletic Bilbao":[-2.95,43.26],"Real Betis":[-5.98,37.35],"Valencia CF":[-0.36,39.47],"Villarreal CF":[-0.10,39.94],"Celta Vigo":[-8.73,42.21],"Getafe CF":[-3.72,40.32],"Girona FC":[2.83,41.96],"Manchester City":[-2.20,53.48],"Arsenal":[-0.11,51.55],"Liverpool":[-2.96,53.43],"Chelsea":[-0.19,51.48],"Manchester United":[-2.29,53.46],"Tottenham Hotspur":[-0.07,51.60],"Newcastle United":[-1.62,54.97],"Aston Villa":[-1.88,52.51],"West Ham United":[-0.02,51.53],"Bayern Munich":[11.62,48.22],"Borussia Dortmund":[7.45,51.49],"Inter Milan":[9.12,45.48],"AC Milan":[9.13,45.48],"Juventus":[7.64,45.10],"Paris Saint-Germain":[2.25,48.84],"Ajax":[4.94,52.31]};
+const STATUS_COLORS={client:'#0a8a4e',prospect:'#1a56db',contacted:'#c07000',negotiating:'#6b21a8',lost:'#dc2626'};
 
-function openConfig() {
-  document.getElementById('cfg-token').value = ghToken;
-  document.getElementById('cfg-user').value = ghUser;
-  document.getElementById('cfg-repo').value = ghRepo;
-  document.getElementById('config-overlay').classList.add('open');
-}
-function closeConfig() { document.getElementById('config-overlay').classList.remove('open'); }
-function saveConfig() {
-  ghToken = document.getElementById('cfg-token').value.trim();
-  ghUser = document.getElementById('cfg-user').value.trim();
-  ghRepo = document.getElementById('cfg-repo').value.trim();
-  localStorage.setItem('gh_token', ghToken);
-  localStorage.setItem('gh_user', ghUser);
-  localStorage.setItem('gh_repo', ghRepo);
-  closeConfig();
-  showToast('✅ GitHub configuration saved', 'success');
+let ghToken=localStorage.getItem('gh_token')||'';
+let ghUser=localStorage.getItem('gh_user')||'';
+let ghRepo=localStorage.getItem('gh_repo')||'';
+let editingClubName=null;
+
+function openConfig(){document.getElementById('cfg-token').value=ghToken;document.getElementById('cfg-user').value=ghUser;document.getElementById('cfg-repo').value=ghRepo;document.getElementById('config-overlay').classList.add('open');}
+function closeConfig(){document.getElementById('config-overlay').classList.remove('open');}
+function saveConfig(){ghToken=document.getElementById('cfg-token').value.trim();ghUser=document.getElementById('cfg-user').value.trim();ghRepo=document.getElementById('cfg-repo').value.trim();localStorage.setItem('gh_token',ghToken);localStorage.setItem('gh_user',ghUser);localStorage.setItem('gh_repo',ghRepo);closeConfig();showToast('✅ GitHub configurado','success');}
+
+async function syncToGitHub(){
+  if(!ghToken||!ghUser||!ghRepo){showToast('⚙ Configura GitHub Sync primero','error');return false;}
+  try{
+    showToast('🔄 Guardando en GitHub…','info');
+    const url=`https://api.github.com/repos/${ghUser}/${ghRepo}/contents/data/clubs.json`;
+    const r=await fetch(url,{headers:{Authorization:`token ${ghToken}`,Accept:'application/vnd.github.v3+json'}});
+    const j=await r.json();
+    const content=btoa(unescape(encodeURIComponent(JSON.stringify({meta:{description:'Football Ticketing Intelligence — Fever',last_updated:new Date().toISOString(),total_clubs:CLUBS.length},clubs:CLUBS},null,2))));
+    const p=await fetch(url,{method:'PUT',headers:{Authorization:`token ${ghToken}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:`📊 Update [${new Date().toLocaleDateString()}]`,content,sha:j.sha})});
+    if(p.ok){showToast('✅ Guardado en GitHub','success');return true;}
+    else{showToast('❌ Error. Revisa el token.','error');return false;}
+  }catch(e){showToast('❌ Error de red','error');return false;}
 }
 
-// ── GitHub API ────────────────────────────────────────────────────────────────
-async function syncToGitHub() {
-  if (!ghToken || !ghUser || !ghRepo) {
-    showToast('⚠️ Configure GitHub first (⚙ GitHub Sync)', 'error');
-    return false;
-  }
-  try {
-    showToast('🔄 Syncing to GitHub…', '');
-    const apiUrl = `https://api.github.com/repos/${ghUser}/${ghRepo}/contents/data/clubs.json`;
-    // Get current SHA
-    const getRes = await fetch(apiUrl, { headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github.v3+json' } });
-    const getJson = await getRes.json();
-    const sha = getJson.sha;
-    // Prepare updated content
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify({
-      meta: { description: 'Football Ticketing Intelligence — Fever', last_updated: new Date().toISOString(), total_clubs: CLUBS.length },
-      clubs: CLUBS
-    }, null, 2))));
-    // Commit
-    const putRes = await fetch(apiUrl, {
-      method: 'PUT',
-      headers: { Authorization: `token ${ghToken}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `📊 Update clubs.json [${new Date().toLocaleDateString()}]`, content, sha })
-    });
-    if (putRes.ok) { showToast('✅ Saved to GitHub successfully', 'success'); return true; }
-    else { showToast('❌ GitHub sync failed. Check your token.', 'error'); return false; }
-  } catch(e) { showToast('❌ Network error. Try again.', 'error'); return false; }
+function feverScore(c){
+  let s=0,p={};
+  const cs=Math.min(2.5,(c.capacity||0)/40000);p['Stadium Size']={score:cs,max:2.5,label:c.capacity?c.capacity.toLocaleString()+' seats':'N/A'};s+=cs;
+  const rs=Math.min(2.5,(c.ticketing_revenue_eur_m||0)/55);p['Ticket Revenue']={score:rs,max:2.5,label:c.ticketing_revenue_eur_m?'€'+c.ticketing_revenue_eur_m+'M':'N/A'};s+=rs;
+  const tech=(c.ticketing_technology||'').toLowerCase();
+  let ts=1.8,tl='Unknown';
+  if(tech.includes('onebox')){ts=0;tl='Already client';}else if(tech.includes('seatgeek')){ts=0.5;tl='Competitor';}else if(tech.includes('ticketmaster')){ts=1.5;tl='Replaceable';}else if(tech.includes('propio')||tech.includes('own')){ts=2.0;tl='Own platform';}
+  p['Tech Opportunity']={score:ts,max:2.0,label:tl};s+=ts;
+  const os=c.avg_attendance_pct?Math.min(1.5,(c.avg_attendance_pct/100)*1.5):0.7;p['Fan Demand']={score:os,max:1.5,label:c.avg_attendance_pct?c.avg_attendance_pct+'%':'N/A'};s+=os;
+  let ds=0;if(c.has_own_app)ds+=0.6;if(c.ticketing_provider)ds+=0.5;if(c.resale_channels&&c.resale_channels.length)ds+=0.4;
+  p['Digital Presence']={score:ds,max:1.5,label:c.has_own_app?'App + channels':'Limited'};s+=ds;
+  return{total:Math.round(s*10)/10,max:10,params:p};
 }
+function scoreColor(s){return s>=7?'#0a8a4e':s>=5?'#c07000':'#dc2626';}
+function techClass(t){if(!t)return 't-unknown';const tl=t.toLowerCase();if(tl.includes('onebox'))return 't-fever';if(tl.includes('seatgeek'))return 't-seatgeek';if(tl.includes('ticketmaster'))return 't-ticketmaster';if(tl.includes('propio')||tl.includes('own'))return 't-propio';return 't-unknown';}
+function techShort(t){if(!t)return '—';if(t.includes('OneBox'))return 'OneBox';if(t.includes('SeatGeek'))return 'SeatGeek';if(t.includes('Ticketmaster'))return 'Ticketmaster';if(t.includes('Propio')||t.includes('own'))return 'Own';return t.substring(0,12);}
+function sClass(s){return 's-'+(s||'prospect');}
+CLUBS.forEach(c=>{c.fever_score=feverScore(c).total;});
 
-// ── Scoring ───────────────────────────────────────────────────────────────────
-function feverScore(c) {
-  let score = 0, params = {};
-  const cap = c.capacity || 0;
-  const capScore = Math.min(2.5, cap / 40000);
-  params['Stadium Size'] = { score: capScore, max: 2.5, label: cap > 0 ? cap.toLocaleString() + ' seats' : 'N/A' };
-  score += capScore;
-  const rev = c.ticketing_revenue_eur_m || 0;
-  const revScore = Math.min(2.5, rev / 55);
-  params['Ticketing Revenue'] = { score: revScore, max: 2.5, label: rev > 0 ? '€' + rev + 'M/yr' : 'N/A' };
-  score += revScore;
-  const tech = (c.ticketing_technology || '').toLowerCase();
-  let techScore = 1.8, techLabel = 'Unknown';
-  if (tech.includes('onebox')) { techScore = 0; techLabel = 'Already client'; }
-  else if (tech.includes('seatgeek')) { techScore = 0.5; techLabel = 'Competitor'; }
-  else if (tech.includes('ticketmaster')) { techScore = 1.5; techLabel = 'Replaceable'; }
-  else if (tech.includes('propio') || tech.includes('own')) { techScore = 2.0; techLabel = 'Own platform'; }
-  params['Tech Opportunity'] = { score: techScore, max: 2.0, label: techLabel };
-  score += techScore;
-  const occ = c.avg_attendance_pct || 0;
-  const occScore = occ > 0 ? Math.min(1.5, (occ / 100) * 1.5) : 0.7;
-  params['Fan Demand'] = { score: occScore, max: 1.5, label: occ > 0 ? occ + '% avg occ.' : 'N/A' };
-  score += occScore;
-  let digScore = 0;
-  if (c.has_own_app) digScore += 0.6;
-  if (c.ticketing_provider) digScore += 0.5;
-  if (c.resale_channels && c.resale_channels.length > 0) digScore += 0.4;
-  params['Digital Presence'] = { score: digScore, max: 1.5, label: c.has_own_app ? 'App + channels' : 'Limited digital' };
-  score += digScore;
-  return { total: Math.round(score * 10) / 10, max: 10, params };
-}
+let filtered=[...CLUBS],sortKey='fever_score',sortDir=-1,filterLeague='',filterStatus='',filterTech='',searchQ='',currentView='table';
 
-function scoreColor(s) {
-  if (s >= 7) return '#0a8a4e';
-  if (s >= 5) return '#b86a00';
-  return '#dc2626';
-}
-function techClass(t) {
-  if (!t) return 't-unknown';
-  const tl = t.toLowerCase();
-  if (tl.includes('onebox')) return 't-fever';
-  if (tl.includes('seatgeek')) return 't-seatgeek';
-  if (tl.includes('ticketmaster')) return 't-ticketmaster';
-  if (tl.includes('propio') || tl.includes('own')) return 't-propio';
-  return 't-unknown';
-}
-function techShort(t) {
-  if (!t) return '—';
-  if (t.includes('OneBox')) return 'OneBox';
-  if (t.includes('SeatGeek')) return 'SeatGeek';
-  if (t.includes('Ticketmaster')) return 'Ticketmaster';
-  if (t.includes('Propio') || t.includes('own')) return 'Own Platform';
-  return t.substring(0, 14);
-}
-function statusClass(s) { return 's-' + (s || 'prospect'); }
-const STATUS_COLORS = { client:'#0a8a4e', prospect:'#1a56db', contacted:'#b86a00', negotiating:'#6b21a8', lost:'#dc2626' };
-
-// Pre-compute scores
-CLUBS.forEach(c => { c.fever_score = feverScore(c).total; });
-
-// ── State ─────────────────────────────────────────────────────────────────────
-let filtered = [...CLUBS];
-let sortKey = 'fever_score', sortDir = -1;
-let filterLeague = '', filterStatus = '', filterTech = '', searchQ = '';
-let currentView = 'table';
-
-// ── Filters ───────────────────────────────────────────────────────────────────
-function applyFilters() {
-  filtered = CLUBS.filter(c => {
-    if (filterLeague && c.league !== filterLeague) return false;
-    if (filterStatus && c.fever_status !== filterStatus) return false;
-    if (filterTech && !(c.ticketing_technology||'').toLowerCase().includes(filterTech.toLowerCase())) return false;
-    if (searchQ) {
-      const q = searchQ.toLowerCase();
-      if (!c.name.toLowerCase().includes(q) && !c.stadium.toLowerCase().includes(q)) return false;
-    }
+function applyFilters(){
+  filtered=CLUBS.filter(c=>{
+    if(filterLeague&&c.league!==filterLeague)return false;
+    if(filterStatus&&c.fever_status!==filterStatus)return false;
+    if(filterTech&&!(c.ticketing_technology||'').toLowerCase().includes(filterTech.toLowerCase()))return false;
+    if(searchQ){const q=searchQ.toLowerCase();if(!c.name.toLowerCase().includes(q)&&!(c.stadium||'').toLowerCase().includes(q)&&!(c.owner_name||'').toLowerCase().includes(q))return false;}
     return true;
   });
-  applySort(); render();
+  applySort();render();
 }
-function applySort() {
-  filtered.sort((a,b) => {
-    let av = a[sortKey], bv = b[sortKey];
-    if (av == null) av = sortDir === -1 ? -999 : 999;
-    if (bv == null) bv = sortDir === -1 ? -999 : 999;
-    if (typeof av === 'string') return av.localeCompare(bv) * sortDir;
-    return (av - bv) * sortDir;
-  });
-}
-function sortBy(key) {
-  if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = -1; }
-  applySort(); render();
-}
+function applySort(){filtered.sort((a,b)=>{let av=a[sortKey],bv=b[sortKey];if(av==null)av=sortDir===-1?-999:999;if(bv==null)bv=sortDir===-1?-999:999;if(typeof av==='string')return av.localeCompare(bv)*sortDir;return(av-bv)*sortDir;});}
+function sortBy(k){if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=-1;}applySort();render();}
 
-// Pills
-document.querySelectorAll('#status-pills .pill').forEach(p => p.addEventListener('click', () => {
-  document.querySelectorAll('#status-pills .pill').forEach(x => x.classList.remove('on'));
-  p.classList.add('on'); filterStatus = p.dataset.val; applyFilters();
-}));
-document.querySelectorAll('#tech-pills .pill').forEach(p => p.addEventListener('click', () => {
-  document.querySelectorAll('#tech-pills .pill').forEach(x => x.classList.remove('on'));
-  p.classList.add('on'); filterTech = p.dataset.val; applyFilters();
-}));
-document.getElementById('filter-league').addEventListener('change', e => { filterLeague = e.target.value; applyFilters(); });
-document.getElementById('search').addEventListener('input', e => { searchQ = e.target.value; applyFilters(); });
+document.querySelectorAll('#status-pills .pill').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('#status-pills .pill').forEach(x=>x.classList.remove('on'));p.classList.add('on');filterStatus=p.dataset.val;applyFilters();}));
+document.querySelectorAll('#tech-pills .pill').forEach(p=>p.addEventListener('click',()=>{document.querySelectorAll('#tech-pills .pill').forEach(x=>x.classList.remove('on'));p.classList.add('on');filterTech=p.dataset.val;applyFilters();}));
+document.getElementById('filter-league').addEventListener('change',e=>{filterLeague=e.target.value;applyFilters();});
+document.getElementById('search').addEventListener('input',e=>{searchQ=e.target.value;applyFilters();});
 
-// ── View ──────────────────────────────────────────────────────────────────────
-function setView(v) {
-  currentView = v;
-  ['table','map','scorecard'].forEach(x => {
-    document.getElementById('view-'+x).style.display = x === v ? (x === 'table' ? 'flex' : 'block') : 'none';
-  });
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('on', ['table','map','scorecard'][i] === v));
-  if (v === 'map') renderMap();
-  else if (v === 'scorecard') renderScorecards();
+function setView(v){
+  currentView=v;
+  ['table','kanban','map','ownership','scorecard'].forEach(x=>{const el=document.getElementById('view-'+x);if(el)el.style.display=x===v?(x==='table'?'block':'flex'):'none';});
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',['table','kanban','map','ownership','scorecard'][i]===v));
+  if(v==='map')renderMap();else if(v==='kanban')renderKanban();else if(v==='scorecard')renderScorecards();else if(v==='ownership')renderOwnership();
   render();
 }
 
-// ── Render ────────────────────────────────────────────────────────────────────
-function render() {
-  document.getElementById('result-count').textContent = `${filtered.length} clubs`;
-  document.getElementById('chip-count').textContent = CLUBS.length;
-  renderStats();
-  if (currentView === 'table') renderTable();
-}
+function render(){document.getElementById('result-count').textContent=`${filtered.length} clubs`;document.getElementById('chip-count').textContent=CLUBS.length;renderStats();if(currentView==='table')renderTable();}
 
-function renderTable() {
-  const tbody = document.getElementById('table-body');
-  tbody.innerHTML = filtered.map(c => {
-    const sc = feverScore(c);
-    const color = scoreColor(sc.total);
-    return `<tr onclick="openDetail('${c.name.replace(/'/g,"\\'")}')">
-      <td><div class="club-cell">
-        <div class="shield">${c.logo_url ? `<img src="${c.logo_url}" onerror="this.parentNode.textContent='⚽'">` : '⚽'}</div>
-        <div><div class="cname">${c.name}</div><div class="csub">${c.stadium || c.country}</div></div>
-      </div></td>
+function renderTable(){
+  document.getElementById('table-body').innerHTML=filtered.map(c=>{
+    const sc=feverScore(c),col=scoreColor(sc.total);
+    return`<tr onclick="openDetail('${c.name.replace(/'/g,"\\'")}')">
+      <td><div class="club-cell"><div class="shield">${c.logo_url?`<img src="${c.logo_url}" onerror="this.parentNode.textContent='⚽'">`:'⚽'}</div><div><div class="cname">${c.name}</div><div class="csub">${c.stadium||c.country}</div></div></div></td>
       <td class="mono">${c.league}</td>
-      <td><span class="tech-badge ${techClass(c.ticketing_technology)}">${techShort(c.ticketing_technology)}</span></td>
-      <td><span class="status-badge ${statusClass(c.fever_status)}">${c.fever_status}</span></td>
-      <td class="mono">${c.ticketing_revenue_eur_m ? '€'+c.ticketing_revenue_eur_m+'M' : '—'}</td>
-      <td class="mono">${c.avg_ticket_price_eur ? '€'+c.avg_ticket_price_eur : '—'}</td>
-      <td class="mono">${c.avg_attendance_pct ? c.avg_attendance_pct+'%' : '—'}</td>
-      <td><div class="score-cell">
-        <span class="score-num" style="color:${color}">${sc.total}</span>
-        <div class="score-bar-wrap"><div class="score-bar" style="width:${sc.total*10}%;background:${color}"></div></div>
-      </div></td>
+      <td><span class="tbadge ${techClass(c.ticketing_technology)}">${techShort(c.ticketing_technology)}</span></td>
+      <td><span class="sbadge ${sClass(c.fever_status)}">${c.fever_status}</span></td>
+      <td class="mono">${c.ticketing_revenue_eur_m?'€'+c.ticketing_revenue_eur_m+'M':'—'}</td>
+      <td class="mono">${c.avg_ticket_price_eur?'€'+c.avg_ticket_price_eur:'—'}</td>
+      <td class="mono">${c.avg_attendance_pct?c.avg_attendance_pct+'%':'—'}</td>
+      <td class="mono" style="font-size:10px">${c.owner_name?c.owner_name.substring(0,18):'—'}</td>
+      <td><div class="score-cell"><span class="score-num" style="color:${col}">${sc.total}</span><div class="score-bar-wrap"><div class="score-bar" style="width:${sc.total*10}%;background:${col}"></div></div></div></td>
     </tr>`;
   }).join('');
 }
 
-function renderScorecards() {
-  const grid = document.getElementById('scorecard-grid');
-  grid.innerHTML = filtered.map(c => {
-    const sc = feverScore(c);
-    const color = scoreColor(sc.total);
-    const params = Object.entries(sc.params).map(([k,v]) => `
-      <div class="score-param">
-        <div class="score-param-header">
-          <span class="score-param-name">${k}</span>
-          <span class="score-param-val" style="color:${scoreColor(v.score/v.max*10)}">${Math.round(v.score*10)/10}/${v.max} · ${v.label}</span>
-        </div>
-        <div class="score-param-bar-wrap"><div class="score-param-bar" style="width:${(v.score/v.max)*100}%;background:${scoreColor(v.score/v.max*10)}"></div></div>
-      </div>`).join('');
-    return `<div class="scorecard" onclick="openDetail('${c.name.replace(/'/g,"\\'")}')">
-      <div class="scorecard-header">
-        <div style="display:flex;align-items:center;gap:8px">
-          <div class="shield" style="width:28px;height:28px">${c.logo_url?`<img src="${c.logo_url}" onerror="this.parentNode.textContent='⚽'">`: '⚽'}</div>
-          <div><div style="font-size:12px;font-weight:600">${c.name}</div><div style="font-size:10px;color:var(--text3)">${c.league} · ${c.country}</div></div>
-        </div>
-        <div class="scorecard-total"><span class="scorecard-num" style="color:${color}">${sc.total}</span><span class="scorecard-denom">/10</span></div>
-      </div>
-      <div class="scorecard-body">${params}</div>
-      <div class="score-verdict">${c.fever_score_notes || 'No analysis yet.'}</div>
+const STATUSES=[{key:'prospect',label:'Prospect',color:'#1a56db',bg:'#eff6ff'},{key:'contacted',label:'Contacted',color:'#c07000',bg:'#fff7e0'},{key:'negotiating',label:'Negotiating',color:'#6b21a8',bg:'#f5f3ff'},{key:'client',label:'Client',color:'#0a8a4e',bg:'#e6f7f0'},{key:'lost',label:'Lost',color:'#dc2626',bg:'#fef2f2'}];
+
+function renderKanban(){
+  document.getElementById('kanban-board').innerHTML=STATUSES.map(st=>{
+    const cols=filtered.filter(c=>c.fever_status===st.key);
+    return`<div class="kanban-col">
+      <div class="kanban-header" style="background:${st.bg};color:${st.color}"><span>${st.label}</span><span>${cols.length}</span></div>
+      <div class="kanban-cards">${cols.map(c=>{const sc=feverScore(c),col=scoreColor(sc.total);return`<div class="kcard" onclick="openDetail('${c.name.replace(/'/g,"\\'")}')"><div class="kcard-name">${c.name}</div><div class="kcard-meta">${c.league}${c.owner_name?' · '+c.owner_name.substring(0,18):''}</div><div class="kcard-score"><span class="kcard-score-num" style="color:${col}">${sc.total}</span><div class="kcard-score-bar"><div class="kcard-score-fill" style="width:${sc.total*10}%;background:${col}"></div></div>${c.ticketing_technology?`<span class="tbadge ${techClass(c.ticketing_technology)}" style="font-size:8px;padding:1px 5px">${techShort(c.ticketing_technology)}</span>`:''}</div></div>`;}).join('')||'<div style="font-size:11px;color:var(--text3);text-align:center;padding:12px">No clubs</div>'}</div>
     </div>`;
   }).join('');
 }
 
-// ── MAP ───────────────────────────────────────────────────────────────────────
-function renderMap() {
-  const container = document.getElementById('europe-map');
-  const W = container.offsetWidth || 800;
-  const H = container.offsetHeight || 500;
-
-  // Simple mercator projection for Europe
-  function project(lng, lat) {
-    const minLng = -12, maxLng = 32, minLat = 34, maxLat = 60;
-    const x = ((lng - minLng) / (maxLng - minLng)) * W;
-    const y = (1 - (lat - minLat) / (maxLat - minLat)) * H;
-    return [x, y];
-  }
-
-  // Country outlines (simplified paths)
-  const countries = [
-    { name:'Spain', d:'M120,310 L160,290 L200,285 L230,300 L240,330 L220,360 L180,370 L140,360 L110,340 Z' },
-    { name:'England', d:'M220,100 L260,90 L270,130 L250,160 L220,165 L205,140 Z' },
-    { name:'Germany', d:'M310,130 L370,120 L390,160 L380,200 L340,210 L300,190 L295,155 Z' },
-    { name:'France', d:'M200,180 L260,165 L290,190 L285,240 L250,260 L205,255 L185,225 Z' },
-    { name:'Italy', d:'M320,220 L360,215 L380,260 L365,310 L340,340 L320,300 L310,260 Z' },
-    { name:'Netherlands', d:'M295,105 L330,100 L335,130 L300,135 Z' },
-    { name:'Portugal', d:'M100,280 L120,275 L125,315 L115,345 L100,340 Z' },
-  ];
-
-  // Build SVG
-  let dots = '';
-  CLUBS.forEach(c => {
-    const coord = COORDS[c.name];
-    if (!coord) return;
-    const [x, y] = project(coord[0], coord[1]);
-    const color = STATUS_COLORS[c.fever_status] || '#1a56db';
-    const sc = feverScore(c);
-    const r = 6 + (sc.total / 10) * 6;
-    dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="${color}" fill-opacity="0.85" stroke="#fff" stroke-width="1.5" style="cursor:pointer" onclick="openDetail('${c.name.replace(/'/g,"\\'")}')">
-      <title>${c.name} — Score: ${sc.total}/10 — ${c.fever_status}</title>
-    </circle>
-    <text x="${(x+r+3).toFixed(1)}" y="${(y+4).toFixed(1)}" font-size="9" fill="#1a1d2e" font-family="Inter,sans-serif" font-weight="500" pointer-events="none">${c.name}</text>`;
+function renderMap(){
+  const container=document.getElementById('europe-map');
+  const W=container.offsetWidth||800,H=container.offsetHeight||420;
+  function proj(lng,lat){return[((lng+12)/(44))*W,(1-(lat-34)/26)*H];}
+  let dots='';
+  filtered.forEach(c=>{
+    const coord=COORDS[c.name];if(!coord)return;
+    const[x,y]=proj(coord[0],coord[1]);
+    const color=STATUS_COLORS[c.fever_status]||'#1a56db';
+    const sc=feverScore(c),r=5+(sc.total/10)*7;
+    dots+=`<g onclick="openDetail('${c.name.replace(/'/g,"\\'")}')"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="${color}" fill-opacity="0.85" stroke="#fff" stroke-width="1.5" style="cursor:pointer"/><text x="${(x+r+3).toFixed(1)}" y="${(y+4).toFixed(1)}" font-size="9" fill="#1a1d2e" font-family="Inter,sans-serif" font-weight="500" pointer-events="none">${c.name}</text></g>`;
   });
-
-  container.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-    <rect width="${W}" height="${H}" fill="#f1f5fb" rx="8"/>
-    <g opacity="0.15">
-      ${countries.map(c => `<path d="${c.d}" fill="#1a56db" stroke="#fff" stroke-width="1"/>`).join('')}
-    </g>
-    ${dots}
-  </svg>`;
+  container.innerHTML=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#eef2f8" rx="8"/><text x="${W/2}" y="${H/2}" text-anchor="middle" font-size="12" fill="#c0c4d8" font-family="Inter,sans-serif">Europe</text>${dots}</svg>`;
 }
 
-function renderStats() {
-  const clients = CLUBS.filter(c => c.fever_status === 'client').length;
-  const prospects = CLUBS.filter(c => c.fever_status === 'prospect').length;
-  const totalRev = CLUBS.reduce((s,c)=>s+(c.ticketing_revenue_eur_m||0),0);
-  const avgScore = CLUBS.length ? (CLUBS.reduce((s,c)=>s+c.fever_score,0)/CLUBS.length).toFixed(1) : 0;
-
-  document.getElementById('sidebar-stats').innerHTML = `
-    <div class="sstat"><div class="sstat-val" style="color:var(--green)">${clients}</div><div class="sstat-key">Clients</div></div>
-    <div class="sstat"><div class="sstat-val" style="color:var(--blue)">${prospects}</div><div class="sstat-key">Prospects</div></div>
-    <div class="sstat"><div class="sstat-val">€${(totalRev/1000).toFixed(1)}B</div><div class="sstat-key">Total Rev.</div></div>
-    <div class="sstat"><div class="sstat-val">${avgScore}</div><div class="sstat-key">Avg Score</div></div>`;
-
-  const techMap = {};
-  CLUBS.forEach(c => { const t = techShort(c.ticketing_technology)||'Unknown'; techMap[t]=(techMap[t]||0)+1; });
-  const maxTech = Math.max(...Object.values(techMap));
-  const techColors = {'OneBox':'#e8193c','SeatGeek':'#0a8a4e','Ticketmaster':'#1a56db','Own Platform':'#6b21a8','Unknown':'#9aa0b8','—':'#9aa0b8'};
-  document.getElementById('tech-breakdown').innerHTML = Object.entries(techMap).sort((a,b)=>b[1]-a[1]).map(([t,n])=>`
-    <div class="tech-row">
-      <span class="tech-name">${t}</span>
-      <div class="tech-bar-wrap"><div class="tech-bar" style="width:${(n/maxTech)*100}%;background:${techColors[t]||'#9aa0b8'}"></div></div>
-      <span class="tech-count">${n}</span>
-    </div>`).join('');
-}
-
-// ── Detail Panel ──────────────────────────────────────────────────────────────
-function openDetail(name) {
-  const c = CLUBS.find(x => x.name === name);
-  if (!c) return;
-  const sc = feverScore(c);
-  const color = scoreColor(sc.total);
-
-  document.getElementById('dp-shield').innerHTML = c.logo_url ? `<img src="${c.logo_url}" onerror="this.innerHTML='⚽'">` : '⚽';
-  document.getElementById('dp-name').textContent = c.name;
-  document.getElementById('dp-meta').textContent = `${c.league} · ${c.country}${c.founded ? ' · Est. '+c.founded : ''}`;
-  document.getElementById('dp-edit-btn').onclick = () => openEditModal(c.name);
-
-  const params = Object.entries(sc.params).map(([k,v])=>`
-    <div class="score-param">
-      <div class="score-param-header">
-        <span class="score-param-name">${k}</span>
-        <span class="score-param-val" style="color:${scoreColor(v.score/v.max*10)}">${Math.round(v.score*10)/10}/${v.max} · ${v.label}</span>
+function renderOwnership(){
+  const typeColors={'Private Equity':{bg:'#eff6ff',col:'#1a56db'},'Sovereign Wealth Fund':{bg:'#f5f3ff',col:'#6b21a8'},'Sports Group':{bg:'#e6f7f0',col:'#0a8a4e'},'Family':{bg:'#fff7e0',col:'#c07000'},'Member-owned':{bg:'#f0f1f7',col:'#5a6080'},'Public Company':{bg:'#fef2f2',col:'#dc2626'}};
+  document.getElementById('owner-grid').innerHTML=OWNERS.map(o=>{
+    const tc=typeColors[o.type]||{bg:'#f0f1f7',col:'#5a6080'};
+    const clientClubs=o.clubs.filter(name=>CLUBS.find(c=>c.name===name&&c.fever_status==='client'));
+    return`<div class="owner-card">
+      <div class="owner-card-header"><div><div class="owner-name">${o.name}</div><div style="font-size:10px;color:var(--text3);margin-top:2px">${o.hq}</div></div><span class="owner-type-badge" style="background:${tc.bg};color:${tc.col}">${o.type}</span></div>
+      <div class="owner-body">
+        <div class="owner-stat-row"><span class="owner-stat-key">Portfolio global</span><span class="owner-stat-val">${o.portfolio} clubs</span></div>
+        <div class="owner-stat-row"><span class="owner-stat-key">Clients Fever</span><span class="owner-stat-val" style="color:${clientClubs.length>0?'var(--green)':'var(--text3)'}">${clientClubs.length} club${clientClubs.length!==1?'s':''}</span></div>
+        <div style="font-size:10px;color:var(--text3);font-weight:500">Clubs en base de datos:</div>
+        <div class="owner-clubs">${o.clubs.map(name=>{const isC=CLUBS.find(c=>c.name===name&&c.fever_status==='client');return`<span class="owner-club-chip ${isC?'is-client':''}" onclick="event.stopPropagation();filterByOwner('${o.name}')">${name}</span>`;}).join('')}</div>
+        <div class="owner-stat-row"><span class="owner-stat-key">Contacto Fever</span><span class="fever-contact-badge ${o.fever_relationship?'has-contact':'no-contact'}">${o.fever_relationship||'Sin contacto'}</span></div>
+        ${o.notes?`<div style="font-size:10px;color:var(--text2);line-height:1.5;padding-top:6px;border-top:1px solid var(--border)">${o.notes}</div>`:''}
       </div>
-      <div class="score-param-bar-wrap"><div class="score-param-bar" style="width:${(v.score/v.max)*100}%;background:${scoreColor(v.score/v.max*10)}"></div></div>
-    </div>`).join('');
-
-  document.getElementById('detail-body').innerHTML = `
-    <div class="detail-section">
-      <div class="detail-section-title">Fever Opportunity Score</div>
-      <div class="dp-scorecard">
-        <div class="dp-scorecard-header">
-          <div style="font-size:12px;font-weight:600;color:var(--text2)">Overall Score</div>
-          <div style="display:flex;align-items:baseline;gap:3px"><span class="dp-score-big" style="color:${color}">${sc.total}</span><span style="font-size:14px;color:var(--text3)">/10</span></div>
-        </div>
-        <div class="dp-scorecard-body">${params}</div>
-        <div class="dp-verdict">${c.fever_score_notes || 'No analysis notes yet.'}</div>
-      </div>
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">Financials</div>
-      <div class="detail-grid">
-        <div class="detail-stat"><div class="detail-stat-val">€${c.annual_revenue_eur_m||'—'}M</div><div class="detail-stat-key">Annual Revenue</div></div>
-        <div class="detail-stat"><div class="detail-stat-val" style="color:var(--fever)">€${c.ticketing_revenue_eur_m||'—'}M</div><div class="detail-stat-key">Ticketing Revenue</div></div>
-        <div class="detail-stat"><div class="detail-stat-val">€${c.avg_ticket_price_eur||'—'}</div><div class="detail-stat-key">Avg. Ticket Price</div></div>
-        <div class="detail-stat"><div class="detail-stat-val">${c.avg_attendance_pct||'—'}%</div><div class="detail-stat-key">Avg. Attendance</div></div>
-      </div>
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">Stadium</div>
-      <div class="detail-grid">
-        <div class="detail-stat"><div class="detail-stat-val">${c.capacity?c.capacity.toLocaleString():'—'}</div><div class="detail-stat-key">Capacity</div></div>
-        <div class="detail-stat"><div class="detail-stat-val">${c.annual_matchdays||'—'}</div><div class="detail-stat-key">Home Matchdays</div></div>
-      </div>
-      <div class="detail-row"><span class="detail-row-key">Stadium</span><span class="detail-row-val">${c.stadium||'—'}</span></div>
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">Ticketing Setup</div>
-      <div class="detail-row"><span class="detail-row-key">Technology</span><span class="detail-row-val"><span class="tech-badge ${techClass(c.ticketing_technology)}">${c.ticketing_technology||'—'}</span></span></div>
-      <div class="detail-row"><span class="detail-row-key">Sales Channel</span><span class="detail-row-val">${c.ticketing_provider||'—'}</span></div>
-      <div class="detail-row"><span class="detail-row-key">Own App</span><span class="detail-row-val">${c.has_own_app===true?'✅ Yes':c.has_own_app===false?'❌ No':'—'}</span></div>
-      <div class="detail-row"><span class="detail-row-key">Resale Channels</span><span class="detail-row-val">${c.resale_channels&&c.resale_channels.length?c.resale_channels.join(', '):'—'}</span></div>
-      ${c.ticket_url?`<div class="detail-row"><span class="detail-row-key">Ticket URL</span><span class="detail-row-val"><a href="${c.ticket_url}" target="_blank" style="color:var(--blue);text-decoration:none">${c.ticket_url.replace('https://','')}</a></span></div>`:''}
-    </div>
-    <div class="detail-section">
-      <div class="detail-section-title">CRM</div>
-      <div class="detail-row"><span class="detail-row-key">Fever Status</span><span class="detail-row-val"><span class="status-badge ${statusClass(c.fever_status)}">${c.fever_status}</span></span></div>
-      ${c.notes?`<div class="detail-row" style="align-items:flex-start"><span class="detail-row-key">Notes</span><span class="detail-row-val" style="white-space:normal;text-align:right">${c.notes}</span></div>`:''}
     </div>`;
+  }).join('');
+}
 
+function filterByOwner(ownerName){document.getElementById('search').value=ownerName;searchQ=ownerName;setView('table');applyFilters();}
+
+function renderScorecards(){
+  document.getElementById('scorecard-grid').innerHTML=filtered.map(c=>{
+    const sc=feverScore(c),col=scoreColor(sc.total);
+    const params=Object.entries(sc.params).map(([k,v])=>`<div class="sp"><div class="sp-header"><span class="sp-name">${k}</span><span class="sp-val" style="color:${scoreColor(v.score/v.max*10)}">${Math.round(v.score*10)/10}/${v.max}</span></div><div class="sp-bar-wrap"><div class="sp-bar" style="width:${(v.score/v.max)*100}%;background:${scoreColor(v.score/v.max*10)}"></div></div></div>`).join('');
+    return`<div class="dp-scorecard" style="cursor:pointer" onclick="openDetail('${c.name.replace(/'/g,"\\'")}')"><div class="dp-sc-header"><div style="display:flex;align-items:center;gap:8px"><div class="shield" style="width:26px;height:26px">${c.logo_url?`<img src="${c.logo_url}" onerror="this.parentNode.textContent='⚽'">`:'⚽'}</div><div><div style="font-size:12px;font-weight:600">${c.name}</div><div style="font-size:9px;color:var(--text3)">${c.league}</div></div></div><div style="display:flex;align-items:baseline;gap:2px"><span style="font-size:24px;font-weight:700;color:${col}">${sc.total}</span><span style="font-size:12px;color:var(--text3)">/10</span></div></div><div class="dp-sc-body">${params}</div><div class="dp-sc-verdict">${c.fever_score_notes||'—'}</div></div>`;
+  }).join('');
+}
+
+function renderStats(){
+  const clients=CLUBS.filter(c=>c.fever_status==='client').length;
+  const prospects=CLUBS.filter(c=>c.fever_status==='prospect').length;
+  const totalRev=CLUBS.reduce((s,c)=>s+(c.ticketing_revenue_eur_m||0),0);
+  const avgScore=CLUBS.length?(CLUBS.reduce((s,c)=>s+c.fever_score,0)/CLUBS.length).toFixed(1):0;
+  document.getElementById('sidebar-stats').innerHTML=`<div class="sstat"><div class="sstat-val" style="color:var(--green)">${clients}</div><div class="sstat-key">Clients</div></div><div class="sstat"><div class="sstat-val" style="color:var(--blue)">${prospects}</div><div class="sstat-key">Prospects</div></div><div class="sstat"><div class="sstat-val">€${(totalRev/1000).toFixed(1)}B</div><div class="sstat-key">Total Rev.</div></div><div class="sstat"><div class="sstat-val">${avgScore}</div><div class="sstat-key">Avg Score</div></div>`;
+  const techMap={};CLUBS.forEach(c=>{const t=techShort(c.ticketing_technology)||'Unknown';techMap[t]=(techMap[t]||0)+1;});
+  const maxT=Math.max(...Object.values(techMap));
+  const tCols={'OneBox':'#e8193c','SeatGeek':'#0a8a4e','Ticketmaster':'#1a56db','Own':'#6b21a8','Unknown':'#9aa0b8','—':'#9aa0b8'};
+  document.getElementById('tech-breakdown').innerHTML=Object.entries(techMap).sort((a,b)=>b[1]-a[1]).map(([t,n])=>`<div class="tech-row"><span class="tech-name">${t}</span><div class="tech-bar-wrap"><div class="tech-bar" style="width:${(n/maxT)*100}%;background:${tCols[t]||'#9aa0b8'}"></div></div><span class="tech-count">${n}</span></div>`).join('');
+}
+
+function openDetail(name){
+  const c=CLUBS.find(x=>x.name===name);if(!c)return;
+  const sc=feverScore(c),col=scoreColor(sc.total);
+  document.getElementById('dp-shield').innerHTML=c.logo_url?`<img src="${c.logo_url}" onerror="this.innerHTML='⚽'">`:'⚽';
+  document.getElementById('dp-name').textContent=c.name;
+  document.getElementById('dp-meta').textContent=`${c.league} · ${c.country}${c.founded?' · Est. '+c.founded:''}`;
+  document.getElementById('dp-edit-btn').onclick=()=>openEditModal(c.name);
+  const params=Object.entries(sc.params).map(([k,v])=>`<div class="sp"><div class="sp-header"><span class="sp-name">${k}</span><span class="sp-val" style="color:${scoreColor(v.score/v.max*10)}">${Math.round(v.score*10)/10}/${v.max} · ${v.label}</span></div><div class="sp-bar-wrap"><div class="sp-bar" style="width:${(v.score/v.max)*100}%;background:${scoreColor(v.score/v.max*10)}"></div></div></div>`).join('');
+  document.getElementById('dp-body').innerHTML=`
+    <div class="dp-section"><div class="dp-section-title">Fever Score</div>
+      <div class="dp-scorecard"><div class="dp-sc-header"><span style="font-size:11px;font-weight:600;color:var(--text2)">Overall</span><div style="display:flex;align-items:baseline;gap:2px"><span style="font-size:30px;font-weight:700;color:${col}">${sc.total}</span><span style="font-size:13px;color:var(--text3)">/10</span></div></div><div class="dp-sc-body">${params}</div><div class="dp-sc-verdict">${c.fever_score_notes||'—'}</div></div>
+    </div>
+    <div class="dp-section"><div class="dp-section-title">Financials</div>
+      <div class="dp-grid">
+        <div class="dp-stat"><div class="dp-stat-val">€${c.annual_revenue_eur_m||'—'}M</div><div class="dp-stat-key">Annual Revenue</div></div>
+        <div class="dp-stat"><div class="dp-stat-val" style="color:var(--fever)">€${c.ticketing_revenue_eur_m||'—'}M</div><div class="dp-stat-key">Ticketing Rev.</div></div>
+        <div class="dp-stat"><div class="dp-stat-val">€${c.avg_ticket_price_eur||'—'}</div><div class="dp-stat-key">Avg. Ticket</div></div>
+        <div class="dp-stat"><div class="dp-stat-val">${c.avg_attendance_pct||'—'}%</div><div class="dp-stat-key">Avg. Attendance</div></div>
+      </div>
+    </div>
+    <div class="dp-section"><div class="dp-section-title">Ticketing Setup</div>
+      <div class="dp-row"><span class="dp-row-key">Technology</span><span class="dp-row-val"><span class="tbadge ${techClass(c.ticketing_technology)}">${c.ticketing_technology||'—'}</span></span></div>
+      <div class="dp-row"><span class="dp-row-key">Provider</span><span class="dp-row-val">${c.ticketing_provider||'—'}</span></div>
+      <div class="dp-row"><span class="dp-row-key">Contract Expiry</span><span class="dp-row-val">${c.contract_expiry||'—'}</span></div>
+    </div>
+    <div class="dp-section"><div class="dp-section-title">Ownership</div>
+      <div class="dp-row"><span class="dp-row-key">Owner</span><span class="dp-row-val">${c.owner_name||'—'}</span></div>
+      <div class="dp-row"><span class="dp-row-key">Type</span><span class="dp-row-val">${c.owner_type||'—'}</span></div>
+      <div class="dp-row"><span class="dp-row-key">Fever Contact at Owner</span><span class="dp-row-val">${c.fever_contact_at_owner==='yes'?'✅ Yes':'❌ No'}</span></div>
+      <div class="dp-row"><span class="dp-row-key">Decision Maker</span><span class="dp-row-val">${c.decision_maker||'—'}</span></div>
+    </div>
+    <div class="dp-section"><div class="dp-section-title">CRM <span style="font-size:9px;color:var(--text3);margin-left:4px;text-transform:none;letter-spacing:0">— click to edit inline</span></div>
+      <div class="dp-row dp-row-editable" onclick="startEdit(this,'${c.name}','fever_status','select')"><span class="dp-row-key">Status</span><span class="dp-row-val"><span class="sbadge ${sClass(c.fever_status)}">${c.fever_status}</span></span></div>
+      <div class="dp-row dp-row-editable" onclick="startEdit(this,'${c.name}','priority','select2')"><span class="dp-row-key">Priority</span><span class="dp-row-val">${c.priority||'—'}</span></div>
+      <div class="dp-row dp-row-editable" onclick="startEdit(this,'${c.name}','contract_expiry','text')"><span class="dp-row-key">Contract Expiry</span><span class="dp-row-val">${c.contract_expiry||'—'}</span></div>
+      <div class="dp-row dp-row-editable" onclick="startEdit(this,'${c.name}','decision_maker','text')"><span class="dp-row-key">Decision Maker</span><span class="dp-row-val">${c.decision_maker||'—'}</span></div>
+      <div class="dp-row dp-row-editable" onclick="startEdit(this,'${c.name}','notes','text')"><span class="dp-row-key">Notes</span><span class="dp-row-val" style="white-space:normal;text-align:right;max-width:200px">${c.notes||'—'}</span></div>
+    </div>`;
   document.getElementById('detail-panel').classList.add('open');
 }
 
-function closeDetail() { document.getElementById('detail-panel').classList.remove('open'); }
-
-// ── Add / Edit Modal ──────────────────────────────────────────────────────────
-function openAddModal() {
-  editingClubName = null;
-  document.getElementById('modal-title').textContent = 'Add New Club';
-  ['name','country','founded','stadium','capacity','provider','ticket-rev','avg-price','attendance','resale','url','notes','revenue'].forEach(id => {
-    const el = document.getElementById('f-'+id);
-    if (el) el.value = '';
-  });
-  document.getElementById('f-league').value = '';
-  document.getElementById('f-technology').value = '';
-  document.getElementById('f-status').value = 'prospect';
-  document.getElementById('f-app').value = '';
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
-function openEditModal(name) {
-  const c = CLUBS.find(x => x.name === name);
-  if (!c) return;
-  editingClubName = name;
-  document.getElementById('modal-title').textContent = `Edit — ${c.name}`;
-  document.getElementById('f-name').value = c.name || '';
-  document.getElementById('f-country').value = c.country || '';
-  document.getElementById('f-founded').value = c.founded || '';
-  document.getElementById('f-stadium').value = c.stadium || '';
-  document.getElementById('f-capacity').value = c.capacity || '';
-  document.getElementById('f-league').value = c.league || '';
-  document.getElementById('f-technology').value = c.ticketing_technology || '';
-  document.getElementById('f-provider').value = c.ticketing_provider || '';
-  document.getElementById('f-ticket-rev').value = c.ticketing_revenue_eur_m || '';
-  document.getElementById('f-avg-price').value = c.avg_ticket_price_eur || '';
-  document.getElementById('f-attendance').value = c.avg_attendance_pct || '';
-  document.getElementById('f-app').value = c.has_own_app === true ? 'true' : c.has_own_app === false ? 'false' : '';
-  document.getElementById('f-resale').value = (c.resale_channels || []).join(', ');
-  document.getElementById('f-url').value = c.ticket_url || '';
-  document.getElementById('f-status').value = c.fever_status || 'prospect';
-  document.getElementById('f-revenue').value = c.annual_revenue_eur_m || '';
-  document.getElementById('f-notes').value = c.notes || '';
-  document.getElementById('modal-overlay').classList.add('open');
-}
-
-function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
-
-async function saveClub() {
-  const name = document.getElementById('f-name').value.trim();
-  if (!name) { showToast('Club name is required', 'error'); return; }
-  const league = document.getElementById('f-league').value;
-  if (!league) { showToast('Please select a league', 'error'); return; }
-
-  const appVal = document.getElementById('f-app').value;
-  const resaleRaw = document.getElementById('f-resale').value;
-
-  const club = {
-    id: editingClubName ? CLUBS.find(c=>c.name===editingClubName)?.id : Date.now().toString(),
-    name,
-    short_name: '',
-    logo_url: editingClubName ? (CLUBS.find(c=>c.name===editingClubName)?.logo_url||'') : '',
-    league,
-    country: document.getElementById('f-country').value.trim(),
-    founded: parseInt(document.getElementById('f-founded').value)||'',
-    stadium: document.getElementById('f-stadium').value.trim(),
-    capacity: parseInt(document.getElementById('f-capacity').value)||null,
-    stadium_location: '',
-    ticketing_technology: document.getElementById('f-technology').value,
-    ticketing_provider: document.getElementById('f-provider').value.trim(),
-    has_own_app: appVal === 'true' ? true : appVal === 'false' ? false : null,
-    resale_channels: resaleRaw ? resaleRaw.split(',').map(s=>s.trim()).filter(Boolean) : [],
-    price_range_eur: [],
-    ticket_url: document.getElementById('f-url').value.trim(),
-    fever_status: document.getElementById('f-status').value,
-    notes: document.getElementById('f-notes').value.trim(),
-    last_updated: new Date().toISOString().split('T')[0],
-    annual_revenue_eur_m: parseFloat(document.getElementById('f-revenue').value)||null,
-    ticketing_revenue_eur_m: parseFloat(document.getElementById('f-ticket-rev').value)||null,
-    avg_ticket_price_eur: parseFloat(document.getElementById('f-avg-price').value)||null,
-    avg_attendance_pct: parseFloat(document.getElementById('f-attendance').value)||null,
-    annual_matchdays: null,
-    fever_score_notes: ''
-  };
-  club.fever_score = feverScore(club).total;
-
-  if (editingClubName) {
-    const idx = CLUBS.findIndex(c => c.name === editingClubName);
-    if (idx >= 0) CLUBS[idx] = club;
+function startEdit(rowEl,clubName,field,type){
+  const c=CLUBS.find(x=>x.name===clubName);if(!c)return;
+  const valSpan=rowEl.querySelector('.dp-row-val');
+  const currentVal=c[field]||'';
+  let input;
+  if(type==='select'){
+    input=document.createElement('select');input.className='dp-inline-select';
+    ['prospect','contacted','negotiating','client','lost'].forEach(opt=>{const o=document.createElement('option');o.value=opt;o.textContent=opt;if(opt===currentVal)o.selected=true;input.appendChild(o);});
+  } else if(type==='select2'){
+    input=document.createElement('select');input.className='dp-inline-select';
+    ['High','Medium','Low'].forEach(opt=>{const o=document.createElement('option');o.value=opt;o.textContent=opt;if(opt===currentVal)o.selected=true;input.appendChild(o);});
   } else {
-    CLUBS.push(club);
+    input=document.createElement('input');input.className='dp-inline-edit';input.value=currentVal;
   }
+  valSpan.replaceWith(input);input.focus();
+  async function save(){
+    c[field]=input.value.trim();c.fever_score=feverScore(c).total;
+    const newSpan=document.createElement('span');newSpan.className='dp-row-val';
+    if(field==='fever_status'){newSpan.innerHTML=`<span class="sbadge ${sClass(c.fever_status)}">${c.fever_status}</span>`;}
+    else{newSpan.textContent=c[field]||'—';}
+    input.replaceWith(newSpan);rowEl.onclick=()=>startEdit(rowEl,clubName,field,type);
+    renderStats();if(currentView==='table')renderTable();else if(currentView==='kanban')renderKanban();
+    await syncToGitHub();
+  }
+  input.addEventListener('blur',save);
+  input.addEventListener('keydown',e=>{if(e.key==='Enter')save();if(e.key==='Escape'){input.value=currentVal;save();}});
+}
 
-  closeModal();
-  applyFilters();
-  if (editingClubName) openDetail(name);
+function closeDetail(){document.getElementById('detail-panel').classList.remove('open');}
 
+function openAddModal(){
+  editingClubName=null;
+  document.getElementById('modal-title').textContent='Add New Club';
+  ['name','country','founded','stadium','capacity','provider','ticket-rev','avg-price','attendance','contract','owner','decision-maker','revenue','notes'].forEach(id=>{const el=document.getElementById('f-'+id);if(el)el.value='';});
+  document.getElementById('f-league').value='';document.getElementById('f-technology').value='';document.getElementById('f-owner-type').value='';document.getElementById('f-fever-contact').value='';document.getElementById('f-status').value='prospect';document.getElementById('f-priority').value='Medium';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function openEditModal(name){
+  const c=CLUBS.find(x=>x.name===name);if(!c)return;
+  editingClubName=name;
+  document.getElementById('modal-title').textContent=`Edit — ${c.name}`;
+  document.getElementById('f-name').value=c.name||'';document.getElementById('f-country').value=c.country||'';document.getElementById('f-founded').value=c.founded||'';document.getElementById('f-stadium').value=c.stadium||'';document.getElementById('f-capacity').value=c.capacity||'';document.getElementById('f-league').value=c.league||'';document.getElementById('f-technology').value=c.ticketing_technology||'';document.getElementById('f-provider').value=c.ticketing_provider||'';document.getElementById('f-ticket-rev').value=c.ticketing_revenue_eur_m||'';document.getElementById('f-avg-price').value=c.avg_ticket_price_eur||'';document.getElementById('f-attendance').value=c.avg_attendance_pct||'';document.getElementById('f-contract').value=c.contract_expiry||'';document.getElementById('f-owner').value=c.owner_name||'';document.getElementById('f-owner-type').value=c.owner_type||'';document.getElementById('f-fever-contact').value=c.fever_contact_at_owner||'';document.getElementById('f-decision-maker').value=c.decision_maker||'';document.getElementById('f-status').value=c.fever_status||'prospect';document.getElementById('f-priority').value=c.priority||'Medium';document.getElementById('f-revenue').value=c.annual_revenue_eur_m||'';document.getElementById('f-notes').value=c.notes||'';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
+
+async function saveClub(){
+  const name=document.getElementById('f-name').value.trim();
+  if(!name){showToast('Club name is required','error');return;}
+  const league=document.getElementById('f-league').value;
+  if(!league){showToast('Please select a league','error');return;}
+  const existing=editingClubName?CLUBS.find(c=>c.name===editingClubName):null;
+  const club={id:existing?.id||Date.now().toString(),name,short_name:'',logo_url:existing?.logo_url||'',league,country:document.getElementById('f-country').value.trim(),founded:parseInt(document.getElementById('f-founded').value)||'',stadium:document.getElementById('f-stadium').value.trim(),capacity:parseInt(document.getElementById('f-capacity').value)||null,ticketing_technology:document.getElementById('f-technology').value,ticketing_provider:document.getElementById('f-provider').value.trim(),has_own_app:null,resale_channels:[],price_range_eur:[],ticket_url:'',owner_name:document.getElementById('f-owner').value.trim(),owner_type:document.getElementById('f-owner-type').value,fever_contact_at_owner:document.getElementById('f-fever-contact').value,contract_expiry:document.getElementById('f-contract').value.trim(),decision_maker:document.getElementById('f-decision-maker').value.trim(),fever_status:document.getElementById('f-status').value,priority:document.getElementById('f-priority').value,notes:document.getElementById('f-notes').value.trim(),annual_revenue_eur_m:parseFloat(document.getElementById('f-revenue').value)||null,ticketing_revenue_eur_m:parseFloat(document.getElementById('f-ticket-rev').value)||null,avg_ticket_price_eur:parseFloat(document.getElementById('f-avg-price').value)||null,avg_attendance_pct:parseFloat(document.getElementById('f-attendance').value)||null,annual_matchdays:existing?.annual_matchdays||null,fever_score_notes:existing?.fever_score_notes||'',last_updated:new Date().toISOString().split('T')[0]};
+  club.fever_score=feverScore(club).total;
+  if(editingClubName){const idx=CLUBS.findIndex(c=>c.name===editingClubName);if(idx>=0)CLUBS[idx]=club;}
+  else CLUBS.push(club);
+  closeModal();applyFilters();if(editingClubName)openDetail(name);
   await syncToGitHub();
 }
 
-// ── Toast ─────────────────────────────────────────────────────────────────────
-function showToast(msg, type) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show ' + (type||'');
-  setTimeout(() => t.classList.remove('show'), 3500);
-}
-
-// ── Init ──────────────────────────────────────────────────────────────────────
-// Load saved clubs from localStorage if any
-const saved = localStorage.getItem('fever_clubs');
-if (saved) {
-  try {
-    const parsed = JSON.parse(saved);
-    if (parsed.length > 0) { CLUBS = parsed; CLUBS.forEach(c => { c.fever_score = feverScore(c).total; }); }
-  } catch(e) {}
-}
+function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(()=>t.classList.remove('show'),3500);}
 
 applyFilters();
-
-// Auto-show config if not configured
-setTimeout(() => {
-  if (!ghToken) showToast('💡 Set up GitHub Sync to save edits (⚙ button)', '');
-}, 2000);
+setTimeout(()=>{if(!ghToken)showToast('💡 Configura GitHub Sync para guardar cambios (⚙)','info');},2000);
 </script>
 </body>
 </html>
