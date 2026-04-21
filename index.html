@@ -145,7 +145,7 @@ td{padding:8px 10px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
 .fever-contact-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600}
 .has-contact{background:var(--green2);color:var(--green)}
 .no-contact{background:var(--bg3);color:var(--text3)}
-.detail-panel{position:absolute;right:0;top:0;bottom:0;width:460px;background:#fff;border-left:1px solid var(--border);z-index:50;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;box-shadow:var(--shadow3)}
+.detail-panel{position:absolute;right:0;top:0;bottom:0;width:460px;background:#fff;border-left:1px solid var(--border);z-index:1000;transform:translateX(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto;box-shadow:var(--shadow3)}
 .detail-panel.open{transform:translateX(0)}
 .detail-panel::-webkit-scrollbar{width:4px}
 .detail-panel::-webkit-scrollbar-thumb{background:var(--border2)}
@@ -457,19 +457,175 @@ td{padding:8px 10px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
 let CLUBS=[{"id":"133739","name":"FC Barcelona","league":"La Liga","country":"Spain","founded":1899,"stadium":"Spotify Camp Nou","capacity":99354,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/uyhbfe1612467855.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"fcbarcelona.com","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.fcbarcelona.com/en/tickets/football","fever_status":"client","notes":"OneBox de Fever como tecnología interna","annual_revenue_eur_m":800,"ticketing_revenue_eur_m":120,"avg_ticket_price_eur":95,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Enorme capacidad Camp Nou.","owner_name":"Member-owned (Socios)","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133600","name":"Real Madrid","league":"La Liga","country":"Spain","founded":1902,"stadium":"Santiago Bernabéu","capacity":81044,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/vwpvry1467462651.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"realmadrid.com","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.realmadrid.com/en-US/tickets","fever_status":"client","notes":"OneBox de Fever como tecnología interna.","annual_revenue_eur_m":831,"ticketing_revenue_eur_m":135,"avg_ticket_price_eur":110,"avg_attendance_pct":95,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Mayor revenue ticketing de Europa.","owner_name":"Member-owned (Socios)","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133907","name":"Atletico de Madrid","league":"La Liga","country":"Spain","founded":1903,"stadium":"Cívitas Metropolitano","capacity":68456,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/uvqxox1420514169.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"atleticodemadrid.com","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.atleticodemadrid.com/entradas","fever_status":"client","notes":"OneBox de Fever como tecnología interna","annual_revenue_eur_m":380,"ticketing_revenue_eur_m":55,"avg_ticket_price_eur":55,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Metropolitano con gran capacidad.","owner_name":"Cerezo/Gil Marín","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133618","name":"Athletic Bilbao","league":"La Liga","country":"Spain","founded":1898,"stadium":"San Mamés","capacity":53289,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/sqwpvr1421075011.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":120,"ticketing_revenue_eur_m":16,"avg_ticket_price_eur":30,"avg_attendance_pct":96,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Ocupación casi completa.","owner_name":"Member-owned (Socios)","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133604","name":"Valencia CF","league":"La Liga","country":"Spain","founded":1919,"stadium":"Mestalla","capacity":55000,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/twpvvr1421241528.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":140,"ticketing_revenue_eur_m":15,"avg_ticket_price_eur":28,"avg_attendance_pct":72,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Ocupación baja, margen de mejora.","owner_name":"Peter Lim","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133603","name":"Villarreal CF","league":"La Liga","country":"Spain","founded":1923,"stadium":"Estadio de la Cerámica","capacity":23500,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/xvqpvr1420229520.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":110,"ticketing_revenue_eur_m":10,"avg_ticket_price_eur":30,"avg_attendance_pct":78,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Estadio pequeño.","owner_name":"Roig Family","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"133608","name":"Celta Vigo","league":"La Liga","country":"Spain","founded":1923,"stadium":"Abanca-Balaídos","capacity":29000,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/xvqpss1420229777.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":80,"ticketing_revenue_eur_m":8,"avg_ticket_price_eur":25,"avg_attendance_pct":75,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox.","owner_name":"Carlos Mouriño","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"133612","name":"Getafe CF","league":"La Liga","country":"Spain","founded":1983,"stadium":"Coliseum Alfonso Pérez","capacity":17700,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/tqpvvs1420229834.png","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":50,"ticketing_revenue_eur_m":5,"avg_ticket_price_eur":20,"avg_attendance_pct":70,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. Estadio pequeño.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Low"},{"id":"133919","name":"Girona FC","league":"La Liga","country":"Spain","founded":1930,"stadium":"Estadi Montilivi","capacity":13500,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox. City Football Group.","annual_revenue_eur_m":60,"ticketing_revenue_eur_m":6,"avg_ticket_price_eur":22,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"Cliente OneBox. City Football Group portfolio.","owner_name":"City Football Group","owner_type":"Sports Group","fever_contact_at_owner":"yes","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"133905","name":"Sevilla FC","league":"La Liga","country":"Spain","founded":1890,"stadium":"Ramón Sánchez Pizjuán","capacity":43883,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/xpwwwq1420230246.png","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":22,"avg_ticket_price_eur":35,"avg_attendance_pct":82,"annual_matchdays":19,"fever_score_notes":"Prospect. Estadio medio. Oportunidad real.","owner_name":"777 Partners","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"133906","name":"Real Betis","league":"La Liga","country":"Spain","founded":1907,"stadium":"Estadio Benito Villamarín","capacity":60720,"logo_url":"https://www.thesportsdb.com/images/media/team/badge/rwpvxr1420229881.png","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":130,"ticketing_revenue_eur_m":18,"avg_ticket_price_eur":32,"avg_attendance_pct":85,"annual_matchdays":19,"fever_score_notes":"Prospect. Benito Villamarín renovado.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"PL001","name":"Manchester City","league":"Premier League","country":"England","founded":1880,"stadium":"Etihad Stadium","capacity":53400,"logo_url":"","ticketing_technology":"SeatGeek Enterprise","ticketing_provider":"mancity.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.mancity.com/tickets/mens","fever_status":"prospect","notes":"SeatGeek partner desde 2018.","annual_revenue_eur_m":715,"ticketing_revenue_eur_m":85,"avg_ticket_price_eur":65,"avg_attendance_pct":98,"annual_matchdays":19,"fever_score_notes":"SeatGeek competidor. City Football Group.","owner_name":"City Football Group","owner_type":"Sports Group","fever_contact_at_owner":"yes","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL002","name":"Arsenal","league":"Premier League","country":"England","founded":1886,"stadium":"Emirates Stadium","capacity":60704,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"arsenal.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.arsenal.com/tickets","fever_status":"prospect","notes":"Ticketmaster 30+ años.","annual_revenue_eur_m":590,"ticketing_revenue_eur_m":105,"avg_ticket_price_eur":82,"avg_attendance_pct":98,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. Contrato renovado. Oportunidad futura.","owner_name":"Stan Kroenke (KSE)","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL003","name":"Liverpool","league":"Premier League","country":"England","founded":1892,"stadium":"Anfield","capacity":61276,"logo_url":"","ticketing_technology":"SeatGeek","ticketing_provider":"liverpoolfc.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.liverpoolfc.com/tickets","fever_status":"prospect","notes":"SeatGeek desde 2020.","annual_revenue_eur_m":700,"ticketing_revenue_eur_m":90,"avg_ticket_price_eur":72,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"SeatGeek competidor. Anfield siempre sold out.","owner_name":"Fenway Sports Group","owner_type":"Sports Group","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL004","name":"Chelsea","league":"Premier League","country":"England","founded":1905,"stadium":"Stamford Bridge","capacity":40341,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"chelseafc.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.chelseafc.com/en/tickets","fever_status":"prospect","notes":"Ticketmaster desde 2025.","annual_revenue_eur_m":510,"ticketing_revenue_eur_m":72,"avg_ticket_price_eur":75,"avg_attendance_pct":97,"annual_matchdays":19,"fever_score_notes":"Ticketmaster 2025. Contrato nuevo.","owner_name":"Todd Boehly / Clearlake","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"2028","decision_maker":"","priority":"Medium"},{"id":"PL005","name":"Manchester United","league":"Premier League","country":"England","founded":1878,"stadium":"Old Trafford","capacity":74140,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"manutd.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.manutd.com/en/tickets","fever_status":"prospect","notes":"Ticketmaster partner oficial.","annual_revenue_eur_m":640,"ticketing_revenue_eur_m":110,"avg_ticket_price_eur":75,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. Old Trafford mayor estadio PL.","owner_name":"Glazer Family / INEOS","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL006","name":"Tottenham Hotspur","league":"Premier League","country":"England","founded":1882,"stadium":"Tottenham Hotspur Stadium","capacity":62850,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"tottenhamhotspur.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub","Viagogo"],"ticket_url":"https://www.tottenhamhotspur.com/tickets/","fever_status":"prospect","notes":"Ticketmaster renovado 2022.","annual_revenue_eur_m":550,"ticketing_revenue_eur_m":95,"avg_ticket_price_eur":72,"avg_attendance_pct":97,"annual_matchdays":19,"fever_score_notes":"Ticketmaster 2022. Estadio más moderno Europa.","owner_name":"ENIC Group (Joe Lewis)","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL007","name":"Newcastle United","league":"Premier League","country":"England","founded":1892,"stadium":"St. James' Park","capacity":52305,"logo_url":"","ticketing_technology":"SeatGeek","ticketing_provider":"nufc.com / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.nufc.com/tickets/","fever_status":"prospect","notes":"SeatGeek partner oficial.","annual_revenue_eur_m":250,"ticketing_revenue_eur_m":40,"avg_ticket_price_eur":40,"avg_attendance_pct":99,"annual_matchdays":19,"fever_score_notes":"SeatGeek. Nueva propiedad saudí.","owner_name":"PIF (Saudi Arabia)","owner_type":"Sovereign Wealth Fund","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"PL008","name":"Aston Villa","league":"Premier League","country":"England","founded":1874,"stadium":"Villa Park","capacity":42785,"logo_url":"","ticketing_technology":"SeatGeek","ticketing_provider":"avfc.co.uk / SeatGeek","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.avfc.co.uk/tickets","fever_status":"prospect","notes":"SeatGeek renovado 2024.","annual_revenue_eur_m":220,"ticketing_revenue_eur_m":30,"avg_ticket_price_eur":35,"avg_attendance_pct":95,"annual_matchdays":19,"fever_score_notes":"SeatGeek 2024. Champions añade valor.","owner_name":"Nassef Sawiris / Wes Edens","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"PL009","name":"West Ham United","league":"Premier League","country":"England","founded":1895,"stadium":"London Stadium","capacity":62500,"logo_url":"","ticketing_technology":"Ticketmaster Sport","ticketing_provider":"whufc.com / Ticketmaster","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://www.whufc.com/tickets","fever_status":"prospect","notes":"Ticketmaster 10+ años.","annual_revenue_eur_m":250,"ticketing_revenue_eur_m":45,"avg_ticket_price_eur":40,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Ticketmaster. London Stadium gran capacidad.","owner_name":"Daniel Kretinsky","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"BL001","name":"Bayern Munich","league":"Bundesliga","country":"Germany","founded":1900,"stadium":"Allianz Arena","capacity":75024,"logo_url":"","ticketing_technology":"Propio (fcbayern.com)","ticketing_provider":"fcbayern.com","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://fcbayern.com/en/tickets","fever_status":"prospect","notes":"Plataforma propia.","annual_revenue_eur_m":765,"ticketing_revenue_eur_m":90,"avg_ticket_price_eur":65,"avg_attendance_pct":98,"annual_matchdays":17,"fever_score_notes":"Plataforma propia. Muy cerrado.","owner_name":"Bayern Munich AG","owner_type":"Member-owned","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"BL002","name":"Borussia Dortmund","league":"Bundesliga","country":"Germany","founded":1909,"stadium":"Signal Iduna Park","capacity":81365,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":420,"ticketing_revenue_eur_m":55,"avg_ticket_price_eur":35,"avg_attendance_pct":99,"annual_matchdays":17,"fever_score_notes":"Prospect. Mayor estadio Bundesliga.","owner_name":"Borussia Dortmund GmbH","owner_type":"Public Company","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"SA001","name":"Inter Milan","league":"Serie A","country":"Italy","founded":1908,"stadium":"San Siro","capacity":80018,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":440,"ticketing_revenue_eur_m":50,"avg_ticket_price_eur":55,"avg_attendance_pct":92,"annual_matchdays":19,"fever_score_notes":"Nuevo estadio en proyecto. Gran oportunidad.","owner_name":"Oaktree Capital","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"SA002","name":"AC Milan","league":"Serie A","country":"Italy","founded":1899,"stadium":"San Siro","capacity":80018,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":380,"ticketing_revenue_eur_m":42,"avg_ticket_price_eur":50,"avg_attendance_pct":88,"annual_matchdays":19,"fever_score_notes":"RedBird Capital. Nuevo estadio en proyecto.","owner_name":"RedBird Capital","owner_type":"Private Equity","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"SA003","name":"Juventus","league":"Serie A","country":"Italy","founded":1897,"stadium":"Allianz Stadium","capacity":41507,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":395,"ticketing_revenue_eur_m":45,"avg_ticket_price_eur":55,"avg_attendance_pct":85,"annual_matchdays":19,"fever_score_notes":"Allianz Stadium propio. Buen potencial.","owner_name":"Exor (Agnelli Family)","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"L1001","name":"Paris Saint-Germain","league":"Ligue 1","country":"France","founded":1970,"stadium":"Parc des Princes","capacity":47929,"logo_url":"","ticketing_technology":"Propio (billetterie.psg.fr)","ticketing_provider":"psg.fr","has_own_app":true,"resale_channels":["StubHub"],"ticket_url":"https://billetterie.psg.fr","fever_status":"prospect","notes":"Plataforma propia.","annual_revenue_eur_m":780,"ticketing_revenue_eur_m":65,"avg_ticket_price_eur":75,"avg_attendance_pct":98,"annual_matchdays":17,"fever_score_notes":"Plataforma propia. Nuevo estadio en proyecto.","owner_name":"Qatar Sports Investments","owner_type":"Sovereign Wealth Fund","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"High"},{"id":"ED001","name":"Ajax","league":"Eredivisie","country":"Netherlands","founded":1900,"stadium":"Johan Cruijff ArenA","capacity":55865,"logo_url":"","ticketing_technology":"","ticketing_provider":"","has_own_app":null,"resale_channels":[],"ticket_url":"","fever_status":"prospect","notes":"","annual_revenue_eur_m":180,"ticketing_revenue_eur_m":22,"avg_ticket_price_eur":40,"avg_attendance_pct":97,"annual_matchdays":17,"fever_score_notes":"ArenA moderno. Historia digital fuerte.","owner_name":"AFC Ajax NV","owner_type":"Public Company","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"PL001B","name":"Bristol City","league":"Championship","country":"England","founded":1894,"stadium":"Ashton Gate","capacity":27000,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"bristolcity.co.uk","has_own_app":false,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":null,"ticketing_revenue_eur_m":null,"avg_ticket_price_eur":null,"avg_attendance_pct":85,"annual_matchdays":23,"fever_score_notes":"Cliente OneBox.","owner_name":"Steve Lansdown","owner_type":"Family","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Medium"},{"id":"MX001","name":"Querétaro FC","league":"Liga MX","country":"Mexico","founded":1950,"stadium":"Estadio La Corregidora","capacity":33000,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"queretaro.com","has_own_app":false,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":null,"ticketing_revenue_eur_m":null,"avg_ticket_price_eur":null,"avg_attendance_pct":70,"annual_matchdays":17,"fever_score_notes":"Cliente OneBox. Mercado LATAM.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Low"},{"id":"CO001","name":"Municipal de Bogotá","league":"Liga BetPlay","country":"Colombia","founded":1948,"stadium":"Estadio Nemesio Camacho","capacity":36343,"logo_url":"","ticketing_technology":"OneBox (Fever)","ticketing_provider":"","has_own_app":false,"resale_channels":[],"ticket_url":"","fever_status":"client","notes":"Cliente OneBox","annual_revenue_eur_m":null,"ticketing_revenue_eur_m":null,"avg_ticket_price_eur":null,"avg_attendance_pct":65,"annual_matchdays":17,"fever_score_notes":"Cliente OneBox. Colombia.","owner_name":"","owner_type":"","fever_contact_at_owner":"","contract_expiry":"","decision_maker":"","priority":"Low"}];
 
 const OWNERS=[
-  {name:'City Football Group',type:'Sports Group',hq:'UAE',clubs:['Manchester City','Girona FC'],portfolio:12,fever_relationship:'Client via Girona + Man City prospect',notes:'Mayor grupo de clubs del mundo. Abu Dhabi United Group.'},
-  {name:'RedBird Capital',type:'Private Equity',hq:'USA',clubs:['AC Milan'],portfolio:7,fever_relationship:'',notes:'Muy activo en fútbol europeo. También en FSG/Liverpool indirectamente.'},
-  {name:'PIF (Saudi Arabia)',type:'Sovereign Wealth Fund',hq:'Saudi Arabia',clubs:['Newcastle United'],portfolio:4,fever_relationship:'',notes:'Inversión masiva en deporte. También 4 clubs Saudi Pro League.'},
-  {name:'Fenway Sports Group',type:'Sports Group',hq:'USA',clubs:['Liverpool'],portfolio:3,fever_relationship:'',notes:'También Boston Red Sox y Pittsburgh Pirates.'},
-  {name:'Qatar Sports Investments',type:'Sovereign Wealth Fund',hq:'Qatar',clubs:['Paris Saint-Germain'],portfolio:1,fever_relationship:'',notes:'Fondo soberano de Qatar. Nuevo estadio PSG en proyecto.'},
-  {name:'Oaktree Capital',type:'Private Equity',hq:'USA',clubs:['Inter Milan'],portfolio:1,fever_relationship:'',notes:'Adquirieron Inter en 2024 tras deuda de Zhang Jindong.'},
-  {name:'Exor (Agnelli Family)',type:'Family',hq:'Italy',clubs:['Juventus'],portfolio:1,fever_relationship:'',notes:'Holding de la familia Agnelli (Ferrari, Stellantis).'},
-  {name:'777 Partners',type:'Private Equity',hq:'USA',clubs:['Sevilla FC'],portfolio:6,fever_relationship:'',notes:'Problemas financieros en 2024. Situación incierta.'},
-  {name:'Stan Kroenke (KSE)',type:'Family',hq:'USA',clubs:['Arsenal'],portfolio:2,fever_relationship:'',notes:'También Colorado Rapids (MLS) y LA Rams (NFL).'},
-  {name:'Glazer Family / INEOS',type:'Family',hq:'USA/UK',clubs:['Manchester United'],portfolio:3,fever_relationship:'',notes:'Glazers 75% + Ratcliffe (INEOS) 25%. Renovación Old Trafford en debate.'},
-  {name:'Todd Boehly / Clearlake',type:'Private Equity',hq:'USA',clubs:['Chelsea'],portfolio:1,fever_relationship:'',notes:'Adquirieron Chelsea en 2022 por £4.25B. Ticketmaster nuevo partner 2025.'},
-  {name:'Member-owned (Socios)',type:'Member-owned',hq:'Various',clubs:['FC Barcelona','Real Madrid','Athletic Bilbao','Bayern Munich'],portfolio:4,fever_relationship:'3 clients (Barça, Real, Athletic)',notes:'Clubs propiedad de sus socios. No hay fondo externo que presionar.'},
-  {name:'ENIC Group (Joe Lewis)',type:'Family',hq:'UK',clubs:['Tottenham Hotspur'],portfolio:1,fever_relationship:'',notes:'Joe Lewis falleció en 2023. Daniel Levy CEO continúa.'},
+  {
+    name:'City Football Group',type:'Sports Group',hq:'Abu Dhabi, UAE',
+    clubs:['Manchester City','Girona FC'],portfolio:12,
+    fever_relationship:'Client via Girona + Man City prospect',
+    aum:'~$4B valoración estimada',
+    founded:2013,
+    key_people:'Khaldoon Al Mubarak (Chairman), Ferran Soriano (CEO)',
+    strategy:'Modelo multi-club: adquieren clubs en mercados estratégicos para compartir scouting, datos y tecnología. Backed by Abu Dhabi United Group (Sheikh Mansour).',
+    sport_assets:'Man City, Girona, NY City FC, Melbourne City, Yokohama F. Marinos, Montevideo City, Lommel, Palermo, Bahia, Mumbai City, Troyes, Bolívar.',
+    bd_angle:'Girona es cliente OneBox — palanca directa para hablar con CFG sobre escalar a Man City y otros clubs del grupo. Contacto clave: Ferran Soriano.',
+    risk:'SeatGeek tiene contrato multi-año con Man City. Difícil a corto plazo.',
+    priority:'High'
+  },
+  {
+    name:'RedBird Capital Partners',type:'Private Equity',hq:'New York, USA',
+    clubs:['AC Milan'],portfolio:7,
+    fever_relationship:'',
+    aum:'~$10B AUM',
+    founded:2014,
+    key_people:'Gerry Cardinale (Founder), Giorgio Furlani (CEO AC Milan)',
+    strategy:'PE especializado en media, entretenimiento y deportes. Tesis: digitalización y monetización de fans como vector de crecimiento. Socio de FSG (Liverpool) indirectamente.',
+    sport_assets:'AC Milan, Toulouse FC, Fenway Sports Group (participación), YES Network, NHL teams.',
+    bd_angle:'AC Milan está en pleno proceso de modernización digital — nuevo estadio en negociación, sin tecnología de ticketing confirmada post-San Siro. Ventana de entrada clara.',
+    risk:'Proceso de decisión lento en clubs italianos. Necesita interlocutor directo en Milán.',
+    priority:'High'
+  },
+  {
+    name:'PIF — Public Investment Fund',type:'Sovereign Wealth Fund',hq:'Riyadh, Saudi Arabia',
+    clubs:['Newcastle United'],portfolio:5,
+    fever_relationship:'',
+    aum:'~$700B AUM',
+    founded:1971,
+    key_people:'Yasir Al-Rumayyan (Governor), Darren Eales (CEO Newcastle)',
+    strategy:'Diversificación económica de Arabia Saudí (Vision 2030). Deporte como soft power y catalizador de turismo. También controla Saudi Pro League (Al-Nassr, Al-Hilal, Al-Ittihad, Al-Ahli).',
+    sport_assets:'Newcastle United, 4 clubs Saudi Pro League, LIV Golf, F1 (Arabia GP).',
+    bd_angle:'Newcastle tiene SeatGeek pero el contrato es renovable. Con nueva propiedad y ambición de Champions League, hay apetito real por tecnología premium. Saudi Pro League = oportunidad adicional.',
+    risk:'Procesos de decisión lentos y politizados. Relaciones institucionales necesarias.',
+    priority:'High'
+  },
+  {
+    name:'Fenway Sports Group',type:'Sports Group',hq:'Boston, USA',
+    clubs:['Liverpool'],portfolio:4,
+    fever_relationship:'',
+    aum:'Valoración ~$10B (grupo completo)',
+    founded:2001,
+    key_people:'John Henry (Owner), Tom Werner (Chairman), Billy Hogan (CEO Liverpool)',
+    strategy:'Grupo deportivo con foco en maximización de ingresos comerciales y expansión de marca global. Data-driven en todas las decisiones.',
+    sport_assets:'Liverpool FC, Boston Red Sox, Pittsburgh Penguins, RFK Racing.',
+    bd_angle:'Liverpool usa SeatGeek desde 2020. El contrato es evaluable. FSG tiene reputación de buscar siempre la mejor tecnología — si Fever demuestra superioridad técnica, hay conversación.',
+    risk:'Relación sólida con SeatGeek. Necesitaría propuesta muy diferenciada.',
+    priority:'Medium'
+  },
+  {
+    name:'Qatar Sports Investments',type:'Sovereign Wealth Fund',hq:'Doha, Qatar',
+    clubs:['Paris Saint-Germain'],portfolio:1,
+    fever_relationship:'',
+    aum:'Part of Qatar Investment Authority (~$500B)',
+    founded:2011,
+    key_people:'Nasser Al-Khelaifi (President PSG), Hassan Al-Thawadi',
+    strategy:'PSG como proyecto de nation branding global. Objetivo: ganar Champions League y posicionar Qatar en el ecosistema deportivo mundial post-Qatar 2022.',
+    sport_assets:'Paris Saint-Germain, beIN Sports (media), Qatar 2022 World Cup legacy.',
+    bd_angle:'PSG tiene plataforma de ticketing propia (billetterie.psg.fr) — oportunidad real de reemplazar con OneBox. Nuevo estadio en negociación (60k seats) = momento de decisión tecnológica. Qatar tiene relación con FIFA (Fever cliente de FIFA).',
+    risk:'Plataforma propia implica orgullo institucional. Decisiones políticas más que técnicas.',
+    priority:'High'
+  },
+  {
+    name:'Oaktree Capital Management',type:'Private Equity',hq:'Los Angeles, USA',
+    clubs:['Inter Milan'],portfolio:1,
+    fever_relationship:'',
+    aum:'~$192B AUM',
+    founded:1995,
+    key_people:'Howard Marks (Co-founder), Steven Kaplan (Board Inter), Bedy Yang (Board Inter)',
+    strategy:'Fondo de crédito alternativo. Adquirieron Inter en 2024 al ejecutar garantía sobre deuda de Zhang Jindong. No son operadores de deporte — buscan estabilizar y posiblemente vender.',
+    sport_assets:'Inter Milan (desde 2024).',
+    bd_angle:'Oaktree está profesionalizando la gestión del club — con nuevo estadio en proyecto, están tomando decisiones de infraestructura tecnológica ahora. Momento óptimo para entrar.',
+    risk:'Pueden vender el club pronto — cualquier acuerdo dependería del nuevo propietario.',
+    priority:'High'
+  },
+  {
+    name:'Exor N.V. (Familia Agnelli)',type:'Family',hq:'Amsterdam, Netherlands',
+    clubs:['Juventus'],portfolio:1,
+    fever_relationship:'',
+    aum:'~$30B NAV',
+    founded:1927,
+    key_people:'John Elkann (CEO Exor), Gianluca Ferrero (President Juventus)',
+    strategy:'Holding industrial de la familia Agnelli. Juventus es parte del portfolio junto a Ferrari, Stellantis, The Economist. Foco en recuperar estabilidad tras escándalos contables 2022-23.',
+    sport_assets:'Juventus FC (63.8% participación).',
+    bd_angle:'Juventus tiene estadio propio (Allianz Stadium) y está modernizando su stack tecnológico. Sin tecnología de ticketing específica confirmada — ventana de oportunidad.',
+    risk:'Club en recuperación financiera. Presupuesto de tecnología limitado a corto plazo.',
+    priority:'Medium'
+  },
+  {
+    name:'777 Partners',type:'Private Equity',hq:'Miami, USA',
+    clubs:['Sevilla FC'],portfolio:6,
+    fever_relationship:'',
+    aum:'Desconocido (problemas de liquidez reportados)',
+    founded:2015,
+    key_people:'Josh Wander (Co-founder), Steve Pasko (Co-founder)',
+    strategy:'Multi-club model agresivo. Adquirieron 6 clubs en 3 años. En 2024 surgieron graves problemas financieros — deudas impagadas, demandas legales, posibles desinversiones.',
+    sport_assets:'Sevilla FC, Genoa CFC, Standard Liège, Vasco da Gama, Melbourne Victory, Hertha BSC (fallido).',
+    bd_angle:'Situación muy incierta. Sevilla puede cambiar de propietario pronto. Mejor esperar resolución antes de invertir tiempo.',
+    risk:'Alto riesgo. Posible quiebra o venta forzada. No priorizar hasta que se estabilice.',
+    priority:'Low'
+  },
+  {
+    name:'KSE — Kroenke Sports & Entertainment',type:'Family',hq:'Denver, USA',
+    clubs:['Arsenal'],portfolio:5,
+    fever_relationship:'',
+    aum:'Valoración grupo ~$20B+',
+    founded:1999,
+    key_people:'Stan Kroenke (Owner), Josh Kroenke (President), Vinai Venkatesham (ex-CEO Arsenal)',
+    strategy:'Conglomerado deportivo familiar. Arsenal es su asset europeo premium. Foco en maximización de valor comercial a largo plazo.',
+    sport_assets:'Arsenal FC, LA Rams (NFL), Colorado Avalanche (NHL), Denver Nuggets (NBA), Colorado Rapids (MLS), Los Angeles FC.',
+    bd_angle:'Arsenal lleva 30+ años con Ticketmaster. El contrato se renovó recientemente — difícil a corto plazo pero es uno de los mayores ticketing revenue de Europa (€105M). Vale seguir de cerca.',
+    risk:'Ticketmaster muy arraigado. Necesitaría cambio de liderazgo interno para reabrir conversación.',
+    priority:'Medium'
+  },
+  {
+    name:'Glazer Family / INEOS',type:'Family',hq:'USA / Monaco',
+    clubs:['Manchester United'],portfolio:3,
+    fever_relationship:'',
+    aum:'Glazers: ~$4B neto. Ratcliffe: ~$35B neto',
+    founded:'—',
+    key_people:'Jim Ratcliffe (INEOS, 25%), Joel & Avram Glazer (75%), Omar Berrada (CEO)',
+    strategy:'Co-propiedad dividida. INEOS gestiona operaciones deportivas, Glazers retienen control financiero. Old Trafford: plan de remodelación o nuevo estadio (~£2B) en debate activo.',
+    sport_assets:'Manchester United, OGC Nice, FC Lausanne-Sport (INEOS). Tampa Bay Buccaneers, Jacksonville Jaguars (Glazers).',
+    bd_angle:'Ticketmaster es partner actual. Old Trafford remodelación = decisión tecnológica inminente. Mayor estadio de la Premier League (74k). Revenue ticketing ~€110M. INEOS tiene mentalidad de optimización — abiertos a cambios si hay ROI claro.',
+    risk:'Complejidad de co-propiedad ralentiza decisiones. Ticketmaster arraigado.',
+    priority:'High'
+  },
+  {
+    name:'Todd Boehly / Clearlake Capital',type:'Private Equity',hq:'Los Angeles, USA',
+    clubs:['Chelsea'],portfolio:1,
+    fever_relationship:'',
+    aum:'Clearlake: ~$75B AUM',
+    founded:'Clearlake 2006',
+    key_people:'Todd Boehly (Co-owner, Chairman), Behdad Eghbali (Clearlake), Paul Winstanley (Sporting Director)',
+    strategy:'Adquirieron Chelsea en 2022 por £4.25B — mayor precio pagado por un club deportivo hasta entonces. Modelo americano: inversión en infraestructura, datos y tecnología.',
+    sport_assets:'Chelsea FC.',
+    bd_angle:'Chelsea firmó con Ticketmaster en 2025 — contrato nuevo, difícil de mover inmediatamente. Sin embargo, Boehly es conocido por revisar todos los contratos continuamente. A vigilar en 2026-27.',
+    risk:'Contrato Ticketmaster muy reciente (2025). No es el momento.',
+    priority:'Low'
+  },
+  {
+    name:'Member-owned (Socios)',type:'Member-owned',hq:'España / Alemania',
+    clubs:['FC Barcelona','Real Madrid','Athletic Bilbao','Bayern Munich'],portfolio:4,
+    fever_relationship:'3 clientes OneBox: Barça, Real Madrid, Athletic',
+    aum:'N/A — estructuras sin ánimo de lucro',
+    founded:'—',
+    key_people:'Joan Laporta (Barça), Florentino Pérez (Real Madrid), Jon Uriarte (Athletic), Herbert Hainer (Bayern)',
+    strategy:'Clubs propiedad de sus socios/miembros. Gobernanza democrática con presidente elegido. Las decisiones tecnológicas las toma la directiva — no hay fondo externo que presionar.',
+    sport_assets:'Los clubs más grandes de España + Bayern Munich en Alemania.',
+    bd_angle:'Ya somos socios de Barça, Real y Athletic. Bayern es el único sin relación — plataforma propia muy arraigada y cultura cerrada. La vía es a través del presidente y el área de digitalización.',
+    risk:'Bayern es extremadamente autónomo tecnológicamente. Difícil penetrar.',
+    priority:'Medium'
+  },
+  {
+    name:'ENIC Group',type:'Family',hq:'Londres, UK',
+    clubs:['Tottenham Hotspur'],portfolio:1,
+    fever_relationship:'',
+    aum:'~£800M estimado',
+    founded:1995,
+    key_people:'Daniel Levy (Chairman & CEO efectivo), Donna-Maria Cullen (COO)',
+    strategy:'ENIC controla el 86% de Tottenham. Daniel Levy es conocido por ser uno de los negociadores más duros del fútbol inglés. El Tottenham Hotspur Stadium es el más moderno de Europa.',
+    sport_assets:'Tottenham Hotspur FC.',
+    bd_angle:'Ticketmaster renovado en 2022 — uno de los estadios más avanzados tecnológicamente de Europa. Sin embargo, el estadio tiene capacidad de 62k y revenue de €95M ticketing. Vale cultivar la relación para la próxima renovación.',
+    risk:'Levy es muy leal a sus partners si están satisfechos. Horizonte 2027-28.',
+    priority:'Medium'
+  },
 ];
 
 const COORDS={"FC Barcelona":[2.12,41.38],"Real Madrid":[-3.68,40.45],"Atletico de Madrid":[-3.60,40.44],"Sevilla FC":[-5.97,37.38],"Athletic Bilbao":[-2.95,43.26],"Real Betis":[-5.98,37.35],"Valencia CF":[-0.36,39.47],"Villarreal CF":[-0.10,39.94],"Celta Vigo":[-8.73,42.21],"Getafe CF":[-3.72,40.32],"Girona FC":[2.83,41.96],"Manchester City":[-2.20,53.48],"Arsenal":[-0.11,51.55],"Liverpool":[-2.96,53.43],"Chelsea":[-0.19,51.48],"Manchester United":[-2.29,53.46],"Tottenham Hotspur":[-0.07,51.60],"Newcastle United":[-1.62,54.97],"Aston Villa":[-1.88,52.51],"West Ham United":[-0.02,51.53],"Bayern Munich":[11.62,48.22],"Borussia Dortmund":[7.45,51.49],"Inter Milan":[9.12,45.48],"AC Milan":[9.13,45.48],"Juventus":[7.64,45.10],"Paris Saint-Germain":[2.25,48.84],"Ajax":[4.94,52.31]};
@@ -683,19 +839,88 @@ function renderMap(){
 }
 
 function renderOwnership(){
-  const typeColors={'Private Equity':{bg:'#eff6ff',col:'#1a56db'},'Sovereign Wealth Fund':{bg:'#f5f3ff',col:'#6b21a8'},'Sports Group':{bg:'#e6f7f0',col:'#0a8a4e'},'Family':{bg:'#fff7e0',col:'#c07000'},'Member-owned':{bg:'#f0f1f7',col:'#5a6080'},'Public Company':{bg:'#fef2f2',col:'#dc2626'}};
+  const typeColors={
+    'Private Equity':{bg:'#eff6ff',col:'#1a56db'},
+    'Sovereign Wealth Fund':{bg:'#f5f3ff',col:'#6b21a8'},
+    'Sports Group':{bg:'#e6f7f0',col:'#0a8a4e'},
+    'Family':{bg:'#fff7e0',col:'#c07000'},
+    'Member-owned':{bg:'#f0f1f7',col:'#5a6080'},
+    'Public Company':{bg:'#fef2f2',col:'#dc2626'}
+  };
+  const priorityColors={High:'var(--fever)',Medium:'var(--amber)',Low:'var(--text3)'};
+
   document.getElementById('owner-grid').innerHTML=OWNERS.map(o=>{
     const tc=typeColors[o.type]||{bg:'#f0f1f7',col:'#5a6080'};
     const clientClubs=o.clubs.filter(name=>CLUBS.find(c=>c.name===name&&c.fever_status==='client'));
+    const prCol=priorityColors[o.priority]||'var(--text3)';
+
+    const chips=o.clubs.map(name=>{
+      const club=CLUBS.find(c=>c.name===name);
+      const isC=club&&club.fever_status==='client';
+      return`<span class="owner-club-chip ${isC?'is-client':''}" onclick="event.stopPropagation();filterByOwner('${o.name}')" title="${name}">${name}</span>`;
+    }).join('');
+
     return`<div class="owner-card">
-      <div class="owner-card-header"><div><div class="owner-name">${o.name}</div><div style="font-size:10px;color:var(--text3);margin-top:2px">${o.hq}</div></div><span class="owner-type-badge" style="background:${tc.bg};color:${tc.col}">${o.type}</span></div>
+      <div class="owner-card-header">
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <div class="owner-name">${o.name}</div>
+            <span style="font-size:9px;font-weight:700;color:${prCol};background:transparent;border:1px solid ${prCol};padding:1px 6px;border-radius:3px">${o.priority||'—'} priority</span>
+          </div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px">📍 ${o.hq}${o.founded&&o.founded!=='—'?' · Est. '+o.founded:''}</div>
+        </div>
+        <span class="owner-type-badge" style="background:${tc.bg};color:${tc.col};flex-shrink:0">${o.type}</span>
+      </div>
       <div class="owner-body">
-        <div class="owner-stat-row"><span class="owner-stat-key">Portfolio global</span><span class="owner-stat-val">${o.portfolio} clubs</span></div>
-        <div class="owner-stat-row"><span class="owner-stat-key">Clients Fever</span><span class="owner-stat-val" style="color:${clientClubs.length>0?'var(--green)':'var(--text3)'}">${clientClubs.length} club${clientClubs.length!==1?'s':''}</span></div>
-        <div style="font-size:10px;color:var(--text3);font-weight:500">Clubs en base de datos:</div>
-        <div class="owner-clubs">${o.clubs.map(name=>{const isC=CLUBS.find(c=>c.name===name&&c.fever_status==='client');return`<span class="owner-club-chip ${isC?'is-client':''}" onclick="event.stopPropagation();filterByOwner('${o.name}')">${name}</span>`;}).join('')}</div>
-        <div class="owner-stat-row"><span class="owner-stat-key">Contacto Fever</span><span class="fever-contact-badge ${o.fever_relationship?'has-contact':'no-contact'}">${o.fever_relationship||'Sin contacto'}</span></div>
-        ${o.notes?`<div style="font-size:10px;color:var(--text2);line-height:1.5;padding-top:6px;border-top:1px solid var(--border)">${o.notes}</div>`:''}
+
+        <!-- Stats row -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;text-align:center">
+            <div style="font-size:16px;font-weight:700">${o.portfolio}</div>
+            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:1px">clubs global</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;text-align:center">
+            <div style="font-size:16px;font-weight:700;color:${clientClubs.length>0?'var(--green)':'var(--text3)'}">${clientClubs.length}</div>
+            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:1px">Fever clients</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;text-align:center;overflow:hidden">
+            <div style="font-size:9px;font-weight:600;color:var(--text2);line-height:1.3">${o.aum||'N/A'}</div>
+            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:1px">AUM / val.</div>
+          </div>
+        </div>
+
+        <!-- Key people -->
+        ${o.key_people?`<div style="font-size:10px;color:var(--text2);background:var(--bg3);border-radius:7px;padding:7px 10px;border:1px solid var(--border)">
+          <span style="font-weight:700;color:var(--text3);text-transform:uppercase;font-size:8px;letter-spacing:.7px">Key People &nbsp;</span>${o.key_people}
+        </div>`:''}
+
+        <!-- Clubs in DB -->
+        <div>
+          <div style="font-size:9px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px">Clubs en base de datos</div>
+          <div class="owner-clubs">${chips}</div>
+        </div>
+
+        <!-- Strategy -->
+        ${o.strategy?`<div style="font-size:10px;color:var(--text2);line-height:1.6;border-left:2px solid var(--border2);padding-left:8px">${o.strategy}</div>`:''}
+
+        <!-- BD Angle — most important -->
+        ${o.bd_angle?`<div style="background:var(--fever3);border:1px solid var(--fever4);border-radius:8px;padding:9px 11px">
+          <div style="font-size:9px;font-weight:700;color:var(--fever);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">🎯 BD Angle</div>
+          <div style="font-size:10px;color:var(--text);line-height:1.6">${o.bd_angle}</div>
+        </div>`:''}
+
+        <!-- Risk -->
+        ${o.risk?`<div style="background:var(--amber2);border:1px solid #f0dba0;border-radius:8px;padding:9px 11px">
+          <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">⚠️ Riesgo / Barrera</div>
+          <div style="font-size:10px;color:var(--text);line-height:1.6">${o.risk}</div>
+        </div>`:''}
+
+        <!-- Fever relationship -->
+        <div class="owner-stat-row">
+          <span class="owner-stat-key">Relación Fever</span>
+          <span class="fever-contact-badge ${o.fever_relationship?'has-contact':'no-contact'}">${o.fever_relationship||'Sin contacto aún'}</span>
+        </div>
+
       </div>
     </div>`;
   }).join('');
