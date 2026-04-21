@@ -317,9 +317,19 @@ td{padding:8px 10px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
       </div>
     </div>
     <div class="ownership-view" id="view-ownership" style="display:none">
-      <div class="owner-grid" id="owner-grid"></div>
+      <div style="display:flex;height:100%;overflow:hidden">
+        <!-- Owner list -->
+        <div style="width:320px;flex-shrink:0;border-right:1px solid var(--border);overflow-y:auto;background:#fff" id="owner-list"></div>
+        <!-- Owner detail -->
+        <div style="flex:1;overflow-y:auto;padding:20px;background:var(--bg)" id="owner-detail">
+          <div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:12px;color:var(--text3)">
+            <div style="font-size:32px">👈</div>
+            <div style="font-size:13px;font-weight:500">Selecciona un propietario para ver su análisis</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="view-scorecard" style="display:none;flex:1;overflow-y:auto;padding:14px">
+    <div id="view-scorecard" style="display:none;flex:1;flex-direction:column;overflow-y:auto;padding:14px">
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px" id="scorecard-grid"></div>
     </div>
     <div class="detail-panel" id="detail-panel">
@@ -695,9 +705,16 @@ document.getElementById('search').addEventListener('input',e=>{searchQ=e.target.
 
 function setView(v){
   currentView=v;
-  ['table','kanban','map','ownership','scorecard'].forEach(x=>{const el=document.getElementById('view-'+x);if(el)el.style.display=x===v?(x==='table'?'block':'flex'):'none';});
+  const modes={table:'block',kanban:'flex',map:'flex',ownership:'flex',scorecard:'flex'};
+  ['table','kanban','map','ownership','scorecard'].forEach(x=>{
+    const el=document.getElementById('view-'+x);
+    if(el)el.style.display=x===v?modes[x]:'none';
+  });
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',['table','kanban','map','ownership','scorecard'][i]===v));
-  if(v==='map')renderMap();else if(v==='kanban')renderKanban();else if(v==='scorecard')renderScorecards();else if(v==='ownership')renderOwnership();
+  if(v==='map')renderMap();
+  else if(v==='kanban')renderKanban();
+  else if(v==='scorecard')renderScorecards();
+  else if(v==='ownership')renderOwnership();
   render();
 }
 
@@ -847,83 +864,130 @@ function renderOwnership(){
     'Member-owned':{bg:'#f0f1f7',col:'#5a6080'},
     'Public Company':{bg:'#fef2f2',col:'#dc2626'}
   };
-  const priorityColors={High:'var(--fever)',Medium:'var(--amber)',Low:'var(--text3)'};
+  const priorityColors={High:'#e8193c',Medium:'#c07000',Low:'#9aa0b8'};
 
-  document.getElementById('owner-grid').innerHTML=OWNERS.map(o=>{
+  // Render left list
+  const list=document.getElementById('owner-list');
+  list.innerHTML=OWNERS.map((o,i)=>{
     const tc=typeColors[o.type]||{bg:'#f0f1f7',col:'#5a6080'};
     const clientClubs=o.clubs.filter(name=>CLUBS.find(c=>c.name===name&&c.fever_status==='client'));
-    const prCol=priorityColors[o.priority]||'var(--text3)';
-
-    const chips=o.clubs.map(name=>{
-      const club=CLUBS.find(c=>c.name===name);
-      const isC=club&&club.fever_status==='client';
-      return`<span class="owner-club-chip ${isC?'is-client':''}" onclick="event.stopPropagation();filterByOwner('${o.name}')" title="${name}">${name}</span>`;
-    }).join('');
-
-    return`<div class="owner-card">
-      <div class="owner-card-header">
-        <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <div class="owner-name">${o.name}</div>
-            <span style="font-size:9px;font-weight:700;color:${prCol};background:transparent;border:1px solid ${prCol};padding:1px 6px;border-radius:3px">${o.priority||'—'} priority</span>
-          </div>
-          <div style="font-size:10px;color:var(--text3);margin-top:2px">📍 ${o.hq}${o.founded&&o.founded!=='—'?' · Est. '+o.founded:''}</div>
-        </div>
-        <span class="owner-type-badge" style="background:${tc.bg};color:${tc.col};flex-shrink:0">${o.type}</span>
+    const prCol=priorityColors[o.priority]||'#9aa0b8';
+    return`<div class="owner-list-item" id="oli-${i}" onclick="showOwnerDetail(${i})" style="padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div style="font-size:12px;font-weight:600;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${o.name}</div>
+        <span style="font-size:8px;font-weight:700;color:${prCol};border:1px solid ${prCol};padding:1px 5px;border-radius:3px;flex-shrink:0">${o.priority||'—'}</span>
       </div>
-      <div class="owner-body">
+      <div style="display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap">
+        <span style="font-size:9px;font-weight:600;padding:1px 7px;border-radius:3px;background:${tc.bg};color:${tc.col}">${o.type}</span>
+        <span style="font-size:10px;color:var(--text3)">📍 ${o.hq}</span>
+        ${clientClubs.length>0?`<span style="font-size:9px;font-weight:700;color:var(--green);background:var(--green2);padding:1px 6px;border-radius:3px">${clientClubs.length} client${clientClubs.length>1?'s':''}</span>`:''}
+      </div>
+      <div style="font-size:10px;color:var(--text3);margin-top:4px">${o.clubs.slice(0,3).join(', ')}${o.clubs.length>3?' +'+( o.clubs.length-3)+' más':''}</div>
+    </div>`;
+  }).join('');
 
-        <!-- Stats row -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
-          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;text-align:center">
-            <div style="font-size:16px;font-weight:700">${o.portfolio}</div>
-            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:1px">clubs global</div>
-          </div>
-          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;text-align:center">
-            <div style="font-size:16px;font-weight:700;color:${clientClubs.length>0?'var(--green)':'var(--text3)'}">${clientClubs.length}</div>
-            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:1px">Fever clients</div>
-          </div>
-          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:8px 10px;text-align:center;overflow:hidden">
-            <div style="font-size:9px;font-weight:600;color:var(--text2);line-height:1.3">${o.aum||'N/A'}</div>
-            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:1px">AUM / val.</div>
-          </div>
-        </div>
+  // Show first owner by default
+  showOwnerDetail(0);
+}
 
-        <!-- Key people -->
-        ${o.key_people?`<div style="font-size:10px;color:var(--text2);background:var(--bg3);border-radius:7px;padding:7px 10px;border:1px solid var(--border)">
-          <span style="font-weight:700;color:var(--text3);text-transform:uppercase;font-size:8px;letter-spacing:.7px">Key People &nbsp;</span>${o.key_people}
-        </div>`:''}
+function showOwnerDetail(idx){
+  // Highlight selected
+  document.querySelectorAll('.owner-list-item').forEach((el,i)=>{
+    el.style.background=i===idx?'var(--fever3)':'';
+  });
 
-        <!-- Clubs in DB -->
-        <div>
-          <div style="font-size:9px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px">Clubs en base de datos</div>
-          <div class="owner-clubs">${chips}</div>
-        </div>
+  const o=OWNERS[idx];
+  if(!o)return;
 
-        <!-- Strategy -->
-        ${o.strategy?`<div style="font-size:10px;color:var(--text2);line-height:1.6;border-left:2px solid var(--border2);padding-left:8px">${o.strategy}</div>`:''}
+  const typeColors={
+    'Private Equity':{bg:'#eff6ff',col:'#1a56db'},
+    'Sovereign Wealth Fund':{bg:'#f5f3ff',col:'#6b21a8'},
+    'Sports Group':{bg:'#e6f7f0',col:'#0a8a4e'},
+    'Family':{bg:'#fff7e0',col:'#c07000'},
+    'Member-owned':{bg:'#f0f1f7',col:'#5a6080'},
+    'Public Company':{bg:'#fef2f2',col:'#dc2626'}
+  };
+  const tc=typeColors[o.type]||{bg:'#f0f1f7',col:'#5a6080'};
+  const clientClubs=o.clubs.filter(name=>CLUBS.find(c=>c.name===name&&c.fever_status==='client'));
+  const priorityColors={High:'#e8193c',Medium:'#c07000',Low:'#9aa0b8'};
+  const prCol=priorityColors[o.priority]||'#9aa0b8';
 
-        <!-- BD Angle — most important -->
-        ${o.bd_angle?`<div style="background:var(--fever3);border:1px solid var(--fever4);border-radius:8px;padding:9px 11px">
-          <div style="font-size:9px;font-weight:700;color:var(--fever);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">🎯 BD Angle</div>
-          <div style="font-size:10px;color:var(--text);line-height:1.6">${o.bd_angle}</div>
-        </div>`:''}
-
-        <!-- Risk -->
-        ${o.risk?`<div style="background:var(--amber2);border:1px solid #f0dba0;border-radius:8px;padding:9px 11px">
-          <div style="font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">⚠️ Riesgo / Barrera</div>
-          <div style="font-size:10px;color:var(--text);line-height:1.6">${o.risk}</div>
-        </div>`:''}
-
-        <!-- Fever relationship -->
-        <div class="owner-stat-row">
-          <span class="owner-stat-key">Relación Fever</span>
-          <span class="fever-contact-badge ${o.fever_relationship?'has-contact':'no-contact'}">${o.fever_relationship||'Sin contacto aún'}</span>
-        </div>
-
+  const chips=o.clubs.map(name=>{
+    const club=CLUBS.find(c=>c.name===name);
+    const isC=club&&club.fever_status==='client';
+    const sc=club?feverScore(club):null;
+    return`<div onclick="filterByOwner('${o.name}')" style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:${isC?'var(--green2)':'var(--bg3)'};border:1px solid ${isC?'#c8eede':'var(--border)'};border-radius:7px;cursor:pointer;transition:all .12s" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+      <span style="font-size:11px;font-weight:600;color:${isC?'var(--green)':'var(--text)'}">${name}</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        ${sc?`<span style="font-size:10px;font-weight:700;color:${isC?'var(--green)':sc.total>=5?'var(--amber)':'var(--red)'}">${sc.total}/10</span>`:''}
+        ${isC?`<span style="font-size:8px;font-weight:700;color:var(--green);background:var(--green2);padding:1px 5px;border-radius:3px">CLIENT</span>`:'<span style="font-size:8px;color:var(--text3)">→ ver</span>'}
       </div>
     </div>`;
   }).join('');
+
+  document.getElementById('owner-detail').innerHTML=`
+    <div style="max-width:720px">
+      <!-- Header -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:14px;box-shadow:var(--shadow)">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div>
+            <div style="font-size:20px;font-weight:700;color:var(--text)">${o.name}</div>
+            <div style="font-size:11px;color:var(--text2);margin-top:4px">📍 ${o.hq}${o.founded&&o.founded!=='—'?' &nbsp;·&nbsp; Est. '+o.founded:''}</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span style="font-size:10px;font-weight:700;padding:3px 10px;border-radius:5px;background:${tc.bg};color:${tc.col}">${o.type}</span>
+            <span style="font-size:10px;font-weight:700;color:${prCol};border:1px solid ${prCol};padding:3px 10px;border-radius:5px">${o.priority} Priority</span>
+            <span class="fever-contact-badge ${o.fever_relationship?'has-contact':'no-contact'}" style="font-size:10px">${o.fever_relationship||'Sin contacto Fever'}</span>
+          </div>
+        </div>
+        <!-- KPIs -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px">
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center">
+            <div style="font-size:22px;font-weight:700">${o.portfolio}</div>
+            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:2px">Clubs globales</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center">
+            <div style="font-size:22px;font-weight:700;color:${clientClubs.length>0?'var(--green)':'var(--text3)'}">${clientClubs.length}</div>
+            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:2px">Fever Clients</div>
+          </div>
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;text-align:center;grid-column:span 2">
+            <div style="font-size:11px;font-weight:600;color:var(--text2)">${o.aum||'N/A'}</div>
+            <div style="font-size:8px;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;margin-top:2px">AUM / Valoración</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key people -->
+      ${o.key_people?`<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px;box-shadow:var(--shadow)">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:8px">👤 Personas Clave</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7">${o.key_people}</div>
+      </div>`:''}
+
+      <!-- Strategy -->
+      ${o.strategy?`<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:10px;box-shadow:var(--shadow)">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:8px">📋 Estrategia de Inversión</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7">${o.strategy}</div>
+        ${o.sport_assets?`<div style="font-size:11px;color:var(--text3);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)"><b style="color:var(--text2)">Activos deportivos:</b> ${o.sport_assets}</div>`:''}
+      </div>`:''}
+
+      <!-- BD Angle -->
+      ${o.bd_angle?`<div style="background:var(--fever3);border:1px solid var(--fever4);border-radius:10px;padding:14px 18px;margin-bottom:10px">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--fever);margin-bottom:8px">🎯 BD Angle para Fever</div>
+        <div style="font-size:12px;color:var(--text);line-height:1.7">${o.bd_angle}</div>
+      </div>`:''}
+
+      <!-- Risk -->
+      ${o.risk?`<div style="background:var(--amber2);border:1px solid #f0dba0;border-radius:10px;padding:14px 18px;margin-bottom:14px">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:8px">⚠️ Riesgo / Barrera de Entrada</div>
+        <div style="font-size:12px;color:var(--text);line-height:1.7">${o.risk}</div>
+      </div>`:''}
+
+      <!-- Clubs -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px;box-shadow:var(--shadow)">
+        <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:10px">🏟️ Clubs en Base de Datos (${o.clubs.length})</div>
+        <div style="display:flex;flex-direction:column;gap:6px">${chips}</div>
+      </div>
+    </div>`;
 }
 
 function filterByOwner(ownerName){document.getElementById('search').value=ownerName;searchQ=ownerName;setView('table');applyFilters();}
