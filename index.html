@@ -365,12 +365,14 @@ td{padding:8px 10px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
       </div>
       <div class="form-row">
         <div class="form-group"><label class="form-label">League *</label>
-          <select class="form-input form-select" id="f-league">
-            <option value="">Select…</option>
+          <input class="form-input" id="f-league" placeholder="La Liga, Premier League…" list="list-league" autocomplete="off">
+          <datalist id="list-league">
             <option>La Liga</option><option>Premier League</option><option>Bundesliga</option>
             <option>Serie A</option><option>Ligue 1</option><option>Eredivisie</option>
-            <option>Primeira Liga</option><option>Championship</option><option>Liga MX</option><option>Other</option>
-          </select>
+            <option>Primeira Liga</option><option>Championship</option><option>Liga MX</option>
+            <option>Liga BetPlay</option><option>MLS</option><option>Süper Lig</option>
+            <option>Ekstraklasa</option><option>Pro League</option><option>Other</option>
+          </datalist>
         </div>
         <div class="form-group"><label class="form-label">Founded</label><input class="form-input" id="f-founded" type="number" placeholder="1899"></div>
       </div>
@@ -380,12 +382,16 @@ td{padding:8px 10px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
       </div>
       <div class="fsection">Ticketing</div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Technology</label>
-          <select class="form-input form-select" id="f-technology">
-            <option value="">Unknown</option>
+        <div class="form-group">
+          <label class="form-label">Technology <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text3)">— escribe libremente</span></label>
+          <input class="form-input" id="f-technology" placeholder="VivaTicket, OneBox, SeatGeek…" list="list-technology" autocomplete="off">
+          <datalist id="list-technology">
             <option>OneBox (Fever)</option><option>SeatGeek</option><option>SeatGeek Enterprise</option>
-            <option>Ticketmaster Sport</option><option>Propio (own platform)</option><option>Other</option>
-          </select>
+            <option>Ticketmaster Sport</option><option>VivaTicket</option><option>Entradas.com</option>
+            <option>Propio (own platform)</option><option>Eventim</option><option>AXS</option>
+            <option>Dice</option><option>Tixr</option><option>Bilheteira Online</option>
+            <option>See Tickets</option><option>Weezevent</option><option>Other</option>
+          </datalist>
         </div>
         <div class="form-group"><label class="form-label">Provider / Channel</label><input class="form-input" id="f-provider" placeholder="club.com / Ticketmaster"></div>
       </div>
@@ -399,14 +405,27 @@ td{padding:8px 10px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis
       </div>
       <div class="fsection">Ownership</div>
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Owner Name</label><input class="form-input" id="f-owner" placeholder="RedBird Capital"></div>
-        <div class="form-group"><label class="form-label">Owner Type</label>
-          <select class="form-input form-select" id="f-owner-type">
-            <option value="">Unknown</option>
+        <div class="form-group">
+          <label class="form-label">Owner Name</label>
+          <input class="form-input" id="f-owner" placeholder="RedBird Capital, Familia Roig…" list="list-owners" autocomplete="off">
+          <datalist id="list-owners">
+            <option>City Football Group</option><option>RedBird Capital Partners</option>
+            <option>PIF (Saudi Arabia)</option><option>Fenway Sports Group</option>
+            <option>Qatar Sports Investments</option><option>Oaktree Capital</option>
+            <option>Exor (Agnelli Family)</option><option>777 Partners</option>
+            <option>KSE (Stan Kroenke)</option><option>Glazer Family / INEOS</option>
+            <option>Todd Boehly / Clearlake</option><option>Member-owned (Socios)</option>
+            <option>ENIC Group</option>
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Owner Type</label>
+          <input class="form-input" id="f-owner-type" placeholder="Private Equity, Family…" list="list-owner-type" autocomplete="off">
+          <datalist id="list-owner-type">
             <option>Private Equity</option><option>Sovereign Wealth Fund</option>
             <option>Sports Group</option><option>Family</option>
             <option>Member-owned</option><option>Public Company</option><option>State</option>
-          </select>
+          </datalist>
         </div>
       </div>
       <div class="form-row">
@@ -1086,8 +1105,8 @@ function closeDetail(){document.getElementById('detail-panel').classList.remove(
 function openAddModal(){
   editingClubName=null;
   document.getElementById('modal-title').textContent='Add New Club';
-  ['name','country','founded','stadium','capacity','provider','ticket-rev','avg-price','attendance','contract','owner','decision-maker','revenue','notes'].forEach(id=>{const el=document.getElementById('f-'+id);if(el)el.value='';});
-  document.getElementById('f-league').value='';document.getElementById('f-technology').value='';document.getElementById('f-owner-type').value='';document.getElementById('f-fever-contact').value='';document.getElementById('f-status').value='prospect';document.getElementById('f-priority').value='Medium';
+  ['name','country','founded','stadium','capacity','provider','ticket-rev','avg-price','attendance','contract','owner','decision-maker','revenue','notes','technology','league','owner-type'].forEach(id=>{const el=document.getElementById('f-'+id);if(el)el.value='';});
+  document.getElementById('f-fever-contact').value='';document.getElementById('f-status').value='prospect';document.getElementById('f-priority').value='Medium';
   document.getElementById('modal-overlay').classList.add('open');
 }
 
