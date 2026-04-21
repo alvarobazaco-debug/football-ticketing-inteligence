@@ -578,134 +578,108 @@ function renderKanban(){
 
 function renderMap(){
   const container=document.getElementById('europe-map');
-  container.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3);font-size:12px">Cargando mapa…</div>';
+  container.style.position='relative';
 
-  // Load D3 + TopoJSON dynamically
-  function loadScript(src,cb){
-    if(document.querySelector(`script[src="${src}"]`)){cb();return;}
-    const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);
+  // Load Leaflet CSS + JS once
+  function loadLeaflet(cb){
+    if(window.L){cb();return;}
+    if(!document.getElementById('leaflet-css')){
+      const link=document.createElement('link');
+      link.id='leaflet-css';link.rel='stylesheet';
+      link.href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+      document.head.appendChild(link);
+    }
+    if(!document.querySelector('script[src*="leaflet"]')){
+      const s=document.createElement('script');
+      s.src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      s.onload=cb;document.head.appendChild(s);
+    } else {
+      const check=setInterval(()=>{if(window.L){clearInterval(check);cb();}},50);
+    }
   }
 
-  loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js',()=>{
-    loadScript('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js',()=>{
-      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
-        .then(r=>r.json())
-        .then(world=>drawMap(container,world))
-        .catch(()=>{ container.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3)">No se pudo cargar el mapa. Comprueba la conexión.</div>'; });
+  // Destroy previous map instance if exists
+  if(window._leafletMap){
+    window._leafletMap.remove();
+    window._leafletMap=null;
+  }
+  container.innerHTML='';
+
+  loadLeaflet(()=>{
+    // Init map centered on Europe
+    const map=L.map(container,{
+      center:[50,10],zoom:4,
+      zoomControl:true,
+      attributionControl:false,
+      minZoom:3,maxZoom:8
     });
-  });
+    window._leafletMap=map;
 
-  function drawMap(container, world){
-    const W=container.offsetWidth||860, H=container.offsetHeight||440;
-    container.innerHTML='';
+    // Clean light tile layer (CartoDB Positron — no labels, clean)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+      attribution:'© OpenStreetMap © CARTO',
+      subdomains:'abcd',maxZoom:8
+    }).addTo(map);
 
-    // Europe bounding box
-    const projection = d3.geoMercator()
-      .center([13, 52])
-      .scale(W * 1.05)
-      .translate([W * 0.46, H * 0.52]);
-
-    const path = d3.geoPath().projection(projection);
-
-    const svg = d3.select(container).append('svg')
-      .attr('width', W).attr('height', H)
-      .style('border-radius','8px');
-
-    // Sea background
-    svg.append('rect').attr('width',W).attr('height',H).attr('fill','#d6e8f5').attr('rx',8);
-
-    // Countries
-    const countries = topojson.feature(world, world.objects.countries);
-    svg.append('g').selectAll('path')
-      .data(countries.features)
-      .join('path')
-      .attr('d', path)
-      .attr('fill', '#e8eef8')
-      .attr('stroke', '#b8c8de')
-      .attr('stroke-width', 0.6);
-
-    // Country borders
-    svg.append('path')
-      .datum(topojson.mesh(world, world.objects.countries, (a,b)=>a!==b))
-      .attr('d', path)
-      .attr('fill','none')
-      .attr('stroke','#c5d5e8')
-      .attr('stroke-width', 0.5);
-
-    // Clip to Europe area
-    svg.append('rect').attr('width',W).attr('height',H)
-      .attr('fill','none').attr('stroke','none');
-
-    // Jitter for overlapping cities
-    const JITTER={
-      'Arsenal':[-2,-13],'Chelsea':[-13,2],'Tottenham Hotspur':[13,-2],'West Ham United':[2,13],
-      'Manchester City':[-11,0],'Manchester United':[11,0],
-      'Real Madrid':[-13,-7],'Atletico de Madrid':[13,-7],'Getafe CF':[0,12],
-      'Inter Milan':[-11,0],'AC Milan':[11,0],
-      'SL Benfica':[-10,0],'Sporting CP':[10,0],
-      'Liverpool':[-11,0],'Everton':[11,0],
-    };
-
-    // Tooltip div
-    let tooltip = document.getElementById('map-tooltip-d3');
-    if(!tooltip){
-      tooltip=document.createElement('div');
-      tooltip.id='map-tooltip-d3';
-      tooltip.style.cssText='position:fixed;background:#1a1d2e;color:#fff;padding:9px 13px;border-radius:9px;font-size:11px;pointer-events:none;z-index:1000;min-width:170px;box-shadow:0 4px 20px rgba(0,0,0,.3);line-height:1.7;display:none';
-      document.body.appendChild(tooltip);
-    }
-
-    // Plot clubs
+    // Custom marker for each club
     filtered.forEach(c=>{
       const coord=COORDS[c.name];if(!coord)return;
       const sc=feverScore(c);
       const color=STATUS_COLORS[c.fever_status]||'#1a56db';
-      const r=6+(sc.total/10)*5;
-      let [px,py]=projection([coord[0],coord[1]]);
-      const j=JITTER[c.name]||[0,0];
-      px+=j[0]; py+=j[1];
+      const r=8+Math.round((sc.total/10)*6); // radius 8–14px
 
-      // Skip if outside viewport
-      if(px<0||px>W||py<0||py>H)return;
+      // SVG circle marker
+      const svgIcon=L.divIcon({
+        className:'',
+        html:`<div style="width:${r*2}px;height:${r*2}px;border-radius:50%;background:${color};border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.25);cursor:pointer;opacity:0.92"></div>`,
+        iconSize:[r*2,r*2],
+        iconAnchor:[r,r],
+        popupAnchor:[0,-(r+4)]
+      });
 
-      // Shadow
-      const g=svg.append('g').style('cursor','pointer')
-        .on('click',()=>openDetail(c.name))
-        .on('mouseenter',function(event){
-          d3.select(this).select('circle').attr('r',r+2).attr('stroke-width',2.5);
-          tooltip.innerHTML=`<div style="font-weight:700;font-size:12px;margin-bottom:3px">${c.name}</div><div style="color:#9aa0b8;font-size:10px">${c.league} · ${c.country}</div><div style="margin-top:5px;display:flex;align-items:center;gap:6px"><span style="background:${color};padding:1px 7px;border-radius:3px;font-size:9px;font-weight:700;color:#fff">${c.fever_status}</span><span style="font-size:11px">Score <b>${sc.total}/10</b></span></div>${c.ticketing_technology?`<div style="color:#9aa0b8;font-size:10px;margin-top:2px">${c.ticketing_technology}</div>`:''}${c.owner_name?`<div style="color:#9aa0b8;font-size:10px">${c.owner_name}</div>`:''}`;
-          tooltip.style.display='block';
-          tooltip.style.left=(event.clientX+14)+'px';
-          tooltip.style.top=(event.clientY-10)+'px';
-        })
-        .on('mousemove',function(event){
-          tooltip.style.left=(event.clientX+14)+'px';
-          tooltip.style.top=(event.clientY-10)+'px';
-        })
-        .on('mouseleave',function(){
-          d3.select(this).select('circle').attr('r',r).attr('stroke-width',1.8);
-          tooltip.style.display='none';
-        });
+      const marker=L.marker([coord[1],coord[0]],{icon:svgIcon}).addTo(map);
 
-      g.append('circle')
-        .attr('cx',px).attr('cy',py).attr('r',r)
-        .attr('fill',color).attr('fill-opacity',0.9)
-        .attr('stroke','#fff').attr('stroke-width',1.8)
-        .style('filter','drop-shadow(0 1px 2px rgba(0,0,0,0.2))');
+      // Popup content
+      const techBadgeColor=c.ticketing_technology?
+        (c.ticketing_technology.includes('OneBox')?'#e8193c':
+         c.ticketing_technology.includes('SeatGeek')?'#0a8a4e':
+         c.ticketing_technology.includes('Ticketmaster')?'#1a56db':
+         c.ticketing_technology.includes('ropio')||c.ticketing_technology.includes('own')?'#6b21a8':'#9aa0b8')
+        :'#9aa0b8';
 
-      // Label — smart positioning
-      const labelX = px > W*0.75 ? px-r-3 : px+r+3;
-      const anchor = px > W*0.75 ? 'end' : 'start';
-      g.append('text')
-        .attr('x',labelX).attr('y',py+3.5)
-        .attr('font-size',9).attr('font-family','Inter,sans-serif')
-        .attr('font-weight','500').attr('fill','#1a1d2e')
-        .attr('text-anchor',anchor)
-        .style('paint-order','stroke')
-        .style('stroke','#d6e8f5').style('stroke-width','3px')
-        .text(c.name);
+      const popupHtml=`
+        <div style="font-family:Inter,sans-serif;min-width:190px;padding:2px">
+          <div style="font-size:13px;font-weight:700;color:#1a1d2e;margin-bottom:4px">${c.name}</div>
+          <div style="font-size:10px;color:#5a6080;margin-bottom:8px">${c.league} · ${c.country}${c.stadium?' · '+c.stadium:''}</div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
+            <span style="background:${color};color:#fff;padding:2px 8px;border-radius:4px;font-size:9px;font-weight:700;text-transform:uppercase">${c.fever_status}</span>
+            <span style="font-size:11px;color:#1a1d2e">Score <b style="color:${sc.total>=7?'#0a8a4e':sc.total>=5?'#c07000':'#dc2626'}">${sc.total}/10</b></span>
+          </div>
+          ${c.ticketing_technology?`<div style="font-size:10px;color:#fff;background:${techBadgeColor};display:inline-block;padding:1px 7px;border-radius:3px;margin-bottom:5px">${c.ticketing_technology}</div>`:''}
+          ${c.owner_name?`<div style="font-size:10px;color:#5a6080;margin-bottom:2px">👤 ${c.owner_name}</div>`:''}
+          ${c.ticketing_revenue_eur_m?`<div style="font-size:10px;color:#5a6080">🎟️ €${c.ticketing_revenue_eur_m}M ticketing rev.</div>`:''}
+          <div style="margin-top:8px;padding-top:6px;border-top:1px solid #e2e4ee">
+            <button onclick="openDetail('${c.name.replace(/'/g,"\\'")}');document.querySelector('.leaflet-popup-close-button').click()" style="background:#e8193c;color:#fff;border:none;border-radius:5px;padding:4px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;width:100%">Ver detalles →</button>
+          </div>
+        </div>`;
+
+      marker.bindPopup(popupHtml,{maxWidth:220,className:'fever-popup'});
+
+      // Hover to show name label
+      marker.on('mouseover',()=>marker.openPopup());
     });
-  }
+
+    // Add Leaflet popup styles
+    if(!document.getElementById('fever-popup-style')){
+      const style=document.createElement('style');
+      style.id='fever-popup-style';
+      style.textContent=`.fever-popup .leaflet-popup-content-wrapper{border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.15);border:1px solid #e2e4ee;padding:0}.fever-popup .leaflet-popup-content{margin:12px 14px}.fever-popup .leaflet-popup-tip{background:#fff}.leaflet-popup-close-button{font-size:16px!important;padding:6px 8px!important;color:#9aa0b8!important}`;
+      document.head.appendChild(style);
+    }
+
+    // Fix map size after render
+    setTimeout(()=>map.invalidateSize(),100);
+  });
 }
 
 function renderOwnership(){
