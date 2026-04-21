@@ -578,134 +578,134 @@ function renderKanban(){
 
 function renderMap(){
   const container=document.getElementById('europe-map');
-  const W=container.offsetWidth||860,H=container.offsetHeight||460;
+  container.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3);font-size:12px">Cargando mapa…</div>';
 
-  // Mercator projection tuned for Europe viewport
-  function proj(lng,lat){
-    const x=((lng-(-13))/(35-(-13)))*W;
-    const latRad=lat*Math.PI/180;
-    const mercN=Math.log(Math.tan(Math.PI/4+latRad/2));
-    const latRad0=35*Math.PI/180, mercN0=Math.log(Math.tan(Math.PI/4+latRad0/2));
-    const latRad1=62*Math.PI/180, mercN1=Math.log(Math.tan(Math.PI/4+latRad1/2));
-    const y=H-(((mercN-mercN0)/(mercN1-mercN0))*H);
-    return[x,y];
+  // Load D3 + TopoJSON dynamically
+  function loadScript(src,cb){
+    if(document.querySelector(`script[src="${src}"]`)){cb();return;}
+    const s=document.createElement('script');s.src=src;s.onload=cb;document.head.appendChild(s);
   }
 
-  // Country fills — simplified but recognizable polygons
-  const countries=[
-    {id:'pt',fill:'#dde8f5',d:'M 108,338 L 114,318 L 110,300 L 118,285 L 115,268 L 122,260 L 128,270 L 130,290 L 126,310 L 130,330 L 124,348 Z'},
-    {id:'es',fill:'#dde8f5',d:'M 128,270 L 175,255 L 220,258 L 248,250 L 265,258 L 270,272 L 258,285 L 255,300 L 248,315 L 235,328 L 210,335 L 185,338 L 160,332 L 140,338 L 124,348 L 130,330 L 126,310 L 130,290 L 128,270 Z'},
-    {id:'fr',fill:'#dde8f5',d:'M 195,215 L 225,205 L 255,210 L 270,225 L 278,240 L 270,255 L 258,258 L 248,250 L 220,258 L 200,258 L 188,245 L 185,228 Z'},
-    {id:'gb',fill:'#dde8f5',d:'M 168,148 L 180,140 L 192,148 L 195,162 L 188,178 L 175,182 L 165,172 L 162,158 Z M 152,170 L 162,165 L 168,178 L 160,192 L 148,188 L 146,176 Z'},
-    {id:'ie',fill:'#dde8f5',d:'M 138,162 L 148,158 L 152,168 L 146,178 L 136,176 L 132,168 Z'},
-    {id:'be',fill:'#dde8f5',d:'M 225,188 L 240,185 L 248,195 L 240,205 L 225,205 L 218,198 Z'},
-    {id:'nl',fill:'#dde8f5',d:'M 240,172 L 255,168 L 262,178 L 255,188 L 248,192 L 240,185 L 238,178 Z'},
-    {id:'de',fill:'#dde8f5',d:'M 255,168 L 290,162 L 318,165 L 328,175 L 325,195 L 318,210 L 305,218 L 285,222 L 265,218 L 255,210 L 248,195 L 255,188 L 262,178 Z'},
-    {id:'ch',fill:'#dde8f5',d:'M 258,220 L 278,218 L 288,228 L 280,238 L 262,238 L 255,228 Z'},
-    {id:'at',fill:'#dde8f5',d:'M 288,210 L 318,210 L 335,215 L 338,225 L 325,232 L 305,235 L 288,230 L 285,222 Z'},
-    {id:'it',fill:'#dde8f5',d:'M 262,238 L 285,235 L 300,245 L 308,260 L 312,278 L 305,298 L 295,318 L 278,335 L 268,348 L 260,335 L 265,318 L 270,298 L 268,278 L 258,262 L 252,248 Z'},
-    {id:'pt2',fill:'#dde8f5',d:''},
-    {id:'dk',fill:'#dde8f5',d:'M 278,148 L 288,142 L 295,150 L 290,160 L 280,162 L 275,154 Z'},
-    {id:'no',fill:'#dde8f5',d:'M 255,108 L 298,90 L 340,95 L 355,112 L 345,130 L 318,140 L 295,148 L 278,148 L 268,135 L 258,122 Z'},
-    {id:'se',fill:'#dde8f5',d:'M 298,90 L 330,82 L 352,95 L 358,115 L 355,135 L 340,148 L 318,148 L 295,148 L 318,140 L 345,130 L 355,112 L 340,95 Z'},
-    {id:'fi',fill:'#dde8f5',d:'M 330,68 L 360,60 L 390,72 L 400,90 L 388,108 L 368,118 L 352,118 L 338,105 L 330,88 Z'},
-    {id:'pl',fill:'#dde8f5',d:'M 318,165 L 355,158 L 382,162 L 390,178 L 385,195 L 368,202 L 345,205 L 328,198 L 325,182 Z'},
-    {id:'cz',fill:'#dde8f5',d:'M 325,195 L 352,190 L 368,198 L 365,210 L 348,218 L 328,215 L 322,205 Z'},
-    {id:'hu',fill:'#dde8f5',d:'M 335,215 L 362,212 L 378,220 L 375,232 L 358,238 L 340,235 L 335,225 Z'},
-    {id:'ro',fill:'#dde8f5',d:'M 375,195 L 405,192 L 420,205 L 418,222 L 405,232 L 385,235 L 375,225 L 375,210 Z'},
-    {id:'gr',fill:'#dde8f5',d:'M 338,285 L 358,278 L 368,290 L 362,308 L 348,315 L 335,308 L 332,295 Z'},
-    {id:'tr',fill:'#dde8f5',d:'M 368,268 L 408,262 L 432,272 L 435,288 L 418,298 L 392,302 L 372,295 L 362,282 Z'},
-  ];
-
-  // Jitter offsets for clubs that share a city
-  const JITTER={
-    // London clubs — spread in a cluster
-    'Arsenal':       [0, -14],
-    'Chelsea':       [-14, 0],
-    'Tottenham Hotspur': [14, 0],
-    'West Ham United':   [0, 14],
-    // Manchester
-    'Manchester City':   [-10, 0],
-    'Manchester United': [10, 0],
-    // Madrid
-    'Real Madrid':       [-12, -8],
-    'Atletico de Madrid':[12, -8],
-    'Getafe CF':         [0, 10],
-    // Milan
-    'Inter Milan':       [-10, 0],
-    'AC Milan':          [10, 0],
-    // Lisbon
-    'SL Benfica':        [-10, 0],
-    'Sporting CP':       [10, 0],
-  };
-
-  // Build tooltip HTML
-  let tooltipLayer='';
-  let dotsLayer='';
-  let labelsLayer='';
-
-  const placed=[];
-  filtered.forEach(c=>{
-    const coord=COORDS[c.name];if(!coord)return;
-    let [x,y]=proj(coord[0],coord[1]);
-    const jitter=JITTER[c.name]||[0,0];
-    x+=jitter[0]; y+=jitter[1];
-    const color=STATUS_COLORS[c.fever_status]||'#1a56db';
-    const sc=feverScore(c);
-    const r=6+(sc.total/10)*5;
-    const safeN=c.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
-
-    dotsLayer+=`<circle class="map-dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="${color}" fill-opacity="0.88" stroke="#fff" stroke-width="1.8" style="cursor:pointer" onclick="openDetail('${safeN}')" data-name="${c.name.replace(/"/g,'&quot;')}"/>`;
-
-    // Smart label placement: push right unless near right edge
-    const lx = x > W*0.72 ? x-r-3 : x+r+3;
-    const anchor = x > W*0.72 ? 'end' : 'start';
-    labelsLayer+=`<text x="${lx.toFixed(1)}" y="${(y+3.5).toFixed(1)}" font-size="9.5" fill="#2a2f45" font-family="Inter,sans-serif" font-weight="500" text-anchor="${anchor}" pointer-events="none" style="text-shadow:0 0 4px #eef2f8,0 0 4px #eef2f8">${c.name}</text>`;
+  loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js',()=>{
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js',()=>{
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+        .then(r=>r.json())
+        .then(world=>drawMap(container,world))
+        .catch(()=>{ container.innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3)">No se pudo cargar el mapa. Comprueba la conexión.</div>'; });
+    });
   });
 
-  const countryPaths=countries.map(c=>`<path d="${c.d}" fill="${c.fill}" stroke="#c8d4e8" stroke-width="0.8" stroke-linejoin="round"/>`).join('');
+  function drawMap(container, world){
+    const W=container.offsetWidth||860, H=container.offsetHeight||440;
+    container.innerHTML='';
 
-  container.innerHTML=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="dot-shadow" x="-50%" y="-50%" width="200%" height="200%">
-        <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="rgba(0,0,0,0.18)"/>
-      </filter>
-    </defs>
-    <rect width="${W}" height="${H}" fill="#dce8f5" rx="8"/>
-    <!-- Sea texture -->
-    <rect width="${W}" height="${H}" fill="url(#sea)" rx="8" opacity="0.3"/>
-    <!-- Country fills -->
-    <g>${countryPaths}</g>
-    <!-- Dots -->
-    <g filter="url(#dot-shadow)">${dotsLayer}</g>
-    <!-- Labels on top -->
-    <g>${labelsLayer}</g>
-  </svg>`;
+    // Europe bounding box
+    const projection = d3.geoMercator()
+      .center([13, 52])
+      .scale(W * 1.05)
+      .translate([W * 0.46, H * 0.52]);
 
-  // Add hover tooltip
-  container.querySelectorAll('.map-dot').forEach(dot=>{
-    dot.addEventListener('mouseenter',e=>{
-      const name=dot.getAttribute('data-name');
-      const c=CLUBS.find(x=>x.name===name);if(!c)return;
+    const path = d3.geoPath().projection(projection);
+
+    const svg = d3.select(container).append('svg')
+      .attr('width', W).attr('height', H)
+      .style('border-radius','8px');
+
+    // Sea background
+    svg.append('rect').attr('width',W).attr('height',H).attr('fill','#d6e8f5').attr('rx',8);
+
+    // Countries
+    const countries = topojson.feature(world, world.objects.countries);
+    svg.append('g').selectAll('path')
+      .data(countries.features)
+      .join('path')
+      .attr('d', path)
+      .attr('fill', '#e8eef8')
+      .attr('stroke', '#b8c8de')
+      .attr('stroke-width', 0.6);
+
+    // Country borders
+    svg.append('path')
+      .datum(topojson.mesh(world, world.objects.countries, (a,b)=>a!==b))
+      .attr('d', path)
+      .attr('fill','none')
+      .attr('stroke','#c5d5e8')
+      .attr('stroke-width', 0.5);
+
+    // Clip to Europe area
+    svg.append('rect').attr('width',W).attr('height',H)
+      .attr('fill','none').attr('stroke','none');
+
+    // Jitter for overlapping cities
+    const JITTER={
+      'Arsenal':[-2,-13],'Chelsea':[-13,2],'Tottenham Hotspur':[13,-2],'West Ham United':[2,13],
+      'Manchester City':[-11,0],'Manchester United':[11,0],
+      'Real Madrid':[-13,-7],'Atletico de Madrid':[13,-7],'Getafe CF':[0,12],
+      'Inter Milan':[-11,0],'AC Milan':[11,0],
+      'SL Benfica':[-10,0],'Sporting CP':[10,0],
+      'Liverpool':[-11,0],'Everton':[11,0],
+    };
+
+    // Tooltip div
+    let tooltip = document.getElementById('map-tooltip-d3');
+    if(!tooltip){
+      tooltip=document.createElement('div');
+      tooltip.id='map-tooltip-d3';
+      tooltip.style.cssText='position:fixed;background:#1a1d2e;color:#fff;padding:9px 13px;border-radius:9px;font-size:11px;pointer-events:none;z-index:1000;min-width:170px;box-shadow:0 4px 20px rgba(0,0,0,.3);line-height:1.7;display:none';
+      document.body.appendChild(tooltip);
+    }
+
+    // Plot clubs
+    filtered.forEach(c=>{
+      const coord=COORDS[c.name];if(!coord)return;
       const sc=feverScore(c);
-      let tip=document.getElementById('map-tooltip');
-      if(!tip){tip=document.createElement('div');tip.id='map-tooltip';tip.style.cssText='position:absolute;background:#1a1d2e;color:#fff;padding:8px 12px;border-radius:8px;font-size:11px;pointer-events:none;z-index:100;min-width:160px;box-shadow:0 4px 16px rgba(0,0,0,.25);line-height:1.6';container.parentElement.style.position='relative';container.parentElement.appendChild(tip);}
-      tip.innerHTML=`<div style="font-weight:700;font-size:12px;margin-bottom:4px">${c.name}</div><div style="color:#9aa0b8">${c.league} · ${c.country}</div><div style="margin-top:4px"><span style="background:${STATUS_COLORS[c.fever_status]||'#1a56db'};padding:1px 6px;border-radius:3px;font-size:9px;font-weight:700">${c.fever_status}</span> &nbsp; Score: <b>${sc.total}/10</b></div>${c.ticketing_technology?`<div style="color:#9aa0b8;margin-top:2px">${c.ticketing_technology}</div>`:''}${c.owner_name?`<div style="color:#9aa0b8">${c.owner_name}</div>`:''}`;
-      const rect=container.getBoundingClientRect();
-      const pr=container.parentElement.getBoundingClientRect();
-      let tx=e.clientX-pr.left+12, ty=e.clientY-pr.top-20;
-      if(tx+180>pr.width)tx=e.clientX-pr.left-172;
-      tip.style.left=tx+'px';tip.style.top=ty+'px';tip.style.display='block';
+      const color=STATUS_COLORS[c.fever_status]||'#1a56db';
+      const r=6+(sc.total/10)*5;
+      let [px,py]=projection([coord[0],coord[1]]);
+      const j=JITTER[c.name]||[0,0];
+      px+=j[0]; py+=j[1];
+
+      // Skip if outside viewport
+      if(px<0||px>W||py<0||py>H)return;
+
+      // Shadow
+      const g=svg.append('g').style('cursor','pointer')
+        .on('click',()=>openDetail(c.name))
+        .on('mouseenter',function(event){
+          d3.select(this).select('circle').attr('r',r+2).attr('stroke-width',2.5);
+          tooltip.innerHTML=`<div style="font-weight:700;font-size:12px;margin-bottom:3px">${c.name}</div><div style="color:#9aa0b8;font-size:10px">${c.league} · ${c.country}</div><div style="margin-top:5px;display:flex;align-items:center;gap:6px"><span style="background:${color};padding:1px 7px;border-radius:3px;font-size:9px;font-weight:700;color:#fff">${c.fever_status}</span><span style="font-size:11px">Score <b>${sc.total}/10</b></span></div>${c.ticketing_technology?`<div style="color:#9aa0b8;font-size:10px;margin-top:2px">${c.ticketing_technology}</div>`:''}${c.owner_name?`<div style="color:#9aa0b8;font-size:10px">${c.owner_name}</div>`:''}`;
+          tooltip.style.display='block';
+          tooltip.style.left=(event.clientX+14)+'px';
+          tooltip.style.top=(event.clientY-10)+'px';
+        })
+        .on('mousemove',function(event){
+          tooltip.style.left=(event.clientX+14)+'px';
+          tooltip.style.top=(event.clientY-10)+'px';
+        })
+        .on('mouseleave',function(){
+          d3.select(this).select('circle').attr('r',r).attr('stroke-width',1.8);
+          tooltip.style.display='none';
+        });
+
+      g.append('circle')
+        .attr('cx',px).attr('cy',py).attr('r',r)
+        .attr('fill',color).attr('fill-opacity',0.9)
+        .attr('stroke','#fff').attr('stroke-width',1.8)
+        .style('filter','drop-shadow(0 1px 2px rgba(0,0,0,0.2))');
+
+      // Label — smart positioning
+      const labelX = px > W*0.75 ? px-r-3 : px+r+3;
+      const anchor = px > W*0.75 ? 'end' : 'start';
+      g.append('text')
+        .attr('x',labelX).attr('y',py+3.5)
+        .attr('font-size',9).attr('font-family','Inter,sans-serif')
+        .attr('font-weight','500').attr('fill','#1a1d2e')
+        .attr('text-anchor',anchor)
+        .style('paint-order','stroke')
+        .style('stroke','#d6e8f5').style('stroke-width','3px')
+        .text(c.name);
     });
-    dot.addEventListener('mousemove',e=>{
-      const tip=document.getElementById('map-tooltip');if(!tip)return;
-      const pr=container.parentElement.getBoundingClientRect();
-      let tx=e.clientX-pr.left+12,ty=e.clientY-pr.top-20;
-      if(tx+180>pr.width)tx=e.clientX-pr.left-172;
-      tip.style.left=tx+'px';tip.style.top=ty+'px';
-    });
-    dot.addEventListener('mouseleave',()=>{const tip=document.getElementById('map-tooltip');if(tip)tip.style.display='none';});
-  });
+  }
 }
 
 function renderOwnership(){
