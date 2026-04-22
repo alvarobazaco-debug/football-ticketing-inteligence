@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Football Ticketing Intelligence — Fever",
-    "last_updated": "2026-04-22T08:08:17.785Z",
+    "last_updated": "2026-04-22T08:14:53.788Z",
     "total_clubs": 30
   },
   "clubs": [
@@ -795,34 +795,35 @@
     {
       "id": "L1001",
       "name": "Paris Saint-Germain",
+      "short_name": "",
+      "logo_url": "",
       "league": "Ligue 1",
       "country": "France",
       "founded": 1970,
       "stadium": "Parc des Princes",
       "capacity": 47929,
-      "logo_url": "",
       "ticketing_technology": "Propio (billetterie.psg.fr)",
       "ticketing_provider": "psg.fr",
-      "has_own_app": true,
-      "resale_channels": [
-        "StubHub"
-      ],
-      "ticket_url": "https://billetterie.psg.fr",
-      "fever_status": "prospect",
-      "notes": "Plataforma propia.",
+      "has_own_app": null,
+      "resale_channels": [],
+      "price_range_eur": [],
+      "ticket_url": "",
+      "owner_name": "Qatar Sports Investments",
+      "owner_type": "Sovereign Wealth Fund",
+      "fever_contact_at_owner": "",
+      "contract_expiry": "",
+      "decision_maker": "",
+      "fever_status": "contacted",
+      "priority": "High",
+      "notes": "Fever is currently in the RFP process, and a DEMO was presented in Paris to the club",
       "annual_revenue_eur_m": 780,
       "ticketing_revenue_eur_m": 65,
       "avg_ticket_price_eur": 75,
       "avg_attendance_pct": 98,
       "annual_matchdays": 17,
       "fever_score_notes": "Plataforma propia. Nuevo estadio en proyecto.",
-      "owner_name": "Qatar Sports Investments",
-      "owner_type": "Sovereign Wealth Fund",
-      "fever_contact_at_owner": "",
-      "contract_expiry": "",
-      "decision_maker": "",
-      "priority": "High",
-      "fever_score": 7.4
+      "last_updated": "2026-04-22",
+      "fever_score": 6.4
     },
     {
       "id": "ED001",
