@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Football Ticketing Intelligence — Fever",
-    "last_updated": "2026-04-22T07:57:01.684Z",
+    "last_updated": "2026-04-22T07:57:32.860Z",
     "total_clubs": 30
   },
   "clubs": [
@@ -322,7 +322,7 @@
       "founded": 1907,
       "stadium": "Estadio Benito Villamarín",
       "capacity": 60720,
-      "ticketing_technology": "Entradas.com",
+      "ticketing_technology": "VivaTicket",
       "ticketing_provider": "",
       "has_own_app": null,
       "resale_channels": [],
