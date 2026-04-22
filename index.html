@@ -670,17 +670,42 @@ function closeConfig(){document.getElementById('config-overlay').classList.remov
 function saveConfig(){ghToken=document.getElementById('cfg-token').value.trim();ghUser=document.getElementById('cfg-user').value.trim();ghRepo=document.getElementById('cfg-repo').value.trim();localStorage.setItem('gh_token',ghToken);localStorage.setItem('gh_user',ghUser);localStorage.setItem('gh_repo',ghRepo);closeConfig();showToast('✅ GitHub configurado','success');}
 
 async function syncToGitHub(){
-  if(!ghToken||!ghUser||!ghRepo){showToast('⚙ Configura GitHub Sync primero','error');return false;}
+  if(!ghToken||!ghUser||!ghRepo){
+    showToast('⚙ Configura GitHub Sync primero — botón arriba a la derecha','error');
+    return false;
+  }
   try{
     showToast('🔄 Guardando en GitHub…','info');
     const url=`https://api.github.com/repos/${ghUser}/${ghRepo}/contents/data/clubs.json`;
-    const r=await fetch(url,{headers:{Authorization:`token ${ghToken}`,Accept:'application/vnd.github.v3+json'}});
+    // Get current SHA (needed to update the file)
+    const r=await fetch(url,{headers:{Authorization:`token ${ghToken}`,Accept:'application/vnd.github.v3+json'},cache:'no-store'});
+    if(!r.ok){showToast('❌ No se pudo conectar a GitHub. Revisa el token.','error');return false;}
     const j=await r.json();
-    const content=btoa(unescape(encodeURIComponent(JSON.stringify({meta:{description:'Football Ticketing Intelligence — Fever',last_updated:new Date().toISOString(),total_clubs:CLUBS.length},clubs:CLUBS},null,2))));
-    const p=await fetch(url,{method:'PUT',headers:{Authorization:`token ${ghToken}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:`📊 Update [${new Date().toLocaleDateString()}]`,content,sha:j.sha})});
-    if(p.ok){showToast('✅ Guardado en GitHub','success');return true;}
-    else{showToast('❌ Error. Revisa el token.','error');return false;}
-  }catch(e){showToast('❌ Error de red','error');return false;}
+    const payload=JSON.stringify({
+      meta:{description:'Football Ticketing Intelligence — Fever',last_updated:new Date().toISOString(),total_clubs:CLUBS.length},
+      clubs:CLUBS
+    },null,2);
+    const content=btoa(unescape(encodeURIComponent(payload)));
+    const p=await fetch(url,{
+      method:'PUT',
+      headers:{Authorization:`token ${ghToken}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},
+      body:JSON.stringify({message:`📊 Update [${new Date().toLocaleDateString('es-ES')}]`,content,sha:j.sha})
+    });
+    if(p.ok){
+      showToast('✅ Guardado en GitHub — los cambios persisten','success');
+      // Update sync indicator
+      const chip=document.getElementById('chip-count');
+      if(chip)chip.parentElement.style.borderColor='var(--green)';
+      return true;
+    } else {
+      const err=await p.json();
+      showToast(`❌ Error GitHub: ${err.message||'desconocido'}. Revisa el token.`,'error');
+      return false;
+    }
+  }catch(e){
+    showToast('❌ Error de red al guardar','error');
+    return false;
+  }
 }
 
 function feverScore(c){
@@ -1136,8 +1161,43 @@ async function saveClub(){
 
 function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show '+(type||'');setTimeout(()=>t.classList.remove('show'),3500);}
 
-applyFilters();
-setTimeout(()=>{if(!ghToken)showToast('💡 Configura GitHub Sync para guardar cambios (⚙)','info');},2000);
+// ── Init — load data from GitHub on startup ───────────────────────────────────
+async function init(){
+  // Show loading state
+  document.getElementById('result-count').textContent='Cargando datos…';
+
+  if(ghToken && ghUser && ghRepo){
+    try{
+      const url=`https://api.github.com/repos/${ghUser}/${ghRepo}/contents/data/clubs.json`;
+      const res=await fetch(url,{
+        headers:{Authorization:`token ${ghToken}`,Accept:'application/vnd.github.v3+json'},
+        cache:'no-store'
+      });
+      if(res.ok){
+        const json=await res.json();
+        // GitHub returns content as base64
+        const decoded=decodeURIComponent(escape(atob(json.content.replace(/\n/g,''))));
+        const parsed=JSON.parse(decoded);
+        const clubs=parsed.clubs||parsed;
+        if(Array.isArray(clubs)&&clubs.length>0){
+          CLUBS=clubs;
+          CLUBS.forEach(c=>{c.fever_score=feverScore(c).total;});
+          showToast(`✅ ${CLUBS.length} clubs cargados de GitHub`,'success');
+        }
+      } else {
+        showToast('⚠️ No se pudo leer GitHub — usando datos locales','');
+      }
+    } catch(e){
+      showToast('⚠️ Error de red — usando datos locales','');
+    }
+  } else {
+    setTimeout(()=>showToast('💡 Configura GitHub Sync para guardar cambios (⚙)','info'),1500);
+  }
+
+  applyFilters();
+}
+
+init();
 </script>
 </body>
 </html>
