@@ -1,8 +1,8 @@
 {
   "meta": {
     "description": "Football Ticketing Intelligence — Fever",
-    "last_updated": "2026-04-22T08:14:53.788Z",
-    "total_clubs": 30
+    "last_updated": "2026-04-22T10:21:12.318Z",
+    "total_clubs": 31
   },
   "clubs": [
     {
@@ -944,6 +944,39 @@
       "decision_maker": "",
       "priority": "Low",
       "fever_score": 1.9
+    },
+    {
+      "id": "1776853271632",
+      "name": "Fulham F.C.",
+      "short_name": "",
+      "logo_url": "",
+      "league": "Premier League",
+      "country": "England",
+      "founded": 1879,
+      "stadium": "Craven Cottage",
+      "capacity": 29130,
+      "ticketing_technology": "Ticketmaster Sport",
+      "ticketing_provider": "https://www.eticketing.co.uk/fulhamfc",
+      "has_own_app": null,
+      "resale_channels": [],
+      "price_range_eur": [],
+      "ticket_url": "",
+      "owner_name": "",
+      "owner_type": "",
+      "fever_contact_at_owner": "",
+      "contract_expiry": "2026-06",
+      "decision_maker": "",
+      "fever_status": "contacted",
+      "priority": "High",
+      "notes": "Status: MF presented our commercial proposal, matching their current TM fees, and adding a sponsorship package (see proposal slides here and in image below)\nCompetitive Landscape: We were told by them yesterday that they will be receiving a total of 7 offers + TM offer (incumbent). Therefore it will be a very tough sell\nFrom the insight we were able to gather, there is a Saudi company with no credentials in the market and we assume Sports Illustrated is also in the mix (these two offered way more sponsorship money than us). Then we assume the other 3 big players are involved: Seat Geek & Secutix. \n\nDecision making process: They plan to receive all offers by end of April, have discussions with the board and have a shortlist of 2 companies + TM for the final round.",
+      "annual_revenue_eur_m": null,
+      "ticketing_revenue_eur_m": null,
+      "avg_ticket_price_eur": null,
+      "avg_attendance_pct": null,
+      "annual_matchdays": null,
+      "fever_score_notes": "",
+      "last_updated": "2026-04-22",
+      "fever_score": 3.4
     }
   ]
 }
