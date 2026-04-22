@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Football Ticketing Intelligence — Fever",
-    "last_updated": "2026-04-22T07:57:32.860Z",
+    "last_updated": "2026-04-22T08:02:24.442Z",
     "total_clubs": 30
   },
   "clubs": [
@@ -732,18 +732,26 @@
     {
       "id": "SA002",
       "name": "AC Milan",
+      "short_name": "",
+      "logo_url": "",
       "league": "Serie A",
       "country": "Italy",
       "founded": 1899,
       "stadium": "San Siro",
       "capacity": 80018,
-      "logo_url": "",
       "ticketing_technology": "",
       "ticketing_provider": "",
       "has_own_app": null,
       "resale_channels": [],
+      "price_range_eur": [],
       "ticket_url": "",
-      "fever_status": "prospect",
+      "owner_name": "RedBird Capital",
+      "owner_type": "Private Equity",
+      "fever_contact_at_owner": "",
+      "contract_expiry": "",
+      "decision_maker": "",
+      "fever_status": "contacted",
+      "priority": "High",
       "notes": "",
       "annual_revenue_eur_m": 380,
       "ticketing_revenue_eur_m": 42,
@@ -751,12 +759,7 @@
       "avg_attendance_pct": 88,
       "annual_matchdays": 19,
       "fever_score_notes": "RedBird Capital. Nuevo estadio en proyecto.",
-      "owner_name": "RedBird Capital",
-      "owner_type": "Private Equity",
-      "fever_contact_at_owner": "",
-      "contract_expiry": "",
-      "decision_maker": "",
-      "priority": "High",
+      "last_updated": "2026-04-22",
       "fever_score": 5.9
     },
     {
